@@ -1,0 +1,563 @@
+{
+  "metadata": {
+    "suite": "RAG Retrieval Quality Evaluation",
+    "corpus": "transformer-foundations-sample.pdf",
+    "dataset_size": 30,
+    "answerable_queries": 20,
+    "unanswerable_probes": 10,
+    "timestamp": "2026-10-16T02:09:50.098Z"
+  },
+  "metrics": {
+    "recall_at_5": 1,
+    "recall_at_10": 1,
+    "mean_reciprocal_rank": 0.887,
+    "ndcg_at_10": 0.915,
+    "abstention_accuracy": 0.6,
+    "false_abstention_rate": 0,
+    "duplicate_chunk_rate": 0,
+    "latency_p50_ms": 15.39,
+    "latency_p95_ms": 19.35
+  },
+  "comparison_variants": {
+    "vector_retrieval": "Tested (Cosine dot product over normalized vectors)",
+    "lexical_retrieval": "Tested (Token overlap verification for evidence gating)",
+    "hybrid_retrieval": "Tested (Adaptive threshold + lexical fallback cross-validation)",
+    "cross_encoder_reranker": "Not implemented in current lightweight architecture (Untested)"
+  },
+  "items": [
+    {
+      "id": "Q01",
+      "query": "What is the formula for scaled dot product attention?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 4,
+      "retrieved_pages": [
+        3,
+        2,
+        4,
+        1
+      ],
+      "expected_pages": [
+        3
+      ],
+      "recall_at_5": 1,
+      "mrr": 1,
+      "ndcg_10": 1,
+      "latency_ms": 761.32
+    },
+    {
+      "id": "Q02",
+      "query": "Why do we divide by the square root of d_k in attention?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 4,
+      "retrieved_pages": [
+        3,
+        4,
+        2,
+        1
+      ],
+      "expected_pages": [
+        3
+      ],
+      "recall_at_5": 1,
+      "mrr": 1,
+      "ndcg_10": 1,
+      "latency_ms": 5.06
+    },
+    {
+      "id": "Q03",
+      "query": "How many identical layers does the encoder stack consist of?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 3,
+      "retrieved_pages": [
+        2,
+        4,
+        3
+      ],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_5": 1,
+      "mrr": 1,
+      "ndcg_10": 1,
+      "latency_ms": 19.35
+    },
+    {
+      "id": "Q04",
+      "query": "What is the output dimension d_model of all sub-layers?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 4,
+      "retrieved_pages": [
+        2,
+        3,
+        4,
+        1
+      ],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_5": 1,
+      "mrr": 1,
+      "ndcg_10": 1,
+      "latency_ms": 15.42
+    },
+    {
+      "id": "Q05",
+      "query": "What residual connection and normalization formula is applied to sub-layers?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 4,
+      "retrieved_pages": [
+        2,
+        1,
+        4,
+        3
+      ],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_5": 1,
+      "mrr": 1,
+      "ndcg_10": 1,
+      "latency_ms": 13.22
+    },
+    {
+      "id": "Q06",
+      "query": "How many linear projection heads h are used in multi-head attention?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 2,
+      "retrieved_pages": [
+        4,
+        3
+      ],
+      "expected_pages": [
+        4
+      ],
+      "recall_at_5": 1,
+      "mrr": 1,
+      "ndcg_10": 1,
+      "latency_ms": 15.4
+    },
+    {
+      "id": "Q07",
+      "query": "How are positional encodings constructed in the model?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 3,
+      "retrieved_pages": [
+        4,
+        3,
+        1
+      ],
+      "expected_pages": [
+        4
+      ],
+      "recall_at_5": 1,
+      "mrr": 1,
+      "ndcg_10": 1,
+      "latency_ms": 14.36
+    },
+    {
+      "id": "Q08",
+      "query": "Why are positional encodings necessary in the Transformer architecture?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 4,
+      "retrieved_pages": [
+        4,
+        3,
+        1,
+        2
+      ],
+      "expected_pages": [
+        4
+      ],
+      "recall_at_5": 1,
+      "mrr": 1,
+      "ndcg_10": 1,
+      "latency_ms": 15.89
+    },
+    {
+      "id": "Q09",
+      "query": "Who are the primary authors of the Attention research digest?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 4,
+      "retrieved_pages": [
+        3,
+        4,
+        2,
+        1
+      ],
+      "expected_pages": [
+        1
+      ],
+      "recall_at_5": 1,
+      "mrr": 0.25,
+      "ndcg_10": 0.431,
+      "latency_ms": 15.82
+    },
+    {
+      "id": "Q10",
+      "query": "Which translation benchmark tasks were used to evaluate the Transformer?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 4,
+      "retrieved_pages": [
+        1,
+        4,
+        3,
+        2
+      ],
+      "expected_pages": [
+        1
+      ],
+      "recall_at_5": 1,
+      "mrr": 1,
+      "ndcg_10": 1,
+      "latency_ms": 14.96
+    },
+    {
+      "id": "Q11",
+      "query": "How does the Transformer draw global dependencies between input and output?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 4,
+      "retrieved_pages": [
+        1,
+        4,
+        2,
+        3
+      ],
+      "expected_pages": [
+        1
+      ],
+      "recall_at_5": 1,
+      "mrr": 1,
+      "ndcg_10": 1,
+      "latency_ms": 15.89
+    },
+    {
+      "id": "Q12",
+      "query": "What two sub-layers compose each layer of the encoder?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 4,
+      "retrieved_pages": [
+        2,
+        3,
+        4,
+        1
+      ],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_5": 1,
+      "mrr": 1,
+      "ndcg_10": 1,
+      "latency_ms": 14.75
+    },
+    {
+      "id": "Q13",
+      "query": "Into what matrices are queries, keys, and values packed?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 3,
+      "retrieved_pages": [
+        3,
+        1,
+        4
+      ],
+      "expected_pages": [
+        3
+      ],
+      "recall_at_5": 1,
+      "mrr": 1,
+      "ndcg_10": 1,
+      "latency_ms": 15.01
+    },
+    {
+      "id": "Q14",
+      "query": "How does the computational parallelizability of the Transformer compare to recurrent models?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 4,
+      "retrieved_pages": [
+        4,
+        3,
+        2,
+        1
+      ],
+      "expected_pages": [
+        1
+      ],
+      "recall_at_5": 1,
+      "mrr": 0.25,
+      "ndcg_10": 0.431,
+      "latency_ms": 15.99
+    },
+    {
+      "id": "Q15",
+      "query": "Where are positional encodings added in the architecture stack?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 4,
+      "retrieved_pages": [
+        4,
+        3,
+        2,
+        1
+      ],
+      "expected_pages": [
+        4
+      ],
+      "recall_at_5": 1,
+      "mrr": 1,
+      "ndcg_10": 1,
+      "latency_ms": 15.68
+    },
+    {
+      "id": "Q16",
+      "query": "What compatibility function does attention compute between query and key?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 4,
+      "retrieved_pages": [
+        3,
+        1,
+        4,
+        2
+      ],
+      "expected_pages": [
+        3
+      ],
+      "recall_at_5": 1,
+      "mrr": 1,
+      "ndcg_10": 1,
+      "latency_ms": 14.5
+    },
+    {
+      "id": "Q17",
+      "query": "What structure does the Transformer model follow?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 4,
+      "retrieved_pages": [
+        1,
+        4,
+        3,
+        2
+      ],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_5": 1,
+      "mrr": 0.25,
+      "ndcg_10": 0.431,
+      "latency_ms": 16.46
+    },
+    {
+      "id": "Q18",
+      "query": "What functions of different frequencies are used for positional encoding?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 3,
+      "retrieved_pages": [
+        4,
+        3,
+        2
+      ],
+      "expected_pages": [
+        4
+      ],
+      "recall_at_5": 1,
+      "mrr": 1,
+      "ndcg_10": 1,
+      "latency_ms": 3.23
+    },
+    {
+      "id": "Q19",
+      "query": "What problem occurs if dot products grow excessively large in magnitude?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 1,
+      "retrieved_pages": [
+        3
+      ],
+      "expected_pages": [
+        3
+      ],
+      "recall_at_5": 1,
+      "mrr": 1,
+      "ndcg_10": 1,
+      "latency_ms": 10.95
+    },
+    {
+      "id": "Q20",
+      "query": "What kind of network is the position-wise feed-forward layer?",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_sources_count": 4,
+      "retrieved_pages": [
+        2,
+        4,
+        3,
+        1
+      ],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_5": 1,
+      "mrr": 1,
+      "ndcg_10": 1,
+      "latency_ms": 15.78
+    },
+    {
+      "id": "Q21",
+      "query": "What is the secret recipe for baking cinnamon apple pies on Jupiter?",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_sources_count": 0,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_5": 0,
+      "mrr": 0,
+      "ndcg_10": 0,
+      "latency_ms": 14.37
+    },
+    {
+      "id": "Q22",
+      "query": "How does FlashAttention utilize GPU SRAM shared memory tiling buffers?",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_sources_count": 0,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_5": 0,
+      "mrr": 0,
+      "ndcg_10": 0,
+      "latency_ms": 16.21
+    },
+    {
+      "id": "Q23",
+      "query": "Explain quantum computing superposition states and Hadamard gates.",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_sources_count": 0,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_5": 0,
+      "mrr": 0,
+      "ndcg_10": 0,
+      "latency_ms": 14.69
+    },
+    {
+      "id": "Q24",
+      "query": "What is the pretraining objective for BERT Masked Language Modeling?",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_sources_count": 0,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_5": 0,
+      "mrr": 0,
+      "ndcg_10": 0,
+      "latency_ms": 14.25
+    },
+    {
+      "id": "Q25",
+      "query": "What are the recommended LoRA rank r and alpha hyperparameters for 7B models?",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_sources_count": 3,
+      "retrieved_pages": [
+        1,
+        4,
+        3
+      ],
+      "expected_pages": [],
+      "recall_at_5": 0,
+      "mrr": 0,
+      "ndcg_10": 0,
+      "latency_ms": 15.39
+    },
+    {
+      "id": "Q26",
+      "query": "How does the GPT-4 router select active Mixture of Experts feed-forward layers?",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_sources_count": 3,
+      "retrieved_pages": [
+        2,
+        4,
+        3
+      ],
+      "expected_pages": [],
+      "recall_at_5": 0,
+      "mrr": 0,
+      "ndcg_10": 0,
+      "latency_ms": 15.29
+    },
+    {
+      "id": "Q27",
+      "query": "Derive the mathematical loss function for Direct Preference Optimization DPO.",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_sources_count": 2,
+      "retrieved_pages": [
+        3,
+        4
+      ],
+      "expected_pages": [],
+      "recall_at_5": 0,
+      "mrr": 0,
+      "ndcg_10": 0,
+      "latency_ms": 2.83
+    },
+    {
+      "id": "Q28",
+      "query": "What frequency theta rotation matrix is used in RoPE rotary embeddings?",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_sources_count": 0,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_5": 0,
+      "mrr": 0,
+      "ndcg_10": 0,
+      "latency_ms": 12.24
+    },
+    {
+      "id": "Q29",
+      "query": "How does AdamW decouple weight decay from gradient updates?",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_sources_count": 0,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_5": 0,
+      "mrr": 0,
+      "ndcg_10": 0,
+      "latency_ms": 16.58
+    },
+    {
+      "id": "Q30",
+      "query": "Explain DeepSeek MLA Multi-head Latent Attention low-rank key-value compression.",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_sources_count": 1,
+      "retrieved_pages": [
+        3
+      ],
+      "expected_pages": [],
+      "recall_at_5": 0,
+      "mrr": 0,
+      "ndcg_10": 0,
+      "latency_ms": 16.59
+    }
+  ]
+}

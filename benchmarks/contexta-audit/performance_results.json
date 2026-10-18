@@ -1,0 +1,156 @@
+{
+  "metadata": {
+    "suite": "API Performance & Latency Benchmark",
+    "environment": {
+      "node_version": "v24.19.0",
+      "platform": "win32",
+      "arch": "x64",
+      "base_url": "http://localhost:3000",
+      "timestamp": "2026-10-16T00:21:52.842Z"
+    },
+    "summary": {
+      "total_endpoints_tested": 6,
+      "overall_error_rate": 0
+    }
+  },
+  "endpoints": {
+    "health": {
+      "route": "/health",
+      "method": "GET",
+      "total_requests": 100,
+      "successful_requests": 100,
+      "error_count": 0,
+      "error_rate_pct": 0,
+      "status_codes": {
+        "200": 100
+      },
+      "cold_start_ms": 7.79,
+      "warm_mean_ms": 11.57,
+      "p50_ms": 14.99,
+      "p90_ms": 17.11,
+      "p95_ms": 19.04,
+      "p99_ms": 24.14,
+      "min_ms": 1.3,
+      "max_ms": 24.14,
+      "mean_ttfb_ms": 11.38,
+      "requests_per_sec": 86.37,
+      "mean_response_bytes": 143,
+      "sample_duration_sec": 1.16
+    },
+    "sample_doc": {
+      "route": "/sample-doc",
+      "method": "GET",
+      "total_requests": 50,
+      "successful_requests": 50,
+      "error_count": 0,
+      "error_rate_pct": 0,
+      "status_codes": {
+        "200": 50
+      },
+      "cold_start_ms": 14.78,
+      "warm_mean_ms": 11.56,
+      "p50_ms": 15.29,
+      "p90_ms": 16.27,
+      "p95_ms": 16.6,
+      "p99_ms": 17.89,
+      "min_ms": 1.3,
+      "max_ms": 17.89,
+      "mean_ttfb_ms": 11.21,
+      "requests_per_sec": 86.44,
+      "mean_response_bytes": 143,
+      "sample_duration_sec": 0.58
+    },
+    "chat_teacher": {
+      "route": "/chat",
+      "method": "POST",
+      "total_requests": 50,
+      "successful_requests": 50,
+      "error_count": 0,
+      "error_rate_pct": 0,
+      "status_codes": {
+        "200": 50
+      },
+      "cold_start_ms": 84.33,
+      "warm_mean_ms": 11.93,
+      "p50_ms": 14.89,
+      "p90_ms": 16.79,
+      "p95_ms": 18.08,
+      "p99_ms": 31.13,
+      "min_ms": 2.38,
+      "max_ms": 31.13,
+      "mean_ttfb_ms": 11.79,
+      "requests_per_sec": 83.76,
+      "mean_response_bytes": 2618,
+      "sample_duration_sec": 0.6
+    },
+    "chat_abstention": {
+      "route": "/chat",
+      "method": "POST",
+      "total_requests": 50,
+      "successful_requests": 50,
+      "error_count": 0,
+      "error_rate_pct": 0,
+      "status_codes": {
+        "200": 50
+      },
+      "cold_start_ms": 16.11,
+      "warm_mean_ms": 10.77,
+      "p50_ms": 9.49,
+      "p90_ms": 17.32,
+      "p95_ms": 18.51,
+      "p99_ms": 30.38,
+      "min_ms": 2.66,
+      "max_ms": 30.38,
+      "mean_ttfb_ms": 10.63,
+      "requests_per_sec": 92.77,
+      "mean_response_bytes": 245,
+      "sample_duration_sec": 0.54
+    },
+    "summary": {
+      "route": "/summary",
+      "method": "POST",
+      "total_requests": 50,
+      "successful_requests": 50,
+      "error_count": 0,
+      "error_rate_pct": 0,
+      "status_codes": {
+        "200": 50
+      },
+      "cold_start_ms": 5.15,
+      "warm_mean_ms": 10.7,
+      "p50_ms": 12.15,
+      "p90_ms": 16.67,
+      "p95_ms": 16.81,
+      "p99_ms": 27.56,
+      "min_ms": 2.18,
+      "max_ms": 27.56,
+      "mean_ttfb_ms": 10.56,
+      "requests_per_sec": 93.41,
+      "mean_response_bytes": 3819,
+      "sample_duration_sec": 0.54
+    },
+    "quiz_genie": {
+      "route": "/quiz",
+      "method": "POST",
+      "total_requests": 50,
+      "successful_requests": 50,
+      "error_count": 0,
+      "error_rate_pct": 0,
+      "status_codes": {
+        "200": 50
+      },
+      "cold_start_ms": 16.44,
+      "warm_mean_ms": 11.45,
+      "p50_ms": 14.07,
+      "p90_ms": 16.36,
+      "p95_ms": 18.94,
+      "p99_ms": 30.67,
+      "min_ms": 2.34,
+      "max_ms": 30.67,
+      "mean_ttfb_ms": 11.3,
+      "requests_per_sec": 87.31,
+      "mean_response_bytes": 8297,
+      "sample_duration_sec": 0.57
+    }
+  }
+}

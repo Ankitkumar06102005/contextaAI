@@ -1,0 +1,89 @@
+{
+  "run_id": "CONTEXTA-V4-CANONICAL-20261017",
+  "timestamp": "2026-10-17T02:47:09.207Z",
+  "environment": {
+    "runtime": "Node.js v20+ / tsx v4.19+",
+    "os": "Windows 11",
+    "server_base_url": "http://localhost:3000",
+    "data_directory": "E:\\contexta ai\\data",
+    "active_workspace": "f:\\contexta Ai",
+    "target_repository": "E:\\contexta ai"
+  },
+  "benchmark_target": {
+    "corpus_file": "transformer-foundations-sample.pdf",
+    "doc_id": "doc_sample_transformer_foundations",
+    "pages": 4,
+    "chunks": 4,
+    "dataset_version": "v4.0.0-canonical-100",
+    "dataset_sha256": "0b539a921e00f94ba0b58139abf93bef8082e424a7e4dff80eafbd903b174e81",
+    "question_count": 100,
+    "answerable_count": 65,
+    "unanswerable_count": 35
+  },
+  "commands": {
+    "server_start": "npx --prefix \"e:\\contexta ai\" tsx \"e:\\contexta ai\\server.ts\"",
+    "rag_evaluation": "npx --prefix \"e:\\contexta ai\" tsx \"e:\\contexta ai\\benchmarks\\contexta-audit-v4\\scripts\\eval_rag_v4.ts\"",
+    "load_test": "npx --prefix \"e:\\contexta ai\" tsx \"e:\\contexta ai\\benchmarks\\contexta-audit-v4\\scripts\\load_test_v4.ts\"",
+    "resource_soak": "npx --prefix \"e:\\contexta ai\" tsx \"e:\\contexta ai\\benchmarks\\contexta-audit-v4\\scripts\\resource_soak_v4.ts\"",
+    "security_audit": "npx --prefix \"e:\\contexta ai\" tsx \"e:\\contexta ai\\benchmarks\\contexta-audit-v4\\scripts\\verify_security_v4.ts\"",
+    "metric_validation": "npx --prefix \"e:\\contexta ai\" tsx \"e:\\contexta ai\\benchmarks\\contexta-audit-v4\\scripts\\validate_metrics_v4.ts\""
+  },
+  "artifacts": {
+    "retrieval_evaluation_v4.json": {
+      "relative_path": "benchmarks/contexta-audit-v4/retrieval_evaluation_v4.json",
+      "sha256": "bce5bc8efea11705894be1aba247f3437bdf137c52f330289481daafb6523d31",
+      "bytes": 42356
+    },
+    "answer_quality_evaluation_v4.json": {
+      "relative_path": "benchmarks/contexta-audit-v4/answer_quality_evaluation_v4.json",
+      "sha256": "420b9dce2d54e273f31ea95a272431e4cc8ce788f0915e0f6d487a71ee350fad",
+      "bytes": 46004
+    },
+    "citation_evaluation_v4.json": {
+      "relative_path": "benchmarks/contexta-audit-v4/citation_evaluation_v4.json",
+      "sha256": "16a5cdafd6056af6879a1386207bf503fcef59b9371b0ffbbfc6f90e902c4245",
+      "bytes": 13565
+    },
+    "experiment_comparison_v4.json": {
+      "relative_path": "benchmarks/contexta-audit-v4/experiment_comparison_v4.json",
+      "sha256": "ca47d217a0a6791a1ce96fa788d4739f825df42647cbea978e8a7440ebe07dbe",
+      "bytes": 3299
+    },
+    "load_test_results_v4.csv": {
+      "relative_path": "benchmarks/contexta-audit-v4/load_test_results_v4.csv",
+      "sha256": "02d48f5a203ffea6d900e7abcc5af297185f8420ebecfd54d0610950ba5771b8",
+      "bytes": 468
+    },
+    "resource_soak_results_v4.json": {
+      "relative_path": "benchmarks/contexta-audit-v4/resource_soak_results_v4.json",
+      "sha256": "621f5da034d9430544c97b3860476c69b6620b5eb18cf119e1d356bcb4bf1872",
+      "bytes": 4606
+    },
+    "security_results_v4.json": {
+      "relative_path": "benchmarks/contexta-audit-v4/security_results_v4.json",
+      "sha256": "32add8381e7fa17fa66c1f2be6a688eb975803001e0ad3e88eec242e82f1331f",
+      "bytes": 1593
+    },
+    "metric_reconciliation_v4.json": {
+      "relative_path": "benchmarks/contexta-audit-v4/metric_reconciliation_v4.json",
+      "sha256": "c670089c7e2fc4468e488d5d0015fae84b1d9180f47f9b5e2689b7e8afc68e71",
+      "bytes": 4295
+    },
+    "metric_registry_v4.json": {
+      "relative_path": "benchmarks/contexta-audit-v4/metric_registry_v4.json",
+      "sha256": "3970d7eda77ecc6536a76efac2af6f6fc17a9ac649278cec776d0827b1ab00e7",
+      "bytes": 2044
+    }
+  },
+  "audit_summary": {
+    "population_recall_at_5": "100.0% (65/65)",
+    "false_abstention_rate": "0.0% (0/65)",
+    "unanswerable_abstention_rate": "45.7% (16/35)",
+    "strict_citation_precision": "83.8% (62/74)",
+    "claim_support_rate": "86.3% (69/80)",
+    "peak_concurrency_rps": "1489.63 RPS (C=20)",
+    "soak_operations": "1000 ops (0 failures, 17.33s duration)",
+    "net_heap_delta_mb": "+0.79 MB",
+    "security_tests_passed": "9/9 (100.0%)"
+  }
+}

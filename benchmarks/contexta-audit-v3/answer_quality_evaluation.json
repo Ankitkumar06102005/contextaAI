@@ -1,0 +1,1348 @@
+{
+  "suite": "Contexta AI Answer Quality & Hallucination Audit V3",
+  "timestamp": "2026-10-17T00:20:35.335Z",
+  "answerable_total": 65,
+  "answered_count": 48,
+  "false_abstention_count": 17,
+  "answerable_completion_rate": 0.738,
+  "false_abstention_rate": 0.262,
+  "unanswerable_total": 35,
+  "unanswerable_correct_abstention_count": 17,
+  "unanswerable_abstention_rate": 0.486,
+  "unanswerable_hallucination_rate": 0.514,
+  "claim_level_metrics": {
+    "total_claims_evaluated": 62,
+    "supported_claims_count": 46,
+    "claim_support_rate": 0.742
+  },
+  "items": [
+    {
+      "id": "DF01",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention funct...",
+      "claims_total": 3,
+      "claims_supported": 2,
+      "cited_pages": [
+        3
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "softmax function",
+          "supported": true
+        },
+        {
+          "fact": "divided by square root of d_k",
+          "supported": true
+        },
+        {
+          "fact": "multiplied by V",
+          "supported": false
+        }
+      ]
+    },
+    {
+      "id": "DF02",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention funct...",
+      "claims_total": 2,
+      "claims_supported": 2,
+      "cited_pages": [
+        3
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "large magnitude dot products",
+          "supported": true
+        },
+        {
+          "fact": "extremely small gradients in softmax",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "DF03",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows a...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        2
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "N = 6 identical layers",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "DF04",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows a...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        2
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "dimension d_model = 512",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "DF05",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows a...",
+      "claims_total": 2,
+      "claims_supported": 2,
+      "cited_pages": [
+        2
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "residual connection",
+          "supported": true
+        },
+        {
+          "fact": "layer normalization LayerNorm(x + Sublayer(x))",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "DF06",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nIn...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        4
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "h = 8 linear projections",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "DF07",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nIn...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        4
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "sine and cosine functions of different frequencies",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "DF08",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nIn...",
+      "claims_total": 2,
+      "claims_supported": 2,
+      "cited_pages": [
+        4
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "bottoms of encoder and decoder stacks",
+          "supported": true
+        },
+        {
+          "fact": "added to input embeddings",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "DF09",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention funct...",
+      "claims_total": 1,
+      "claims_supported": 0,
+      "cited_pages": [
+        3
+      ],
+      "citations_valid": 0,
+      "citations_unsupported": 1,
+      "citation_precision": 0,
+      "claim_details": [
+        {
+          "fact": "Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, Polosukhin",
+          "supported": false
+        }
+      ]
+    },
+    {
+      "id": "DF10",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 1:\n\nContexta AI Research Digest: Attention Mechanisms and Tran...",
+      "claims_total": 2,
+      "claims_supported": 2,
+      "cited_pages": [
+        1
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "English-to-German",
+          "supported": true
+        },
+        {
+          "fact": "English-to-French",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "DF11",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 1:\n\nContexta AI Research Digest: Attention Mechanisms and Tran...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        1
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "eschewing recurrence and convolutions entirely",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "DF12",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows a...",
+      "claims_total": 2,
+      "claims_supported": 2,
+      "cited_pages": [
+        2
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "multi-head self-attention",
+          "supported": true
+        },
+        {
+          "fact": "position-wise feed-forward network",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "DF13",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nIn...",
+      "claims_total": 1,
+      "claims_supported": 0,
+      "cited_pages": [
+        4
+      ],
+      "citations_valid": 0,
+      "citations_unsupported": 1,
+      "citation_precision": 0,
+      "claim_details": [
+        {
+          "fact": "packed into matrices Q, K, and V",
+          "supported": false
+        }
+      ]
+    },
+    {
+      "id": "DF14",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention funct...",
+      "claims_total": 2,
+      "claims_supported": 2,
+      "cited_pages": [
+        3
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "weighted sum of values",
+          "supported": true
+        },
+        {
+          "fact": "compatibility function of query with key",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "DF15",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nIn...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        4
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "contains no recurrence and no convolution",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "DF16",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 1:\n\nContexta AI Research Digest: Attention Mechanisms and Tran...",
+      "claims_total": 2,
+      "claims_supported": 2,
+      "cited_pages": [
+        1
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "more parallelizable",
+          "supported": true
+        },
+        {
+          "fact": "significantly less time to train",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "DF17",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 1:\n\nContexta AI Research Digest: Attention Mechanisms and Tran...",
+      "claims_total": 1,
+      "claims_supported": 0,
+      "cited_pages": [
+        1
+      ],
+      "citations_valid": 0,
+      "citations_unsupported": 1,
+      "citation_precision": 0,
+      "claim_details": [
+        {
+          "fact": "encoder-decoder structure",
+          "supported": false
+        }
+      ]
+    },
+    {
+      "id": "DF18",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention funct...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        3
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "dot product of query with key divided by sqrt(d_k)",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "DF19",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nIn...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        4
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "d_model-dimensional",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "DF20",
+      "category": "direct_factual",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows a...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        2
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "position-wise fully connected feed-forward network",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "PV01",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "PV02",
+      "category": "paraphrased",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention funct...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        3
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "scaling by square root of d_k prevents vanishing gradients",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "PV03",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "PV04",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "PV05",
+      "category": "paraphrased",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows a...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        2
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "LayerNorm(x + Sublayer(x))",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "PV06",
+      "category": "paraphrased",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention funct...",
+      "claims_total": 1,
+      "claims_supported": 0,
+      "cited_pages": [
+        3
+      ],
+      "citations_valid": 0,
+      "citations_unsupported": 1,
+      "citation_precision": 0,
+      "claim_details": [
+        {
+          "fact": "h = 8 linear projections",
+          "supported": false
+        }
+      ]
+    },
+    {
+      "id": "PV07",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "PV08",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "PV09",
+      "category": "paraphrased",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention funct...",
+      "claims_total": 1,
+      "claims_supported": 0,
+      "cited_pages": [
+        3
+      ],
+      "citations_valid": 0,
+      "citations_unsupported": 1,
+      "citation_precision": 0,
+      "claim_details": [
+        {
+          "fact": "Vaswani et al.",
+          "supported": false
+        }
+      ]
+    },
+    {
+      "id": "PV10",
+      "category": "paraphrased",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 1:\n\nContexta AI Research Digest: Attention Mechanisms and Tran...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        1
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "English-to-German and English-to-French",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "PV11",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "PV12",
+      "category": "paraphrased",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows a...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        2
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "position-wise feed-forward network",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "PV13",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "PV14",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "PV15",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "PV16",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "PV17",
+      "category": "paraphrased",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nIn...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        4
+      ],
+      "citations_valid": 0,
+      "citations_unsupported": 1,
+      "citation_precision": 0,
+      "claim_details": [
+        {
+          "fact": "encoder and decoder stacks",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "PV18",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "PV19",
+      "category": "paraphrased",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 1:\n\nContexta AI Research Digest: Attention Mechanisms and Tran...",
+      "claims_total": 1,
+      "claims_supported": 0,
+      "cited_pages": [
+        1
+      ],
+      "citations_valid": 0,
+      "citations_unsupported": 1,
+      "citation_precision": 0,
+      "claim_details": [
+        {
+          "fact": "d_model = 512",
+          "supported": false
+        }
+      ]
+    },
+    {
+      "id": "PV20",
+      "category": "paraphrased",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows a...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        2
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "position-wise feed-forward layer",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "MP01",
+      "category": "multi_passage",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nIn...",
+      "claims_total": 2,
+      "claims_supported": 2,
+      "cited_pages": [
+        4
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "d_model = 512 from Section 2",
+          "supported": true
+        },
+        {
+          "fact": "h = 8 linear projections from Section 4",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "MP02",
+      "category": "multi_passage",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nIn...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        4
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "eschewing recurrence requires explicit positional encodings for word order",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "MP03",
+      "category": "multi_passage",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention funct...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        3
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "multi-head attention sub-layer applies scaled dot product",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "MP04",
+      "category": "multi_passage",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows a...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        2
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "embedding + positional encoding passes into sub-layer with LayerNorm residual",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "MP05",
+      "category": "multi_passage",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows a...",
+      "claims_total": 2,
+      "claims_supported": 1,
+      "cited_pages": [
+        2
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "LayerNorm residual connection across 6 layers",
+          "supported": true
+        },
+        {
+          "fact": "1/sqrt(d_k) prevents softmax gradient vanishing",
+          "supported": false
+        }
+      ]
+    },
+    {
+      "id": "MP06",
+      "category": "multi_passage",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nIn...",
+      "claims_total": 1,
+      "claims_supported": 0,
+      "cited_pages": [
+        4
+      ],
+      "citations_valid": 0,
+      "citations_unsupported": 1,
+      "citation_precision": 0,
+      "claim_details": [
+        {
+          "fact": "translation tasks run on encoder-decoder structure",
+          "supported": false
+        }
+      ]
+    },
+    {
+      "id": "MP07",
+      "category": "multi_passage",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention funct...",
+      "claims_total": 2,
+      "claims_supported": 0,
+      "cited_pages": [
+        3
+      ],
+      "citations_valid": 0,
+      "citations_unsupported": 1,
+      "citation_precision": 0,
+      "claim_details": [
+        {
+          "fact": "removing convolutions removes local position bias",
+          "supported": false
+        },
+        {
+          "fact": "requires explicit positional encoding",
+          "supported": false
+        }
+      ]
+    },
+    {
+      "id": "MP08",
+      "category": "multi_passage",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows a...",
+      "claims_total": 3,
+      "claims_supported": 1,
+      "cited_pages": [
+        2
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "N = 6",
+          "supported": false
+        },
+        {
+          "fact": "d_model = 512",
+          "supported": true
+        },
+        {
+          "fact": "h = 8",
+          "supported": false
+        }
+      ]
+    },
+    {
+      "id": "MP09",
+      "category": "multi_passage",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nIn...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        4
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "projected h=8 times before forming Q, K, V matrices",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "MP10",
+      "category": "multi_passage",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nIn...",
+      "claims_total": 1,
+      "claims_supported": 0,
+      "cited_pages": [
+        4
+      ],
+      "citations_valid": 0,
+      "citations_unsupported": 1,
+      "citation_precision": 0,
+      "claim_details": [
+        {
+          "fact": "self-attention replaces sequential loops, enabling parallel training",
+          "supported": false
+        }
+      ]
+    },
+    {
+      "id": "MP11",
+      "category": "multi_passage",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nIn...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        4
+      ],
+      "citations_valid": 0,
+      "citations_unsupported": 1,
+      "citation_precision": 0,
+      "claim_details": [
+        {
+          "fact": "originate from encoder sub-layer outputs of dimension 512",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "MP12",
+      "category": "multi_passage",
+      "status": "FALSE_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "MP13",
+      "category": "multi_passage",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nIn...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        4
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "sine and cosine of diverse frequencies mark relative/absolute positions",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "MP14",
+      "category": "multi_passage",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nIn...",
+      "claims_total": 1,
+      "claims_supported": 0,
+      "cited_pages": [
+        4
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "N=6 controls depth, h=8 controls subspace breadth",
+          "supported": false
+        }
+      ]
+    },
+    {
+      "id": "MP15",
+      "category": "multi_passage",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows a...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        2
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "feed-forward sublayer is wrapped in LayerNorm residual connection",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "AM01",
+      "category": "ambiguous",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nIn...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        4
+      ],
+      "citations_valid": 0,
+      "citations_unsupported": 1,
+      "citation_precision": 0,
+      "claim_details": [
+        {
+          "fact": "maps queries and key-values to weighted sum of values",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "AM02",
+      "category": "ambiguous",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows a...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        2
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "multi-head attention, feed-forward, residual connections",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "AM03",
+      "category": "ambiguous",
+      "status": "FALSE_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "AM04",
+      "category": "ambiguous",
+      "status": "FALSE_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "AM05",
+      "category": "ambiguous",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nIn...",
+      "claims_total": 1,
+      "claims_supported": 0,
+      "cited_pages": [
+        4
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "6, 512, 8",
+          "supported": false
+        }
+      ]
+    },
+    {
+      "id": "AM06",
+      "category": "ambiguous",
+      "status": "FALSE_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "AM07",
+      "category": "ambiguous",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention funct...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        3
+      ],
+      "citations_valid": 1,
+      "citations_unsupported": 0,
+      "citation_precision": 1,
+      "claim_details": [
+        {
+          "fact": "queries, keys, values -> weighted sum of values",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "AM08",
+      "category": "ambiguous",
+      "status": "FALSE_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "AM09",
+      "category": "ambiguous",
+      "status": "ANSWERED",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nIn...",
+      "claims_total": 1,
+      "claims_supported": 1,
+      "cited_pages": [
+        4
+      ],
+      "citations_valid": 0,
+      "citations_unsupported": 1,
+      "citation_precision": 0,
+      "claim_details": [
+        {
+          "fact": "pass through sub-layers and LayerNorm(x + Sublayer(x))",
+          "supported": true
+        }
+      ]
+    },
+    {
+      "id": "AM10",
+      "category": "ambiguous",
+      "status": "FALSE_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "AB01",
+      "category": "absent_fact",
+      "status": "UNANSWERABLE_HALLUCINATION",
+      "answer_preview": "Based on retrieved passages from Page 1:\n\nContexta AI Research Digest: Attention"
+    },
+    {
+      "id": "AB02",
+      "category": "absent_fact",
+      "status": "CORRECT_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "AB03",
+      "category": "absent_fact",
+      "status": "UNANSWERABLE_HALLUCINATION",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe T"
+    },
+    {
+      "id": "AB04",
+      "category": "absent_fact",
+      "status": "UNANSWERABLE_HALLUCINATION",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe T"
+    },
+    {
+      "id": "AB05",
+      "category": "absent_fact",
+      "status": "UNANSWERABLE_HALLUCINATION",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Po"
+    },
+    {
+      "id": "AB06",
+      "category": "absent_fact",
+      "status": "CORRECT_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "AB07",
+      "category": "absent_fact",
+      "status": "CORRECT_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "AB08",
+      "category": "absent_fact",
+      "status": "CORRECT_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "AB09",
+      "category": "absent_fact",
+      "status": "CORRECT_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "AB10",
+      "category": "absent_fact",
+      "status": "CORRECT_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "AB11",
+      "category": "absent_fact",
+      "status": "CORRECT_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "AB12",
+      "category": "absent_fact",
+      "status": "CORRECT_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "AB13",
+      "category": "absent_fact",
+      "status": "CORRECT_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "AB14",
+      "category": "absent_fact",
+      "status": "UNANSWERABLE_HALLUCINATION",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attentio"
+    },
+    {
+      "id": "AB15",
+      "category": "absent_fact",
+      "status": "CORRECT_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "OOD01",
+      "category": "shared_keyword_ood",
+      "status": "UNANSWERABLE_HALLUCINATION",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe T"
+    },
+    {
+      "id": "OOD02",
+      "category": "shared_keyword_ood",
+      "status": "CORRECT_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "OOD03",
+      "category": "shared_keyword_ood",
+      "status": "CORRECT_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "OOD04",
+      "category": "shared_keyword_ood",
+      "status": "UNANSWERABLE_HALLUCINATION",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe T"
+    },
+    {
+      "id": "OOD05",
+      "category": "shared_keyword_ood",
+      "status": "UNANSWERABLE_HALLUCINATION",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attentio"
+    },
+    {
+      "id": "OOD06",
+      "category": "shared_keyword_ood",
+      "status": "UNANSWERABLE_HALLUCINATION",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attentio"
+    },
+    {
+      "id": "OOD07",
+      "category": "shared_keyword_ood",
+      "status": "CORRECT_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "OOD08",
+      "category": "shared_keyword_ood",
+      "status": "CORRECT_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "OOD09",
+      "category": "shared_keyword_ood",
+      "status": "CORRECT_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "OOD10",
+      "category": "shared_keyword_ood",
+      "status": "UNANSWERABLE_HALLUCINATION",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe T"
+    },
+    {
+      "id": "ADV01",
+      "category": "adversarial",
+      "status": "UNANSWERABLE_HALLUCINATION",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Po"
+    },
+    {
+      "id": "ADV02",
+      "category": "adversarial",
+      "status": "UNANSWERABLE_HALLUCINATION",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attentio"
+    },
+    {
+      "id": "ADV03",
+      "category": "adversarial",
+      "status": "UNANSWERABLE_HALLUCINATION",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe T"
+    },
+    {
+      "id": "ADV04",
+      "category": "adversarial",
+      "status": "CORRECT_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "ADV05",
+      "category": "adversarial",
+      "status": "UNANSWERABLE_HALLUCINATION",
+      "answer_preview": "Based on retrieved passages from Page 1:\n\nContexta AI Research Digest: Attention"
+    },
+    {
+      "id": "ADV06",
+      "category": "adversarial",
+      "status": "CORRECT_ABSTENTION",
+      "answer_preview": "I couldn't find enough information about this in the uploaded document."
+    },
+    {
+      "id": "ADV07",
+      "category": "adversarial",
+      "status": "UNANSWERABLE_HALLUCINATION",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Po"
+    },
+    {
+      "id": "ADV08",
+      "category": "adversarial",
+      "status": "UNANSWERABLE_HALLUCINATION",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe T"
+    },
+    {
+      "id": "ADV09",
+      "category": "adversarial",
+      "status": "UNANSWERABLE_HALLUCINATION",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe T"
+    },
+    {
+      "id": "ADV10",
+      "category": "adversarial",
+      "status": "UNANSWERABLE_HALLUCINATION",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Po"
+    }
+  ]
+}

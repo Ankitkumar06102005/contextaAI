@@ -1,0 +1,457 @@
+{
+  "suite": "Contexta AI Canonical Citation Verification V3",
+  "timestamp": "2026-10-17T00:20:35.335Z",
+  "total_citations_evaluated": 48,
+  "valid_citations_count": 35,
+  "unsupported_citations_count": 13,
+  "strict_citation_precision": 0.729,
+  "unsupported_citation_rate": 0.271,
+  "discrepancy_resolution": "Reconciled: V2 report incorrectly claimed 93.6% (88/94) due to manual author error. Actual verified ground-truth precision is 72.9% (35/48).",
+  "citations": [
+    {
+      "question_id": "DF01",
+      "category": "direct_factual",
+      "cited_page": 3,
+      "expected_pages": [
+        3
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "DF02",
+      "category": "direct_factual",
+      "cited_page": 3,
+      "expected_pages": [
+        3
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "DF03",
+      "category": "direct_factual",
+      "cited_page": 2,
+      "expected_pages": [
+        2
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "DF04",
+      "category": "direct_factual",
+      "cited_page": 2,
+      "expected_pages": [
+        2
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "DF05",
+      "category": "direct_factual",
+      "cited_page": 2,
+      "expected_pages": [
+        2
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "DF06",
+      "category": "direct_factual",
+      "cited_page": 4,
+      "expected_pages": [
+        4
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "DF07",
+      "category": "direct_factual",
+      "cited_page": 4,
+      "expected_pages": [
+        4
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "DF08",
+      "category": "direct_factual",
+      "cited_page": 4,
+      "expected_pages": [
+        4
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "DF09",
+      "category": "direct_factual",
+      "cited_page": 3,
+      "expected_pages": [
+        1
+      ],
+      "is_valid_grounded": false
+    },
+    {
+      "question_id": "DF10",
+      "category": "direct_factual",
+      "cited_page": 1,
+      "expected_pages": [
+        1
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "DF11",
+      "category": "direct_factual",
+      "cited_page": 1,
+      "expected_pages": [
+        1
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "DF12",
+      "category": "direct_factual",
+      "cited_page": 2,
+      "expected_pages": [
+        2
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "DF13",
+      "category": "direct_factual",
+      "cited_page": 4,
+      "expected_pages": [
+        3
+      ],
+      "is_valid_grounded": false
+    },
+    {
+      "question_id": "DF14",
+      "category": "direct_factual",
+      "cited_page": 3,
+      "expected_pages": [
+        3
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "DF15",
+      "category": "direct_factual",
+      "cited_page": 4,
+      "expected_pages": [
+        4
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "DF16",
+      "category": "direct_factual",
+      "cited_page": 1,
+      "expected_pages": [
+        1
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "DF17",
+      "category": "direct_factual",
+      "cited_page": 1,
+      "expected_pages": [
+        2
+      ],
+      "is_valid_grounded": false
+    },
+    {
+      "question_id": "DF18",
+      "category": "direct_factual",
+      "cited_page": 3,
+      "expected_pages": [
+        3
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "DF19",
+      "category": "direct_factual",
+      "cited_page": 4,
+      "expected_pages": [
+        4
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "DF20",
+      "category": "direct_factual",
+      "cited_page": 2,
+      "expected_pages": [
+        2
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "PV02",
+      "category": "paraphrased",
+      "cited_page": 3,
+      "expected_pages": [
+        3
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "PV05",
+      "category": "paraphrased",
+      "cited_page": 2,
+      "expected_pages": [
+        2
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "PV06",
+      "category": "paraphrased",
+      "cited_page": 3,
+      "expected_pages": [
+        4
+      ],
+      "is_valid_grounded": false
+    },
+    {
+      "question_id": "PV09",
+      "category": "paraphrased",
+      "cited_page": 3,
+      "expected_pages": [
+        1
+      ],
+      "is_valid_grounded": false
+    },
+    {
+      "question_id": "PV10",
+      "category": "paraphrased",
+      "cited_page": 1,
+      "expected_pages": [
+        1
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "PV12",
+      "category": "paraphrased",
+      "cited_page": 2,
+      "expected_pages": [
+        2
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "PV17",
+      "category": "paraphrased",
+      "cited_page": 4,
+      "expected_pages": [
+        2
+      ],
+      "is_valid_grounded": false
+    },
+    {
+      "question_id": "PV19",
+      "category": "paraphrased",
+      "cited_page": 1,
+      "expected_pages": [
+        4
+      ],
+      "is_valid_grounded": false
+    },
+    {
+      "question_id": "PV20",
+      "category": "paraphrased",
+      "cited_page": 2,
+      "expected_pages": [
+        2
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "MP01",
+      "category": "multi_passage",
+      "cited_page": 4,
+      "expected_pages": [
+        2,
+        4
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "MP02",
+      "category": "multi_passage",
+      "cited_page": 4,
+      "expected_pages": [
+        1,
+        4
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "MP03",
+      "category": "multi_passage",
+      "cited_page": 3,
+      "expected_pages": [
+        2,
+        3
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "MP04",
+      "category": "multi_passage",
+      "cited_page": 2,
+      "expected_pages": [
+        2,
+        4
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "MP05",
+      "category": "multi_passage",
+      "cited_page": 2,
+      "expected_pages": [
+        2,
+        3
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "MP06",
+      "category": "multi_passage",
+      "cited_page": 4,
+      "expected_pages": [
+        1,
+        2
+      ],
+      "is_valid_grounded": false
+    },
+    {
+      "question_id": "MP07",
+      "category": "multi_passage",
+      "cited_page": 3,
+      "expected_pages": [
+        1,
+        4
+      ],
+      "is_valid_grounded": false
+    },
+    {
+      "question_id": "MP08",
+      "category": "multi_passage",
+      "cited_page": 2,
+      "expected_pages": [
+        2,
+        4
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "MP09",
+      "category": "multi_passage",
+      "cited_page": 4,
+      "expected_pages": [
+        3,
+        4
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "MP10",
+      "category": "multi_passage",
+      "cited_page": 4,
+      "expected_pages": [
+        1,
+        2
+      ],
+      "is_valid_grounded": false
+    },
+    {
+      "question_id": "MP11",
+      "category": "multi_passage",
+      "cited_page": 4,
+      "expected_pages": [
+        2,
+        3
+      ],
+      "is_valid_grounded": false
+    },
+    {
+      "question_id": "MP13",
+      "category": "multi_passage",
+      "cited_page": 4,
+      "expected_pages": [
+        4
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "MP14",
+      "category": "multi_passage",
+      "cited_page": 4,
+      "expected_pages": [
+        2,
+        4
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "MP15",
+      "category": "multi_passage",
+      "cited_page": 2,
+      "expected_pages": [
+        2
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "AM01",
+      "category": "ambiguous",
+      "cited_page": 4,
+      "expected_pages": [
+        3
+      ],
+      "is_valid_grounded": false
+    },
+    {
+      "question_id": "AM02",
+      "category": "ambiguous",
+      "cited_page": 2,
+      "expected_pages": [
+        2
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "AM05",
+      "category": "ambiguous",
+      "cited_page": 4,
+      "expected_pages": [
+        2,
+        4
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "AM07",
+      "category": "ambiguous",
+      "cited_page": 3,
+      "expected_pages": [
+        3
+      ],
+      "is_valid_grounded": true
+    },
+    {
+      "question_id": "AM09",
+      "category": "ambiguous",
+      "cited_page": 4,
+      "expected_pages": [
+        2
+      ],
+      "is_valid_grounded": false
+    }
+  ]
+}

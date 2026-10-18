@@ -1,0 +1,112 @@
+{
+  "metadata": {
+    "suite": "Phase 2 Independent Metric Validation",
+    "evaluated_source_directory": "e:\\contexta ai\\benchmarks\\contexta-audit",
+    "timestamp": "2026-10-16T02:36:03.409Z",
+    "summary": {
+      "total_metrics_evaluated": 12,
+      "verified_count": 11,
+      "partially_verified_count": 1,
+      "unverified_count": 0,
+      "failed_count": 0
+    }
+  },
+  "validations": [
+    {
+      "metric_name": "API /chat P50 (Sequential)",
+      "reported_value": 14.89,
+      "recalculated_value": 14.89,
+      "status": "VERIFIED",
+      "raw_source_file": "performance_results.json",
+      "notes_and_discrepancies": "Accurately recorded from 50 sequential requests. However, v1 report compared this against a Concurrency=1 load-test run (8.63ms) and claimed latency improvement, which was a methodological discrepancy (cross-harness comparison)."
+    },
+    {
+      "metric_name": "API /health P50 (Sequential)",
+      "reported_value": 14.99,
+      "recalculated_value": 14.99,
+      "status": "VERIFIED",
+      "raw_source_file": "performance_results.json",
+      "notes_and_discrepancies": "Accurately recorded over 100 requests. Confirmed local in-memory response."
+    },
+    {
+      "metric_name": "RAG Recall@5 (Post-opt)",
+      "reported_value": 1,
+      "recalculated_value": 1,
+      "status": "VERIFIED",
+      "raw_source_file": "retrieval_evaluation.json",
+      "notes_and_discrepancies": "Independently verified across 20 answerable items. All target pages present in top-5 chunks."
+    },
+    {
+      "metric_name": "RAG MRR (Post-opt)",
+      "reported_value": 0.887,
+      "recalculated_value": 0.887,
+      "status": "VERIFIED",
+      "raw_source_file": "retrieval_evaluation.json",
+      "notes_and_discrepancies": "Independently verified. Reciprocal rank average matches raw records (0.887)."
+    },
+    {
+      "metric_name": "RAG nDCG@10 (Post-opt)",
+      "reported_value": 0.915,
+      "recalculated_value": 0.915,
+      "status": "VERIFIED",
+      "raw_source_file": "retrieval_evaluation.json",
+      "notes_and_discrepancies": "Independently verified. Graded ranking discount matches formula."
+    },
+    {
+      "metric_name": "Unanswerable Abstention Rate",
+      "reported_value": 0.6,
+      "recalculated_value": 0.6,
+      "status": "VERIFIED",
+      "raw_source_file": "retrieval_evaluation.json",
+      "notes_and_discrepancies": "6 out of 10 negative probes properly abstained (60.0%). 4 negative queries containing technical subterms (e.g. GPT-4 feed-forward layers) erroneously retrieved document passages due to subterm lexical bleed."
+    },
+    {
+      "metric_name": "Answerable Success Rate",
+      "reported_value": 1,
+      "recalculated_value": 1,
+      "status": "VERIFIED",
+      "raw_source_file": "answer_quality_evaluation.json",
+      "notes_and_discrepancies": "All 10 answerable questions yielded non-empty grounded answers."
+    },
+    {
+      "metric_name": "Fabricated Citation Rate",
+      "reported_value": 0,
+      "recalculated_value": 0,
+      "status": "PARTIALLY_VERIFIED",
+      "raw_source_file": "answer_quality_evaluation.json",
+      "notes_and_discrepancies": "CRITICAL LIMITATION: The v1 test defined \"fabricated citation\" solely as whether the cited page number was < 1 or > page_count. It did NOT check whether the specific fact in the text was actually supported by that page. Under rigorous claim-level entailment, claiming a 0% fabrication rate is misleading and must be qualified."
+    },
+    {
+      "metric_name": "Unanswerable Hallucination Rate",
+      "reported_value": "40.0% failure (2/5 hallucinated)",
+      "recalculated_value": "40%",
+      "status": "VERIFIED",
+      "raw_source_file": "answer_quality_evaluation.json",
+      "notes_and_discrepancies": "Confirmed raw records: 2 out of 5 negative probes (T11: GPT-4 parameters, T13: FlashAttention CUDA memory) generated hallucinated answers from retrieved document passages instead of abstaining."
+    },
+    {
+      "metric_name": "Load Test /chat Throughput (C=25)",
+      "reported_value": "439.33 RPS",
+      "recalculated_value": "439.33 RPS",
+      "status": "VERIFIED",
+      "raw_source_file": "load_test_results.csv",
+      "notes_and_discrepancies": "Calculated as 100 requests / 0.23s duration = 439.33 RPS in local in-memory burst. Accurately reflects raw CSV, but must be clearly contextualized as a short burst rather than a multi-minute sustained load."
+    },
+    {
+      "metric_name": "Load Test /health Peak Throughput (C=50)",
+      "reported_value": "2005.92 RPS",
+      "recalculated_value": "2005.92 RPS",
+      "status": "VERIFIED",
+      "raw_source_file": "load_test_results.csv",
+      "notes_and_discrepancies": "Calculated as 250 requests / 0.12s duration = 2005.92 RPS. Accurately reflects raw CSV, but represents local Node.js health-check loopback throughput, NOT full AI/RAG inference throughput."
+    },
+    {
+      "metric_name": "Load Test Error Rate",
+      "reported_value": "0.00%",
+      "recalculated_value": "0.00%",
+      "status": "VERIFIED",
+      "raw_source_file": "load_test_results.csv",
+      "notes_and_discrepancies": "All 1,050 total load test requests across both suites returned HTTP 200 without timeouts or connection drops."
+    }
+  ]
+}

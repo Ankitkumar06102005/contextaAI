@@ -1,0 +1,133 @@
+{
+  "test_run": "Phase 8 Resource Soak V2",
+  "date": "2026-10-16T23:44:22.936Z",
+  "config": {
+    "cycles": 500,
+    "base_url": "http://localhost:3000",
+    "document_cached": true
+  },
+  "performance": {
+    "total_duration_sec": 7.42,
+    "throughput_rps": 67.4,
+    "successful_requests": 500,
+    "failed_requests": 0,
+    "p50_latency_ms": 15.24,
+    "p95_latency_ms": 16.7,
+    "p99_latency_ms": 18.39,
+    "mean_latency_ms": 14.61
+  },
+  "server_memory": {
+    "initial_heap_used_mb": 41.63,
+    "final_heap_used_mb": 42.23,
+    "heap_delta_mb": 0.6,
+    "initial_rss_mb": 118.81,
+    "final_rss_mb": 124.57,
+    "rss_delta_mb": 5.76
+  },
+  "telemetry_timeline": [
+    {
+      "cycle": 0,
+      "timestamp": "2026-10-16T23:44:15.512Z",
+      "server_rss_mb": 118.81,
+      "server_heap_total_mb": 43.04,
+      "server_heap_used_mb": 41.63,
+      "server_cache_entries": 0,
+      "client_heap_used_mb": 10.54
+    },
+    {
+      "cycle": 50,
+      "timestamp": "2026-10-16T23:44:16.777Z",
+      "server_rss_mb": 121,
+      "server_heap_total_mb": 45.79,
+      "server_heap_used_mb": 43.23,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 13.82
+    },
+    {
+      "cycle": 100,
+      "timestamp": "2026-10-16T23:44:17.509Z",
+      "server_rss_mb": 120.24,
+      "server_heap_total_mb": 46.04,
+      "server_heap_used_mb": 42.78,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 13.74
+    },
+    {
+      "cycle": 150,
+      "timestamp": "2026-10-16T23:44:18.215Z",
+      "server_rss_mb": 120.31,
+      "server_heap_total_mb": 46.04,
+      "server_heap_used_mb": 43.36,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 12.13
+    },
+    {
+      "cycle": 200,
+      "timestamp": "2026-10-16T23:44:18.949Z",
+      "server_rss_mb": 120.52,
+      "server_heap_total_mb": 46.04,
+      "server_heap_used_mb": 43.2,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 16.66
+    },
+    {
+      "cycle": 250,
+      "timestamp": "2026-10-16T23:44:19.602Z",
+      "server_rss_mb": 120.88,
+      "server_heap_total_mb": 48.29,
+      "server_heap_used_mb": 43.39,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 15.38
+    },
+    {
+      "cycle": 300,
+      "timestamp": "2026-10-16T23:44:20.253Z",
+      "server_rss_mb": 122.71,
+      "server_heap_total_mb": 48.79,
+      "server_heap_used_mb": 43.56,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 15.79
+    },
+    {
+      "cycle": 350,
+      "timestamp": "2026-10-16T23:44:20.937Z",
+      "server_rss_mb": 123.18,
+      "server_heap_total_mb": 49.04,
+      "server_heap_used_mb": 43.81,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 15.84
+    },
+    {
+      "cycle": 400,
+      "timestamp": "2026-10-16T23:44:21.621Z",
+      "server_rss_mb": 123.55,
+      "server_heap_total_mb": 49.04,
+      "server_heap_used_mb": 45.37,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 19.7
+    },
+    {
+      "cycle": 450,
+      "timestamp": "2026-10-16T23:44:22.266Z",
+      "server_rss_mb": 124,
+      "server_heap_total_mb": 49.54,
+      "server_heap_used_mb": 45.54,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 13.95
+    },
+    {
+      "cycle": 500,
+      "timestamp": "2026-10-16T23:44:22.934Z",
+      "server_rss_mb": 124.75,
+      "server_heap_total_mb": 53.29,
+      "server_heap_used_mb": 42.67,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 18.74
+    }
+  ],
+  "verdict": {
+    "status": "STABLE",
+    "leak_detected": false,
+    "notes": "Server memory remained bounded within expected V8 GC cycles under 500 consecutive requests."
+  }
+}

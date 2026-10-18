@@ -1,0 +1,428 @@
+@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --background: #FAF8F9;
+    --surface: #FFFFFF;
+    --surface-soft: #F3EEF2;
+    --surface-muted: #EBE4E9;
+
+    --text-primary: #1E181D;
+    --text-secondary: #72656F;
+    --text-muted: #9E919B;
+
+    --primary-purple: #9218B5;
+    --dusty-rose: #B85B61;
+    --purple-soft: #F3E2F7;
+    --purple-highlight: #9218B5;
+
+    --border: #E5DEE3;
+    --border-strong: #D4CAD2;
+
+    --success: #8E2FB3;
+    --success-soft: #F8EDFB;
+
+    --warning: #B36842;
+    --warning-soft: #FAF0E8;
+
+    --error: #C2454E;
+    --error-soft: #FAEBEB;
+
+    --focus-ring: #9218B5;
+  }
+
+  .dark {
+    --background: #090607;
+    --surface: #221F20;
+    --surface-soft: #2B2429;
+    --surface-muted: #1A1618;
+
+    --text-primary: #F7F3F6;
+    --text-secondary: #BEB4BB;
+    --text-muted: #8E828B;
+
+    --primary-purple: #AC1ED6;
+    --dusty-rose: #C26E73;
+    --purple-soft: #E6B8F0;
+    --purple-highlight: #AC1ED6;
+
+    --border: #40363E;
+    --border-strong: #5A4E57;
+
+    --success: #AC1ED6;
+    --success-soft: #2B1D30;
+
+    --warning: #C26E73;
+    --warning-soft: #302022;
+
+    --error: #D64251;
+    --error-soft: #331A1E;
+
+    --focus-ring: #AC1ED6;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--text-primary);
+    font-family: 'Epilogue', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+}
+
+.font-epilogue {
+  font-family: 'Epilogue', sans-serif;
+}
+
+.font-mono-code {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Subtle lunar horizon rim glow animation */
+@keyframes lunar-glow {
+  0%, 100% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 16px rgba(172, 30, 214, 0.45));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 24px rgba(194, 110, 115, 0.55));
+  }
+}
+
+/* Shining Moon Aura Keyframes (gentle celestial breathing) */
+@keyframes shining-white-aura {
+  0%, 100% {
+    opacity: 0.92;
+    transform: scale(1) translateY(0px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.015) translateY(-2px);
+  }
+}
+
+@keyframes aura-corona-pulse {
+  0%, 100% {
+    opacity: 0.75;
+    transform: scaleX(1) scaleY(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.04) scaleY(1.08);
+  }
+}
+
+@keyframes aura-shimmer-sweep {
+  0% {
+    transform: translateX(-80%);
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateX(80%);
+    opacity: 0.15;
+  }
+}
+
+@keyframes lunar-sparkle {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(0.75);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+
+/* Cat pet animation keyframes */
+@keyframes cat-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes cat-bounce-once {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  30% { transform: translateY(-6px) scale(1.05); }
+  60% { transform: translateY(-2px) scale(0.98); }
+}
+
+@keyframes cat-scan {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+@keyframes cat-think {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+@keyframes cat-tilt {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-8deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-lunar-glow,
+  .animate-shining-white-aura,
+  .animate-aura-corona-pulse,
+  .animate-aura-shimmer,
+  .animate-lunar-sparkle,
+  .animate-cat-float,
+  .animate-cat-bounce,
+  .animate-cat-scan,
+  .animate-cat-think,
+  .animate-cat-tilt {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.animate-lunar-glow {
+  animation: lunar-glow 9s ease-in-out infinite;
+}
+
+.animate-shining-white-aura {
+  animation: shining-white-aura 5s ease-in-out infinite;
+}
+
+.animate-aura-corona-pulse {
+  animation: aura-corona-pulse 4s ease-in-out infinite alternate;
+}
+
+.animate-aura-shimmer {
+  animation: aura-shimmer-sweep 6s linear infinite;
+}
+
+.animate-lunar-sparkle {
+  animation: lunar-sparkle 3s ease-in-out infinite;
+}
+
+.animate-cat-float {
+  animation: cat-float 3.5s ease-in-out infinite;
+}
+
+.animate-cat-bounce {
+  animation: cat-bounce-once 0.7s ease-out;
+}
+
+.animate-cat-scan {
+  animation: cat-scan 2s ease-in-out infinite;
+}
+
+.animate-cat-think {
+  animation: cat-think 2.2s ease-in-out infinite;
+}
+
+.animate-cat-tilt {
+  animation: cat-tilt 2.5s ease-in-out infinite;
+}
+
+/* Academic rendered markdown typography */
+.academic-prose {
+  color: var(--text-primary);
+  line-height: 1.7;
+}
+
+.dark .academic-prose,
+.academic-prose.dark-mode,
+.dark-mode .academic-prose {
+  color: #F7F3F6 !important;
+}
+
+.academic-prose h1,
+.academic-prose h2,
+.academic-prose h3,
+.academic-prose h4 {
+  color: inherit;
+  font-weight: 600;
+  margin-top: 1.25em;
+  margin-bottom: 0.5em;
+  letter-spacing: -0.015em;
+}
+
+.dark .academic-prose h1,
+.dark .academic-prose h2,
+.dark .academic-prose h3,
+.dark .academic-prose h4,
+.academic-prose.dark-mode h1,
+.academic-prose.dark-mode h2,
+.academic-prose.dark-mode h3,
+.academic-prose.dark-mode h4 {
+  color: #F7F3F6 !important;
+}
+
+.academic-prose h1 { font-size: 1.35rem; }
+.academic-prose h2 { font-size: 1.18rem; border-bottom: 1px solid var(--border); padding-bottom: 0.35rem; }
+.academic-prose h3 { font-size: 1.05rem; }
+
+.academic-prose p {
+  color: inherit;
+  margin-top: 0.65em;
+  margin-bottom: 0.65em;
+}
+
+.dark .academic-prose p,
+.academic-prose.dark-mode p {
+  color: #F7F3F6 !important;
+}
+
+.academic-prose strong,
+.academic-prose b {
+  color: inherit;
+  font-weight: 600;
+}
+
+.academic-prose ul {
+  list-style-type: disc;
+  padding-left: 1.4em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.academic-prose ol {
+  list-style-type: decimal;
+  padding-left: 1.4em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.academic-prose li {
+  color: inherit;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.dark .academic-prose li,
+.academic-prose.dark-mode li {
+  color: #F7F3F6 !important;
+}
+
+.academic-prose span {
+  color: inherit;
+}
+
+.academic-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-size: 0.85rem;
+}
+
+.academic-prose th,
+.academic-prose td {
+  border: 1px solid var(--border-strong);
+  padding: 0.55rem 0.75rem;
+  text-align: left;
+  color: inherit;
+}
+
+.academic-prose th {
+  background-color: var(--surface-soft);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.academic-prose tr:nth-child(even) td {
+  background-color: var(--surface-soft);
+}
+
+.academic-prose blockquote {
+  border-left: 3px solid var(--primary-purple);
+  padding-left: 1rem;
+  margin-left: 0;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.academic-prose code {
+  font-family: 'JetBrains Mono', monospace;
+  background-color: var(--surface-soft);
+  color: var(--primary-purple);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.15em 0.35em;
+  font-size: 0.85em;
+}
+
+.dark .academic-prose code,
+.academic-prose.dark-mode code {
+  background-color: var(--surface-soft);
+  color: #E6B8F0 !important;
+  border-color: var(--border);
+}
+
+.academic-prose pre {
+  background-color: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+
+.dark .academic-prose pre,
+.academic-prose.dark-mode pre {
+  background-color: #2B2429;
+  border-color: #40363E;
+}
+
+.academic-prose pre code {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0;
+  color: inherit !important;
+}
+
+/* KaTeX equations in academic prose */
+.academic-prose .katex,
+.academic-prose .katex-html,
+.academic-prose .katex .base,
+.academic-prose .katex-display {
+  color: inherit !important;
+}
+
+.dark .academic-prose .katex,
+.dark .academic-prose .katex-html,
+.dark .academic-prose .katex .base,
+.dark .academic-prose .katex-display,
+.academic-prose.dark-mode .katex,
+.academic-prose.dark-mode .katex-html,
+.academic-prose.dark-mode .katex .base,
+.academic-prose.dark-mode .katex-display {
+  color: #F7F3F6 !important;
+}
+
+.academic-prose .katex-display {
+  margin: 0.8em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.4em 0;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-purple);
+}
+

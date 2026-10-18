@@ -1,0 +1,195 @@
+{
+  "metadata": {
+    "suite": "Generated Answer Quality & Hallucination Audit",
+    "corpus": "transformer-foundations-sample.pdf",
+    "document_page_count": 4,
+    "timestamp": "2026-10-16T02:09:57.399Z"
+  },
+  "metrics": {
+    "answerable_success_rate": 1,
+    "unanswerable_abstention_rate": 0.6,
+    "citation_precision": 0.9,
+    "citation_coverage": 1,
+    "faithfulness_score": 0.9,
+    "fabricated_citation_rate": 0,
+    "total_citations_checked": 10,
+    "fabricated_citations_count": 0
+  },
+  "sample_evaluations": [
+    {
+      "id": "T01",
+      "question": "What is the attention equation in the paper?",
+      "status": "SUCCESS",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described as mapping a query ...",
+      "cited_pages": [
+        3
+      ],
+      "expected_page": 3,
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citation": false
+    },
+    {
+      "id": "T02",
+      "question": "Why is the square root of d_k used as a scaling factor?",
+      "status": "SUCCESS",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described as mapping a query ...",
+      "cited_pages": [
+        3
+      ],
+      "expected_page": 3,
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citation": false
+    },
+    {
+      "id": "T03",
+      "question": "How many layers are stacked in the encoder?",
+      "status": "SUCCESS",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder structure using stacke...",
+      "cited_pages": [
+        2
+      ],
+      "expected_page": 2,
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citation": false
+    },
+    {
+      "id": "T04",
+      "question": "What is the dimensionality d_model of all sub-layers?",
+      "status": "SUCCESS",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder structure using stacke...",
+      "cited_pages": [
+        2
+      ],
+      "expected_page": 2,
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citation": false
+    },
+    {
+      "id": "T05",
+      "question": "What formula is used for residual connections and normalization?",
+      "status": "SUCCESS",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder structure using stacke...",
+      "cited_pages": [
+        2
+      ],
+      "expected_page": 2,
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citation": false
+    },
+    {
+      "id": "T06",
+      "question": "How many linear projections h are learned in multi-head attention?",
+      "status": "SUCCESS",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing a single attention f...",
+      "cited_pages": [
+        4
+      ],
+      "expected_page": 4,
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citation": false
+    },
+    {
+      "id": "T07",
+      "question": "How does the model incorporate sequence token positions?",
+      "status": "SUCCESS",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing a single attention f...",
+      "cited_pages": [
+        4
+      ],
+      "expected_page": 4,
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citation": false
+    },
+    {
+      "id": "T08",
+      "question": "Why does the Transformer require positional encodings?",
+      "status": "SUCCESS",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing a single attention f...",
+      "cited_pages": [
+        4
+      ],
+      "expected_page": 4,
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citation": false
+    },
+    {
+      "id": "T09",
+      "question": "Who is the first author of the research digest?",
+      "status": "SUCCESS",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described as mapping a query ...",
+      "cited_pages": [
+        3
+      ],
+      "expected_page": 1,
+      "citation_precision": 0,
+      "citation_coverage": 1,
+      "faithfulness_score": 0,
+      "fabricated_citation": false
+    },
+    {
+      "id": "T10",
+      "question": "On which machine translation tasks was the Transformer evaluated?",
+      "status": "SUCCESS",
+      "answer_preview": "Based on retrieved passages from Page 1:\n\nContexta AI Research Digest: Attention Mechanisms and Transformer Architectures\nAuthors: Vaswani, ...",
+      "cited_pages": [
+        1
+      ],
+      "expected_page": 1,
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citation": false
+    },
+    {
+      "id": "T11",
+      "question": "How many parameters does the GPT-4 MoE model have?",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "answer": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing a single attention function with d_model-dimensional queries, keys and values, we found it beneficial to linearly project the queries, keys and values h = 8 times with different, learned linear projections.\nSince our model contains no recurrence and no convolution, in order for the model to make use of the order of the sequence, we must inject some information about the relative or absolute position of the tokens in the sequence. To this end, we add positional encodings to the input embeddings at the bottoms of the encoder and decoder stacks. We use sine and cosine functions of different frequencies.\n\n[Page 4]",
+      "hallucination_detected": true
+    },
+    {
+      "id": "T12",
+      "question": "What is the secret baking temperature for apple pie in outer space?",
+      "status": "CORRECTLY_ABSTAINED",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    },
+    {
+      "id": "T13",
+      "question": "Explain how FlashAttention v2 splits key-value blocks in CUDA shared memory.",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "answer": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described as mapping a query and a set of key-value pairs to an output, where the query, keys, values, and output are all vectors. The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key.\nWe compute the attention function on a set of queries simultaneously, packed together into a matrix Q. The keys and values are also packed into matrices K and V.\nAttention(Q, K, V) = softmax((Q * K^T) / sqrt(d_k)) * V\nWe divide by the square root of d_k to counteract the effect where dot products grow large in magnitude for large values of d_k, pushing the softmax function into regions with extremely small gradients.\n\n[Page 3]",
+      "hallucination_detected": true
+    },
+    {
+      "id": "T14",
+      "question": "What is the learning rate schedule for LLaMA 3 pre-training?",
+      "status": "CORRECTLY_ABSTAINED",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    },
+    {
+      "id": "T15",
+      "question": "Who won the 2024 Olympic marathon?",
+      "status": "CORRECTLY_ABSTAINED",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    }
+  ]
+}

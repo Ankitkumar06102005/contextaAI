@@ -1,0 +1,68 @@
+{
+  "version": "4.0.0",
+  "timestamp": "2026-10-17T02:46:42.896Z",
+  "environment": {
+    "runtime": "Node.js (tsx)",
+    "os": "Windows",
+    "target_corpus": "transformer-foundations-sample.pdf (4 pages, 4 chunks)",
+    "document_id": "doc_sample_transformer_foundations",
+    "dataset_size": 100,
+    "answerable_subset": 65,
+    "unanswerable_subset": 35
+  },
+  "metrics": {
+    "retrieval": {
+      "population_recall_at_1": 0.892,
+      "population_recall_at_3": 1,
+      "population_recall_at_5": 1,
+      "population_recall_at_10": 1,
+      "population_mrr": 0.941,
+      "population_ndcg_at_10": 1.081,
+      "conditioned_recall_at_5": 1,
+      "conditioned_mrr": 0.941,
+      "conditioned_ndcg_at_10": 1.081,
+      "population_denominator": 65,
+      "conditioned_denominator": 65
+    },
+    "answer_quality": {
+      "answerable_completion_rate": 1,
+      "false_abstention_rate": 0,
+      "false_abstention_count": 0,
+      "unanswerable_correct_abstention_rate": 0.457,
+      "unanswerable_hallucination_rate": 0.543,
+      "claim_support_rate": 0.863,
+      "claims_evaluated": 80,
+      "claims_supported": 69
+    },
+    "citations": {
+      "strict_citation_precision": 0.838,
+      "unsupported_citation_rate": 0.162,
+      "total_citations_checked": 74,
+      "valid_citations_count": 62,
+      "unsupported_citations_count": 12
+    },
+    "performance": {
+      "chat_concurrency_10_rps": 1012.71,
+      "chat_concurrency_20_rps": 1489.63,
+      "health_concurrency_10_rps": 1755.83,
+      "total_load_requests": 1150,
+      "load_test_error_rate_pct": 0,
+      "retrieval_latency_p50_ms": 14.8,
+      "retrieval_latency_p95_ms": 18.44,
+      "retrieval_latency_p99_ms": 23.52
+    },
+    "stability": {
+      "soak_operations_count": 1000,
+      "soak_duration_sec": 17.33,
+      "soak_success_rate_pct": 100,
+      "net_heap_delta_mb": 0.79,
+      "net_rss_delta_mb": 7.02,
+      "bounded_lru_cache_size": 1
+    },
+    "security": {
+      "tests_evaluated": 9,
+      "tests_passed": 9,
+      "pass_rate_pct": 100
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Contexta AI",
+  "description": "A premium RAG-based PDF learning assistant. Turn complex PDFs into clear explanations, structured summaries, and interactive quizzes grounded in your documents.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

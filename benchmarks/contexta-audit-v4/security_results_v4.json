@@ -1,0 +1,56 @@
+{
+  "suite": "Contexta AI Security & Filesystem Containment Audit V3",
+  "timestamp": "2026-10-17T02:43:10.021Z",
+  "total_tests": 9,
+  "passed_tests": 9,
+  "failed_tests": 0,
+  "pass_rate_pct": 100,
+  "results": [
+    {
+      "id": 1,
+      "name": "Production isValidDocId rejects directory traversal sequences",
+      "status": "PASSED"
+    },
+    {
+      "id": 2,
+      "name": "Production isValidDocId accepts clean alphanumeric document IDs",
+      "status": "PASSED"
+    },
+    {
+      "id": 3,
+      "name": "API: POST /chat strictly returns HTTP 400 (not 404) on traversal doc_id",
+      "status": "PASSED"
+    },
+    {
+      "id": 4,
+      "name": "API: POST /quiz strictly returns HTTP 400 (not 404) on traversal doc_id",
+      "status": "PASSED"
+    },
+    {
+      "id": 5,
+      "name": "API: POST /summary strictly returns HTTP 400 (not 404) on traversal doc_id",
+      "status": "PASSED"
+    },
+    {
+      "id": 6,
+      "name": "API: DELETE /document/.. strictly returns HTTP 400 on traversal delete",
+      "status": "PASSED"
+    },
+    {
+      "id": 7,
+      "name": "Filesystem Containment: Canary file outside DATA_DIR cannot be accessed or deleted",
+      "status": "PASSED"
+    },
+    {
+      "id": 8,
+      "name": "XSS Defense: DOMPurify strips <script> and malicious event handlers",
+      "status": "PASSED"
+    },
+    {
+      "id": 9,
+      "name": "Mermaid Sandbox: AcademicRenderer enforces securityLevel: strict",
+      "status": "PASSED"
+    }
+  ],
+  "audit_notes": "Verified production isValidDocId exported from server.ts and HTTP 400 boundary enforcement."
+}

@@ -1,0 +1,254 @@
+{
+  "timestamp": "2026-10-17T01:26:43.958Z",
+  "overall_passed": true,
+  "results": [
+    {
+      "test_name": "Direct Factual Query (Attention Formula)",
+      "endpoint": "POST /chat",
+      "request_payload": {
+        "doc_id": "doc_sample_transformer_foundations",
+        "message": "What is the mathematical equation for scaled dot-product attention?"
+      },
+      "status_code": 200,
+      "duration_ms": 17,
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described as mapping a query and a set of key-value pairs to an output, where the query, ",
+      "sources_count": 4,
+      "sources_summary": [
+        {
+          "page": 3
+        },
+        {
+          "page": 2
+        },
+        {
+          "page": 4
+        },
+        {
+          "page": 1
+        }
+      ],
+      "timings": {
+        "embedding_ms": 0.19,
+        "search_ms": 0.14,
+        "filtering_ms": 0.55,
+        "context_assembly_ms": 0.01,
+        "generation_ms": 0.01,
+        "total_ms": 0.96
+      },
+      "passed": true,
+      "verifications": [
+        {
+          "check": "HTTP 200 OK",
+          "passed": true,
+          "detail": "Status 200"
+        },
+        {
+          "check": "Non-empty answer returned",
+          "passed": true,
+          "detail": "Answer length: 849 chars"
+        },
+        {
+          "check": "Contains attention formula terms (softmax, sqrt, d_k, or Attention)",
+          "passed": true,
+          "detail": "Formula keywords verified"
+        },
+        {
+          "check": "Sources returned and grounded on Page 3",
+          "passed": true,
+          "detail": "Sources: Page 3 (Score: undefined), Page 2 (Score: undefined), Page 4 (Score: undefined), Page 1 (Score: undefined)"
+        },
+        {
+          "check": "Pipeline latency timings provided",
+          "passed": true,
+          "detail": "Timings: search=0.14ms, total=0.96ms"
+        }
+      ]
+    },
+    {
+      "test_name": "Architecture Query (Encoder Stack)",
+      "endpoint": "POST /chat",
+      "request_payload": {
+        "doc_id": "doc_sample_transformer_foundations",
+        "message": "How many identical layers make up the encoder stack, and what sub-layers are inside each layer?"
+      },
+      "status_code": 200,
+      "duration_ms": 6.3,
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder structure using stacked self-attention and point-wise, fully connected layers for ",
+      "sources_count": 4,
+      "sources_summary": [
+        {
+          "page": 2
+        },
+        {
+          "page": 4
+        },
+        {
+          "page": 3
+        },
+        {
+          "page": 1
+        }
+      ],
+      "timings": {
+        "embedding_ms": 0.16,
+        "search_ms": 0.02,
+        "filtering_ms": 1.03,
+        "context_assembly_ms": 0.02,
+        "generation_ms": 0,
+        "total_ms": 1.27
+      },
+      "passed": true,
+      "verifications": [
+        {
+          "check": "HTTP 200 OK",
+          "passed": true,
+          "detail": "Status 200"
+        },
+        {
+          "check": "Mentions 6 identical layers (N = 6)",
+          "passed": true,
+          "detail": "Encoder layer count verified"
+        },
+        {
+          "check": "Mentions self-attention and feed-forward sub-layers",
+          "passed": true,
+          "detail": "Sub-layer architecture verified"
+        },
+        {
+          "check": "Sources grounded on Page 2 (Architecture overview)",
+          "passed": true,
+          "detail": "Sources: Page 2 (Score: undefined), Page 4 (Score: undefined), Page 3 (Score: undefined), Page 1 (Score: undefined)"
+        }
+      ]
+    },
+    {
+      "test_name": "Negative Out-of-Domain Probe",
+      "endpoint": "POST /chat",
+      "request_payload": {
+        "doc_id": "doc_sample_transformer_foundations",
+        "message": "What is the secret recipe for chocolate strawberry gelato on Mars?"
+      },
+      "status_code": 200,
+      "duration_ms": 4.5,
+      "answer_preview": "I couldn't find enough information about this in the uploaded document.",
+      "sources_count": 0,
+      "sources_summary": [],
+      "passed": true,
+      "verifications": [
+        {
+          "check": "HTTP 200 OK",
+          "passed": true,
+          "detail": "Status 200"
+        },
+        {
+          "check": "Sufficiency gate cleanly intercepted out-of-domain probe",
+          "passed": true,
+          "detail": "Abstention message: \"I couldn't find enough information about this in the uploaded document....\""
+        },
+        {
+          "check": "Sources array is empty (zero hallucinated context)",
+          "passed": true,
+          "detail": "Sources count: 0"
+        }
+      ]
+    },
+    {
+      "test_name": "Executive Document Summary",
+      "endpoint": "POST /summary",
+      "request_payload": {
+        "doc_id": "doc_sample_transformer_foundations"
+      },
+      "status_code": 200,
+      "duration_ms": 6.3,
+      "answer_preview": "Summary of transformer-foundations-sample.pdf (4 pages):\n\nKey excerpts:\n- [Page 1] Contexta AI Research Digest: Attention Mechanisms and Transformer Architectures\nAuthors: Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, Po...\n- [Page 2] Se",
+      "sources_count": 4,
+      "sources_summary": [
+        {
+          "page": 1
+        },
+        {
+          "page": 2
+        },
+        {
+          "page": 3
+        },
+        {
+          "page": 4
+        }
+      ],
+      "passed": true,
+      "verifications": [
+        {
+          "check": "HTTP 200 OK",
+          "passed": true,
+          "detail": "Status 200"
+        },
+        {
+          "check": "Summary text contains executive synthesis",
+          "passed": true,
+          "detail": "Summary length: 731 chars"
+        },
+        {
+          "check": "Summary cites document pages",
+          "passed": true,
+          "detail": "Sources sampled: Page 1, Page 2, Page 3, Page 4"
+        }
+      ]
+    },
+    {
+      "test_name": "Interactive Quiz Genie",
+      "endpoint": "POST /quiz",
+      "request_payload": {
+        "doc_id": "doc_sample_transformer_foundations",
+        "num_questions": 4,
+        "difficulty": "medium"
+      },
+      "status_code": 200,
+      "duration_ms": 13.7,
+      "answer_preview": "4 questions generated",
+      "sources_count": 4,
+      "sources_summary": [
+        [
+          4
+        ],
+        [
+          4
+        ],
+        [
+          4
+        ],
+        [
+          1
+        ]
+      ],
+      "passed": true,
+      "verifications": [
+        {
+          "check": "HTTP 200 OK",
+          "passed": true,
+          "detail": "Status 200"
+        },
+        {
+          "check": "Generated requested 4 distinct questions",
+          "passed": true,
+          "detail": "Count: 4"
+        },
+        {
+          "check": "Every question has exactly 4 options",
+          "passed": true,
+          "detail": "4 options verified per question"
+        },
+        {
+          "check": "Every correct_answer is strictly one of the 4 options",
+          "passed": true,
+          "detail": "Answer key consistency verified"
+        },
+        {
+          "check": "Every question references source page citations",
+          "passed": true,
+          "detail": "Source page grounding verified"
+        }
+      ]
+    }
+  ]
+}

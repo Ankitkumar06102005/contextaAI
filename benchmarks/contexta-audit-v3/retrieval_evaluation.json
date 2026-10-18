@@ -1,0 +1,2010 @@
+{
+  "suite": "Contexta AI Canonical RAG Retrieval Evaluation V3",
+  "timestamp": "2026-10-17T00:20:35.334Z",
+  "dataset_size": 100,
+  "answerable_count": 65,
+  "unanswerable_count": 35,
+  "population_metrics_all_answerable_65": {
+    "recall_at_1": 0.538,
+    "recall_at_3": 0.662,
+    "recall_at_5": 0.692,
+    "recall_at_10": 0.692,
+    "mean_reciprocal_rank": 0.597,
+    "ndcg_at_10": 0.7,
+    "denominator_definition": "All 65 answerable questions, counting false abstentions as recall=0"
+  },
+  "conditioned_metrics_answered_subset_48": {
+    "recall_at_5": 0.938,
+    "mean_reciprocal_rank": 0.809,
+    "ndcg_at_10": 0.947,
+    "denominator_definition": "The 48 questions where the sufficiency gate allowed retrieval and response generation"
+  },
+  "unanswerable_metrics_35": {
+    "correct_abstention_rate": 0.486,
+    "hallucinated_unsupported_rate": 0.514,
+    "correct_abstention_count": 17,
+    "total_unanswerable": 35
+  },
+  "latency": {
+    "p50_ms": 3.17,
+    "p95_ms": 13.24,
+    "p99_ms": 17.95
+  },
+  "category_breakdown": {
+    "direct_factual": {
+      "total_items": 20,
+      "answerable_count": 20,
+      "unanswerable_count": 0,
+      "population_recall_at_5": 1,
+      "unanswerable_abstention_rate": "N/A"
+    },
+    "paraphrased": {
+      "total_items": 20,
+      "answerable_count": 20,
+      "unanswerable_count": 0,
+      "population_recall_at_5": 0.4,
+      "unanswerable_abstention_rate": "N/A"
+    },
+    "multi_passage": {
+      "total_items": 15,
+      "answerable_count": 15,
+      "unanswerable_count": 0,
+      "population_recall_at_5": 0.867,
+      "unanswerable_abstention_rate": "N/A"
+    },
+    "ambiguous": {
+      "total_items": 10,
+      "answerable_count": 10,
+      "unanswerable_count": 0,
+      "population_recall_at_5": 0.4,
+      "unanswerable_abstention_rate": "N/A"
+    },
+    "absent_fact": {
+      "total_items": 15,
+      "answerable_count": 0,
+      "unanswerable_count": 15,
+      "population_recall_at_5": "N/A",
+      "unanswerable_abstention_rate": 0.667
+    },
+    "shared_keyword_ood": {
+      "total_items": 10,
+      "answerable_count": 0,
+      "unanswerable_count": 10,
+      "population_recall_at_5": "N/A",
+      "unanswerable_abstention_rate": 0.5
+    },
+    "adversarial": {
+      "total_items": 10,
+      "answerable_count": 0,
+      "unanswerable_count": 10,
+      "population_recall_at_5": "N/A",
+      "unanswerable_abstention_rate": 0.2
+    }
+  },
+  "items": [
+    {
+      "id": "DF01",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        3,
+        2,
+        4,
+        1
+      ],
+      "expected_pages": [
+        3
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 10.66
+    },
+    {
+      "id": "DF02",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        3,
+        4,
+        2,
+        1
+      ],
+      "expected_pages": [
+        3
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 5.89
+    },
+    {
+      "id": "DF03",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2,
+        4,
+        3,
+        1
+      ],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 7.08
+    },
+    {
+      "id": "DF04",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2,
+        3,
+        4,
+        1
+      ],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 5.76
+    },
+    {
+      "id": "DF05",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2,
+        3,
+        4,
+        1
+      ],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 4.67
+    },
+    {
+      "id": "DF06",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        3
+      ],
+      "expected_pages": [
+        4
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 4.31
+    },
+    {
+      "id": "DF07",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        3,
+        2,
+        1
+      ],
+      "expected_pages": [
+        4
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 3.28
+    },
+    {
+      "id": "DF08",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        3,
+        2,
+        1
+      ],
+      "expected_pages": [
+        4
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 3.84
+    },
+    {
+      "id": "DF09",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        3,
+        4,
+        2,
+        1
+      ],
+      "expected_pages": [
+        1
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 0.25,
+      "ndcg_at_10": 0.431,
+      "latency_ms": 4.03
+    },
+    {
+      "id": "DF10",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        1,
+        3,
+        4,
+        2
+      ],
+      "expected_pages": [
+        1
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 4.41
+    },
+    {
+      "id": "DF11",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        1,
+        3,
+        4,
+        2
+      ],
+      "expected_pages": [
+        1
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 3.08
+    },
+    {
+      "id": "DF12",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2,
+        3,
+        4,
+        1
+      ],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 3.16
+    },
+    {
+      "id": "DF13",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        3,
+        1
+      ],
+      "expected_pages": [
+        3
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 0.5,
+      "ndcg_at_10": 0.631,
+      "latency_ms": 2.8
+    },
+    {
+      "id": "DF14",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        3,
+        2
+      ],
+      "expected_pages": [
+        3
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 3.46
+    },
+    {
+      "id": "DF15",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        3,
+        2,
+        1
+      ],
+      "expected_pages": [
+        4
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 2.59
+    },
+    {
+      "id": "DF16",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        1,
+        4,
+        3,
+        2
+      ],
+      "expected_pages": [
+        1
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 2.7
+    },
+    {
+      "id": "DF17",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        1,
+        4,
+        3,
+        2
+      ],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 0.25,
+      "ndcg_at_10": 0.431,
+      "latency_ms": 3.33
+    },
+    {
+      "id": "DF18",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        3
+      ],
+      "expected_pages": [
+        3
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 3.91
+    },
+    {
+      "id": "DF19",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        1,
+        3
+      ],
+      "expected_pages": [
+        4
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 3.12
+    },
+    {
+      "id": "DF20",
+      "category": "direct_factual",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2,
+        3,
+        4
+      ],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 2.92
+    },
+    {
+      "id": "PV01",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [
+        3
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.68
+    },
+    {
+      "id": "PV02",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        3,
+        4,
+        2
+      ],
+      "expected_pages": [
+        3
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 3.38
+    },
+    {
+      "id": "PV03",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 3.65
+    },
+    {
+      "id": "PV04",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.87
+    },
+    {
+      "id": "PV05",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2,
+        1,
+        3
+      ],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 2.65
+    },
+    {
+      "id": "PV06",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        3,
+        4,
+        1,
+        2
+      ],
+      "expected_pages": [
+        4
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 0.5,
+      "ndcg_at_10": 0.631,
+      "latency_ms": 3.37
+    },
+    {
+      "id": "PV07",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [
+        4
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 3.48
+    },
+    {
+      "id": "PV08",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [
+        4
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 4.38
+    },
+    {
+      "id": "PV09",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        3,
+        4,
+        1,
+        2
+      ],
+      "expected_pages": [
+        1
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 0.3333333333333333,
+      "ndcg_at_10": 0.5,
+      "latency_ms": 2.25
+    },
+    {
+      "id": "PV10",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        1
+      ],
+      "expected_pages": [
+        1
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 4.51
+    },
+    {
+      "id": "PV11",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [
+        1
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 3.83
+    },
+    {
+      "id": "PV12",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2,
+        3,
+        4,
+        1
+      ],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 2.44
+    },
+    {
+      "id": "PV13",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [
+        3
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 3.52
+    },
+    {
+      "id": "PV14",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [
+        3
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 4.57
+    },
+    {
+      "id": "PV15",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [
+        4
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 1.96
+    },
+    {
+      "id": "PV16",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [
+        1
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 13.43
+    },
+    {
+      "id": "PV17",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        3,
+        2
+      ],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 0.3333333333333333,
+      "ndcg_at_10": 0.5,
+      "latency_ms": 4.2
+    },
+    {
+      "id": "PV18",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [
+        3
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.59
+    },
+    {
+      "id": "PV19",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        1
+      ],
+      "expected_pages": [
+        4
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 3.02
+    },
+    {
+      "id": "PV20",
+      "category": "paraphrased",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2,
+        1,
+        3
+      ],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 2.85
+    },
+    {
+      "id": "MP01",
+      "category": "multi_passage",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        3,
+        2
+      ],
+      "expected_pages": [
+        2,
+        4
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1.5,
+      "latency_ms": 17.95
+    },
+    {
+      "id": "MP02",
+      "category": "multi_passage",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        3,
+        2
+      ],
+      "expected_pages": [
+        1,
+        4
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 4.43
+    },
+    {
+      "id": "MP03",
+      "category": "multi_passage",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        3,
+        2,
+        4,
+        1
+      ],
+      "expected_pages": [
+        2,
+        3
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1.631,
+      "latency_ms": 4.1
+    },
+    {
+      "id": "MP04",
+      "category": "multi_passage",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2,
+        4,
+        3,
+        1
+      ],
+      "expected_pages": [
+        2,
+        4
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1.631,
+      "latency_ms": 1.54
+    },
+    {
+      "id": "MP05",
+      "category": "multi_passage",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2,
+        3
+      ],
+      "expected_pages": [
+        2,
+        3
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1.631,
+      "latency_ms": 2.23
+    },
+    {
+      "id": "MP06",
+      "category": "multi_passage",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        3,
+        2,
+        1
+      ],
+      "expected_pages": [
+        1,
+        2
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 0.3333333333333333,
+      "ndcg_at_10": 0.931,
+      "latency_ms": 16.64
+    },
+    {
+      "id": "MP07",
+      "category": "multi_passage",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        3
+      ],
+      "expected_pages": [
+        1,
+        4
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 15.07
+    },
+    {
+      "id": "MP08",
+      "category": "multi_passage",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2,
+        4,
+        1,
+        3
+      ],
+      "expected_pages": [
+        2,
+        4
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1.631,
+      "latency_ms": 2.26
+    },
+    {
+      "id": "MP09",
+      "category": "multi_passage",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        3,
+        1,
+        2
+      ],
+      "expected_pages": [
+        3,
+        4
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1.631,
+      "latency_ms": 2.86
+    },
+    {
+      "id": "MP10",
+      "category": "multi_passage",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        2,
+        3
+      ],
+      "expected_pages": [
+        1,
+        2
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 0.5,
+      "ndcg_at_10": 0.631,
+      "latency_ms": 2.64
+    },
+    {
+      "id": "MP11",
+      "category": "multi_passage",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        3,
+        2,
+        1
+      ],
+      "expected_pages": [
+        2,
+        3
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 0.5,
+      "ndcg_at_10": 1.131,
+      "latency_ms": 3.86
+    },
+    {
+      "id": "MP12",
+      "category": "multi_passage",
+      "is_answerable": true,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 3.68
+    },
+    {
+      "id": "MP13",
+      "category": "multi_passage",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        3,
+        1,
+        2
+      ],
+      "expected_pages": [
+        4
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 3.27
+    },
+    {
+      "id": "MP14",
+      "category": "multi_passage",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        3,
+        2
+      ],
+      "expected_pages": [
+        2,
+        4
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1.5,
+      "latency_ms": 2.24
+    },
+    {
+      "id": "MP15",
+      "category": "multi_passage",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2,
+        4,
+        3,
+        1
+      ],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 4.32
+    },
+    {
+      "id": "AM01",
+      "category": "ambiguous",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4
+      ],
+      "expected_pages": [
+        3
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.56
+    },
+    {
+      "id": "AM02",
+      "category": "ambiguous",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2,
+        3,
+        4,
+        1
+      ],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 4.66
+    },
+    {
+      "id": "AM03",
+      "category": "ambiguous",
+      "is_answerable": true,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [
+        3,
+        4
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 3.09
+    },
+    {
+      "id": "AM04",
+      "category": "ambiguous",
+      "is_answerable": true,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.43
+    },
+    {
+      "id": "AM05",
+      "category": "ambiguous",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        3,
+        1
+      ],
+      "expected_pages": [
+        2,
+        4
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 3.94
+    },
+    {
+      "id": "AM06",
+      "category": "ambiguous",
+      "is_answerable": true,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [
+        4
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.59
+    },
+    {
+      "id": "AM07",
+      "category": "ambiguous",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        3,
+        4,
+        1,
+        2
+      ],
+      "expected_pages": [
+        3
+      ],
+      "recall_at_1": 1,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 1,
+      "ndcg_at_10": 1,
+      "latency_ms": 3.04
+    },
+    {
+      "id": "AM08",
+      "category": "ambiguous",
+      "is_answerable": true,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [
+        1
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 3.17
+    },
+    {
+      "id": "AM09",
+      "category": "ambiguous",
+      "is_answerable": true,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        3,
+        2,
+        1
+      ],
+      "expected_pages": [
+        2
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 1,
+      "recall_at_5": 1,
+      "recall_at_10": 1,
+      "mrr": 0.3333333333333333,
+      "ndcg_at_10": 0.5,
+      "latency_ms": 3.17
+    },
+    {
+      "id": "AM10",
+      "category": "ambiguous",
+      "is_answerable": true,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [
+        4
+      ],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 4.93
+    },
+    {
+      "id": "AB01",
+      "category": "absent_fact",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_pages": [
+        1,
+        3,
+        4,
+        2
+      ],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 3.35
+    },
+    {
+      "id": "AB02",
+      "category": "absent_fact",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.03
+    },
+    {
+      "id": "AB03",
+      "category": "absent_fact",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2,
+        4,
+        1,
+        3
+      ],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.1
+    },
+    {
+      "id": "AB04",
+      "category": "absent_fact",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2,
+        4,
+        3,
+        1
+      ],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.85
+    },
+    {
+      "id": "AB05",
+      "category": "absent_fact",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        3,
+        1,
+        2
+      ],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 3.68
+    },
+    {
+      "id": "AB06",
+      "category": "absent_fact",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.12
+    },
+    {
+      "id": "AB07",
+      "category": "absent_fact",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 1.86
+    },
+    {
+      "id": "AB08",
+      "category": "absent_fact",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 13.24
+    },
+    {
+      "id": "AB09",
+      "category": "absent_fact",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 3.05
+    },
+    {
+      "id": "AB10",
+      "category": "absent_fact",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.72
+    },
+    {
+      "id": "AB11",
+      "category": "absent_fact",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.82
+    },
+    {
+      "id": "AB12",
+      "category": "absent_fact",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.62
+    },
+    {
+      "id": "AB13",
+      "category": "absent_fact",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 3.08
+    },
+    {
+      "id": "AB14",
+      "category": "absent_fact",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_pages": [
+        3,
+        4,
+        2,
+        1
+      ],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 3.33
+    },
+    {
+      "id": "AB15",
+      "category": "absent_fact",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 3.51
+    },
+    {
+      "id": "OOD01",
+      "category": "shared_keyword_ood",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2,
+        4
+      ],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.76
+    },
+    {
+      "id": "OOD02",
+      "category": "shared_keyword_ood",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.53
+    },
+    {
+      "id": "OOD03",
+      "category": "shared_keyword_ood",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 3.53
+    },
+    {
+      "id": "OOD04",
+      "category": "shared_keyword_ood",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2
+      ],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.79
+    },
+    {
+      "id": "OOD05",
+      "category": "shared_keyword_ood",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_pages": [
+        3,
+        2
+      ],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 3.8
+    },
+    {
+      "id": "OOD06",
+      "category": "shared_keyword_ood",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_pages": [
+        3,
+        4
+      ],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 5.23
+    },
+    {
+      "id": "OOD07",
+      "category": "shared_keyword_ood",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 4.71
+    },
+    {
+      "id": "OOD08",
+      "category": "shared_keyword_ood",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.45
+    },
+    {
+      "id": "OOD09",
+      "category": "shared_keyword_ood",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.54
+    },
+    {
+      "id": "OOD10",
+      "category": "shared_keyword_ood",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2
+      ],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.46
+    },
+    {
+      "id": "ADV01",
+      "category": "adversarial",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        3,
+        2,
+        1
+      ],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.07
+    },
+    {
+      "id": "ADV02",
+      "category": "adversarial",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_pages": [
+        3,
+        1,
+        4,
+        2
+      ],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 1.85
+    },
+    {
+      "id": "ADV03",
+      "category": "adversarial",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2,
+        4,
+        3,
+        1
+      ],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 3.49
+    },
+    {
+      "id": "ADV04",
+      "category": "adversarial",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 3.2
+    },
+    {
+      "id": "ADV05",
+      "category": "adversarial",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_pages": [
+        1,
+        4
+      ],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 1.74
+    },
+    {
+      "id": "ADV06",
+      "category": "adversarial",
+      "is_answerable": false,
+      "did_abstain": true,
+      "retrieved_pages": [],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 1.89
+    },
+    {
+      "id": "ADV07",
+      "category": "adversarial",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        3,
+        2,
+        1
+      ],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.98
+    },
+    {
+      "id": "ADV08",
+      "category": "adversarial",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2,
+        3,
+        4,
+        1
+      ],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.98
+    },
+    {
+      "id": "ADV09",
+      "category": "adversarial",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_pages": [
+        2
+      ],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 2.37
+    },
+    {
+      "id": "ADV10",
+      "category": "adversarial",
+      "is_answerable": false,
+      "did_abstain": false,
+      "retrieved_pages": [
+        4,
+        3,
+        1,
+        2
+      ],
+      "expected_pages": [],
+      "recall_at_1": 0,
+      "recall_at_3": 0,
+      "recall_at_5": 0,
+      "recall_at_10": 0,
+      "mrr": 0,
+      "ndcg_at_10": 0,
+      "latency_ms": 3.34
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "suite": "Contexta AI Sustained Multi-Phase Resource Soak V3",
+  "timestamp": "2026-10-17T00:21:51.033Z",
+  "config": {
+    "total_cycles": 1000,
+    "base_url": "http://localhost:3000",
+    "document_cached": true,
+    "routes_tested": [
+      "/chat",
+      "/quiz",
+      "/summary"
+    ]
+  },
+  "performance": {
+    "duration_sec": 17.12,
+    "throughput_rps": 58.4,
+    "successful_requests": 1000,
+    "failed_requests": 0,
+    "p50_latency_ms": 15.12,
+    "p95_latency_ms": 17.46,
+    "p99_latency_ms": 20.47,
+    "mean_latency_ms": 11.98
+  },
+  "server_memory": {
+    "baseline_heap_used_mb": 41.61,
+    "peak_heap_used_mb": 42.27,
+    "final_heap_used_mb": 42.26,
+    "net_heap_delta_mb": 0.65,
+    "baseline_rss_mb": 66.35,
+    "peak_rss_mb": 67.85,
+    "final_rss_mb": 67.85,
+    "net_rss_delta_mb": 1.5
+  },
+  "timeline": [
+    {
+      "phase": "baseline",
+      "cycle": 0,
+      "timestamp": "2026-10-17T00:21:33.913Z",
+      "server_rss_mb": 66.35,
+      "server_heap_total_mb": 46.79,
+      "server_heap_used_mb": 41.61,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 10.61
+    },
+    {
+      "phase": "active_soak",
+      "cycle": 100,
+      "timestamp": "2026-10-17T00:21:35.102Z",
+      "server_rss_mb": 66.78,
+      "server_heap_total_mb": 44.79,
+      "server_heap_used_mb": 42.2,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 13.75
+    },
+    {
+      "phase": "active_soak",
+      "cycle": 200,
+      "timestamp": "2026-10-17T00:21:36.353Z",
+      "server_rss_mb": 66.83,
+      "server_heap_total_mb": 44.79,
+      "server_heap_used_mb": 41.82,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 16.07
+    },
+    {
+      "phase": "active_soak",
+      "cycle": 300,
+      "timestamp": "2026-10-17T00:21:37.485Z",
+      "server_rss_mb": 66.89,
+      "server_heap_total_mb": 44.79,
+      "server_heap_used_mb": 42.25,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 15.72
+    },
+    {
+      "phase": "active_soak",
+      "cycle": 400,
+      "timestamp": "2026-10-17T00:21:38.751Z",
+      "server_rss_mb": 66.98,
+      "server_heap_total_mb": 44.79,
+      "server_heap_used_mb": 41.84,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 19.56
+    },
+    {
+      "phase": "active_soak",
+      "cycle": 500,
+      "timestamp": "2026-10-17T00:21:39.959Z",
+      "server_rss_mb": 67.36,
+      "server_heap_total_mb": 44.79,
+      "server_heap_used_mb": 42.2,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 17.58
+    },
+    {
+      "phase": "active_soak",
+      "cycle": 600,
+      "timestamp": "2026-10-17T00:21:41.154Z",
+      "server_rss_mb": 67.44,
+      "server_heap_total_mb": 44.79,
+      "server_heap_used_mb": 41.79,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 16.3
+    },
+    {
+      "phase": "active_soak",
+      "cycle": 700,
+      "timestamp": "2026-10-17T00:21:42.375Z",
+      "server_rss_mb": 67.45,
+      "server_heap_total_mb": 44.79,
+      "server_heap_used_mb": 42.03,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 24
+    },
+    {
+      "phase": "active_soak",
+      "cycle": 800,
+      "timestamp": "2026-10-17T00:21:43.584Z",
+      "server_rss_mb": 67.46,
+      "server_heap_total_mb": 44.79,
+      "server_heap_used_mb": 42.27,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 24.52
+    },
+    {
+      "phase": "active_soak",
+      "cycle": 900,
+      "timestamp": "2026-10-17T00:21:44.769Z",
+      "server_rss_mb": 67.74,
+      "server_heap_total_mb": 44.79,
+      "server_heap_used_mb": 41.82,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 15.01
+    },
+    {
+      "phase": "active_soak",
+      "cycle": 1000,
+      "timestamp": "2026-10-17T00:21:46.026Z",
+      "server_rss_mb": 67.75,
+      "server_heap_total_mb": 44.79,
+      "server_heap_used_mb": 42.23,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 22.33
+    },
+    {
+      "phase": "post_soak_idle",
+      "cycle": 1000,
+      "timestamp": "2026-10-17T00:21:51.032Z",
+      "server_rss_mb": 67.85,
+      "server_heap_total_mb": 44.79,
+      "server_heap_used_mb": 42.26,
+      "server_cache_entries": 1,
+      "client_heap_used_mb": 23.04
+    }
+  ],
+  "audit_verdict": {
+    "stability_status": "STABLE_SHORT_TERM",
+    "unbounded_leak_detected_during_run": false,
+    "scientific_caveat": "A 1,000-request local benchmark demonstrates that heap usage remains bounded within V8 GC headroom during high-rate request bursts. However, it does not mathematically prove the absence of long-term memory leaks over weeks of production runtime."
+  }
+}

@@ -1,0 +1,1715 @@
+{
+  "metadata": {
+    "suite": "Generated Answer Quality & Hallucination Audit V2",
+    "evaluation_dataset_size": 100,
+    "total_claims_evaluated": 62,
+    "total_citations_evaluated": 48,
+    "timestamp": "2026-10-17T01:31:23.580Z"
+  },
+  "metrics": {
+    "answerable_success_rate": 0.738,
+    "false_abstention_rate": 0.262,
+    "unanswerable_abstention_rate": 0.486,
+    "hallucinated_unanswerable_rate": 0.514,
+    "claim_level_faithfulness": 0.74,
+    "claim_support_rate": 0.742,
+    "strict_citation_precision": 0.729,
+    "fabricated_citation_rate": 0.2708,
+    "total_citations_checked": 48,
+    "valid_citations_count": 35,
+    "fabricated_citations_count": 13
+  },
+  "category_breakdown": {
+    "direct_factual": {
+      "total_items": 20,
+      "answerable_count": 20,
+      "unanswerable_count": 0,
+      "recall_at_5": 1,
+      "abstention_accuracy": "N/A"
+    },
+    "paraphrased": {
+      "total_items": 20,
+      "answerable_count": 20,
+      "unanswerable_count": 0,
+      "recall_at_5": 0.4,
+      "abstention_accuracy": "N/A"
+    },
+    "multi_passage": {
+      "total_items": 15,
+      "answerable_count": 15,
+      "unanswerable_count": 0,
+      "recall_at_5": 0.8,
+      "abstention_accuracy": "N/A"
+    },
+    "ambiguous": {
+      "total_items": 10,
+      "answerable_count": 10,
+      "unanswerable_count": 0,
+      "recall_at_5": 0.35,
+      "abstention_accuracy": "N/A"
+    },
+    "absent_fact": {
+      "total_items": 15,
+      "answerable_count": 0,
+      "unanswerable_count": 15,
+      "recall_at_5": "N/A",
+      "abstention_accuracy": 0.667
+    },
+    "shared_keyword_ood": {
+      "total_items": 10,
+      "answerable_count": 0,
+      "unanswerable_count": 10,
+      "recall_at_5": "N/A",
+      "abstention_accuracy": 0.5
+    },
+    "adversarial": {
+      "total_items": 10,
+      "answerable_count": 0,
+      "unanswerable_count": 10,
+      "recall_at_5": "N/A",
+      "abstention_accuracy": 0.2
+    }
+  },
+  "items": [
+    {
+      "id": "DF01",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "What is the mathematical equation for scaled dot-product attention?",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described...",
+      "cited_pages": [
+        3
+      ],
+      "expected_pages": [
+        3
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 0.67,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "softmax function",
+          "supported_in_answer": true
+        },
+        {
+          "fact": "divided by square root of d_k",
+          "supported_in_answer": true
+        },
+        {
+          "fact": "multiplied by V",
+          "supported_in_answer": false
+        }
+      ]
+    },
+    {
+      "id": "DF02",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "Why do the authors divide by the square root of d_k in the attention equation?",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described...",
+      "cited_pages": [
+        3
+      ],
+      "expected_pages": [
+        3
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "large magnitude dot products",
+          "supported_in_answer": true
+        },
+        {
+          "fact": "extremely small gradients in softmax",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "DF03",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "How many identical layers make up the encoder stack?",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder st...",
+      "cited_pages": [
+        2
+      ],
+      "expected_pages": [
+        2
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "N = 6 identical layers",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "DF04",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "What is the output dimension d_model produced by all sub-layers?",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder st...",
+      "cited_pages": [
+        2
+      ],
+      "expected_pages": [
+        2
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "dimension d_model = 512",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "DF05",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "What operation is applied around each sub-layer in the encoder?",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder st...",
+      "cited_pages": [
+        2
+      ],
+      "expected_pages": [
+        2
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "residual connection",
+          "supported_in_answer": true
+        },
+        {
+          "fact": "layer normalization LayerNorm(x + Sublayer(x))",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "DF06",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "How many linear projections h are learned in multi-head attention?",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing ...",
+      "cited_pages": [
+        4
+      ],
+      "expected_pages": [
+        4
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "h = 8 linear projections",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "DF07",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "What functions of different frequencies are utilized for positional encodings?",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing ...",
+      "cited_pages": [
+        4
+      ],
+      "expected_pages": [
+        4
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "sine and cosine functions of different frequencies",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "DF08",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "Where are positional encodings added in the architecture stack?",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing ...",
+      "cited_pages": [
+        4
+      ],
+      "expected_pages": [
+        4
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "bottoms of encoder and decoder stacks",
+          "supported_in_answer": true
+        },
+        {
+          "fact": "added to input embeddings",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "DF09",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "Who are the listed authors of the Attention research digest?",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described...",
+      "cited_pages": [
+        3
+      ],
+      "expected_pages": [
+        1
+      ],
+      "citation_precision": 0,
+      "citation_coverage": 1,
+      "faithfulness_score": 0,
+      "fabricated_citations": 1,
+      "claims": [
+        {
+          "fact": "Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, Polosukhin",
+          "supported_in_answer": false
+        }
+      ]
+    },
+    {
+      "id": "DF10",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "On what translation benchmarks was the Transformer evaluated?",
+      "answer_preview": "Based on retrieved passages from Page 1:\n\nContexta AI Research Digest: Attention Mechanisms and Transformer Architecture...",
+      "cited_pages": [
+        1
+      ],
+      "expected_pages": [
+        1
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "English-to-German",
+          "supported_in_answer": true
+        },
+        {
+          "fact": "English-to-French",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "DF11",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "What two mechanisms are entirely eschewed by the Transformer model?",
+      "answer_preview": "Based on retrieved passages from Page 1:\n\nContexta AI Research Digest: Attention Mechanisms and Transformer Architecture...",
+      "cited_pages": [
+        1
+      ],
+      "expected_pages": [
+        1
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "eschewing recurrence and convolutions entirely",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "DF12",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "What are the two sub-layers present in each encoder layer?",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder st...",
+      "cited_pages": [
+        2
+      ],
+      "expected_pages": [
+        2
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "multi-head self-attention",
+          "supported_in_answer": true
+        },
+        {
+          "fact": "position-wise feed-forward network",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "DF13",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "How are queries, keys, and values packaged for simultaneous computation?",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing ...",
+      "cited_pages": [
+        4
+      ],
+      "expected_pages": [
+        3
+      ],
+      "citation_precision": 0,
+      "citation_coverage": 1,
+      "faithfulness_score": 0,
+      "fabricated_citations": 1,
+      "claims": [
+        {
+          "fact": "packed into matrices Q, K, and V",
+          "supported_in_answer": false
+        }
+      ]
+    },
+    {
+      "id": "DF14",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "How is attention output mathematically computed from values?",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described...",
+      "cited_pages": [
+        3
+      ],
+      "expected_pages": [
+        3
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "weighted sum of values",
+          "supported_in_answer": true
+        },
+        {
+          "fact": "compatibility function of query with key",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "DF15",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "Why does the Transformer require positional encodings to make use of order?",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing ...",
+      "cited_pages": [
+        4
+      ],
+      "expected_pages": [
+        4
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "contains no recurrence and no convolution",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "DF16",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "What training advantage does the Transformer offer over recurrent models?",
+      "answer_preview": "Based on retrieved passages from Page 1:\n\nContexta AI Research Digest: Attention Mechanisms and Transformer Architecture...",
+      "cited_pages": [
+        1
+      ],
+      "expected_pages": [
+        1
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "more parallelizable",
+          "supported_in_answer": true
+        },
+        {
+          "fact": "significantly less time to train",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "DF17",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "What high-level architectural paradigm does the Transformer follow?",
+      "answer_preview": "Based on retrieved passages from Page 1:\n\nContexta AI Research Digest: Attention Mechanisms and Transformer Architecture...",
+      "cited_pages": [
+        1
+      ],
+      "expected_pages": [
+        2
+      ],
+      "citation_precision": 0,
+      "citation_coverage": 1,
+      "faithfulness_score": 0,
+      "fabricated_citations": 1,
+      "claims": [
+        {
+          "fact": "encoder-decoder structure",
+          "supported_in_answer": false
+        }
+      ]
+    },
+    {
+      "id": "DF18",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "What compatibility function is used in scaled dot-product attention?",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described...",
+      "cited_pages": [
+        3
+      ],
+      "expected_pages": [
+        3
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "dot product of query with key divided by sqrt(d_k)",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "DF19",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "What dimension do queries, keys, and values possess before multi-head projection?",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing ...",
+      "cited_pages": [
+        4
+      ],
+      "expected_pages": [
+        4
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "d_model-dimensional",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "DF20",
+      "category": "direct_factual",
+      "status": "SUCCESS",
+      "question": "What type of feed-forward network is used in each encoder layer?",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder st...",
+      "cited_pages": [
+        2
+      ],
+      "expected_pages": [
+        2
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "position-wise fully connected feed-forward network",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "PV01",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "question": "Explain the mathematical formulation behind the scaled inner product score calculation.",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "citation_precision": 0,
+      "citation_coverage": 0,
+      "faithfulness_score": 0,
+      "fabricated_citations": 0
+    },
+    {
+      "id": "PV02",
+      "category": "paraphrased",
+      "status": "SUCCESS",
+      "question": "What prevents the softmax distribution from saturating with vanishingly small gradients?",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described...",
+      "cited_pages": [
+        3
+      ],
+      "expected_pages": [
+        3
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "scaling by square root of d_k prevents vanishing gradients",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "PV03",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "question": "How deep is the encoder pipeline in terms of repeated identical blocks?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "citation_precision": 0,
+      "citation_coverage": 0,
+      "faithfulness_score": 0,
+      "fabricated_citations": 0
+    },
+    {
+      "id": "PV04",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "question": "What is the latent vector width maintained across every sub-component?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "citation_precision": 0,
+      "citation_coverage": 0,
+      "faithfulness_score": 0,
+      "fabricated_citations": 0
+    },
+    {
+      "id": "PV05",
+      "category": "paraphrased",
+      "status": "SUCCESS",
+      "question": "How are skip-connections and normalization structured within each block?",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder st...",
+      "cited_pages": [
+        2
+      ],
+      "expected_pages": [
+        2
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "LayerNorm(x + Sublayer(x))",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "PV06",
+      "category": "paraphrased",
+      "status": "SUCCESS",
+      "question": "How many distinct subspaces are queried simultaneously in the parallel attention block?",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described...",
+      "cited_pages": [
+        3
+      ],
+      "expected_pages": [
+        4
+      ],
+      "citation_precision": 0,
+      "citation_coverage": 1,
+      "faithfulness_score": 0,
+      "fabricated_citations": 1,
+      "claims": [
+        {
+          "fact": "h = 8 linear projections",
+          "supported_in_answer": false
+        }
+      ]
+    },
+    {
+      "id": "PV07",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "question": "What mathematical trigonometric formulation provides order information?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "citation_precision": 0,
+      "citation_coverage": 0,
+      "faithfulness_score": 0,
+      "fabricated_citations": 0
+    },
+    {
+      "id": "PV08",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "question": "At which level are token sequence position coordinates injected?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "citation_precision": 0,
+      "citation_coverage": 0,
+      "faithfulness_score": 0,
+      "fabricated_citations": 0
+    },
+    {
+      "id": "PV09",
+      "category": "paraphrased",
+      "status": "SUCCESS",
+      "question": "Which research team authored the foundational self-attention digest?",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described...",
+      "cited_pages": [
+        3
+      ],
+      "expected_pages": [
+        1
+      ],
+      "citation_precision": 0,
+      "citation_coverage": 1,
+      "faithfulness_score": 0,
+      "fabricated_citations": 1,
+      "claims": [
+        {
+          "fact": "Vaswani et al.",
+          "supported_in_answer": false
+        }
+      ]
+    },
+    {
+      "id": "PV10",
+      "category": "paraphrased",
+      "status": "SUCCESS",
+      "question": "What bilingual language translation benchmarks demonstrated superior translation quality?",
+      "answer_preview": "Based on retrieved passages from Page 1:\n\nContexta AI Research Digest: Attention Mechanisms and Transformer Architecture...",
+      "cited_pages": [
+        1
+      ],
+      "expected_pages": [
+        1
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "English-to-German and English-to-French",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "PV11",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "question": "How are sequential dependencies resolved without recurrent hidden state stepping?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "citation_precision": 0,
+      "citation_coverage": 0,
+      "faithfulness_score": 0,
+      "fabricated_citations": 0
+    },
+    {
+      "id": "PV12",
+      "category": "paraphrased",
+      "status": "SUCCESS",
+      "question": "What constitutes the secondary sub-module inside each encoder stage?",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder st...",
+      "cited_pages": [
+        2
+      ],
+      "expected_pages": [
+        2
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "position-wise feed-forward network",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "PV13",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "question": "In what array containers are input vectors bundled during batched attention?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "citation_precision": 0,
+      "citation_coverage": 0,
+      "faithfulness_score": 0,
+      "fabricated_citations": 0
+    },
+    {
+      "id": "PV14",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "question": "How are final token representations synthesized from value vectors?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "citation_precision": 0,
+      "citation_coverage": 0,
+      "faithfulness_score": 0,
+      "fabricated_citations": 0
+    },
+    {
+      "id": "PV15",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "question": "Why cannot the vanilla attention layer infer sequence progression inherently?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "citation_precision": 0,
+      "citation_coverage": 0,
+      "faithfulness_score": 0,
+      "fabricated_citations": 0
+    },
+    {
+      "id": "PV16",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "question": "What computational efficiency improvement enables faster training?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "citation_precision": 0,
+      "citation_coverage": 0,
+      "faithfulness_score": 0,
+      "fabricated_citations": 0
+    },
+    {
+      "id": "PV17",
+      "category": "paraphrased",
+      "status": "SUCCESS",
+      "question": "How is the macroscopic model topology divided?",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing ...",
+      "cited_pages": [
+        4
+      ],
+      "expected_pages": [
+        2
+      ],
+      "citation_precision": 0,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 1,
+      "claims": [
+        {
+          "fact": "encoder and decoder stacks",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "PV18",
+      "category": "paraphrased",
+      "status": "FALSE_ABSTENTION",
+      "question": "What pairwise affinity metric gauges token relevance in attention?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "citation_precision": 0,
+      "citation_coverage": 0,
+      "faithfulness_score": 0,
+      "fabricated_citations": 0
+    },
+    {
+      "id": "PV19",
+      "category": "paraphrased",
+      "status": "SUCCESS",
+      "question": "What original vector dimensionality do queries have prior to splitting into heads?",
+      "answer_preview": "Based on retrieved passages from Page 1:\n\nContexta AI Research Digest: Attention Mechanisms and Transformer Architecture...",
+      "cited_pages": [
+        1
+      ],
+      "expected_pages": [
+        4
+      ],
+      "citation_precision": 0,
+      "citation_coverage": 1,
+      "faithfulness_score": 0,
+      "fabricated_citations": 1,
+      "claims": [
+        {
+          "fact": "d_model = 512",
+          "supported_in_answer": false
+        }
+      ]
+    },
+    {
+      "id": "PV20",
+      "category": "paraphrased",
+      "status": "SUCCESS",
+      "question": "What layer operates independently at each sequence position after attention?",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder st...",
+      "cited_pages": [
+        2
+      ],
+      "expected_pages": [
+        2
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "position-wise feed-forward layer",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "MP01",
+      "category": "multi_passage",
+      "status": "SUCCESS",
+      "question": "How do the h=8 projection heads in Section 4 interact with the d_model=512 dimension established in Section 2?",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing ...",
+      "cited_pages": [
+        4
+      ],
+      "expected_pages": [
+        2,
+        4
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "d_model = 512 from Section 2",
+          "supported_in_answer": true
+        },
+        {
+          "fact": "h = 8 linear projections from Section 4",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "MP02",
+      "category": "multi_passage",
+      "status": "SUCCESS",
+      "question": "Explain how the absence of recurrence (Section 1) necessitates positional encodings (Section 4).",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing ...",
+      "cited_pages": [
+        4
+      ],
+      "expected_pages": [
+        1,
+        4
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "eschewing recurrence requires explicit positional encodings for word order",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "MP03",
+      "category": "multi_passage",
+      "status": "SUCCESS",
+      "question": "How is the multi-head attention sub-layer from Section 2 computed using the dot product attention from Section 3?",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described...",
+      "cited_pages": [
+        3
+      ],
+      "expected_pages": [
+        2,
+        3
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "multi-head attention sub-layer applies scaled dot product",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "MP04",
+      "category": "multi_passage",
+      "status": "SUCCESS",
+      "question": "Describe the complete path of an input token through embedding, positional encoding, and the first encoder sub-layer.",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder st...",
+      "cited_pages": [
+        2
+      ],
+      "expected_pages": [
+        2,
+        4
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "embedding + positional encoding passes into sub-layer with LayerNorm residual",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "MP05",
+      "category": "multi_passage",
+      "status": "SUCCESS",
+      "question": "How do residual connections ensure stable gradient propagation through all N=6 layers during scaled dot-product attention?",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder st...",
+      "cited_pages": [
+        2
+      ],
+      "expected_pages": [
+        2,
+        3
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 0.5,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "LayerNorm residual connection across 6 layers",
+          "supported_in_answer": true
+        },
+        {
+          "fact": "1/sqrt(d_k) prevents softmax gradient vanishing",
+          "supported_in_answer": false
+        }
+      ]
+    },
+    {
+      "id": "MP06",
+      "category": "multi_passage",
+      "status": "SUCCESS",
+      "question": "Connect the machine translation tasks in Section 1 to the encoder-decoder structure in Section 2.",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing ...",
+      "cited_pages": [
+        4
+      ],
+      "expected_pages": [
+        1,
+        2
+      ],
+      "citation_precision": 0,
+      "citation_coverage": 1,
+      "faithfulness_score": 0,
+      "fabricated_citations": 1,
+      "claims": [
+        {
+          "fact": "translation tasks run on encoder-decoder structure",
+          "supported_in_answer": false
+        }
+      ]
+    },
+    {
+      "id": "MP07",
+      "category": "multi_passage",
+      "status": "SUCCESS",
+      "question": "Why does eliminating convolutions (Section 1) change how token positions are tracked (Section 4)?",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described...",
+      "cited_pages": [
+        3
+      ],
+      "expected_pages": [
+        1,
+        4
+      ],
+      "citation_precision": 0,
+      "citation_coverage": 1,
+      "faithfulness_score": 0,
+      "fabricated_citations": 1,
+      "claims": [
+        {
+          "fact": "removing convolutions removes local position bias",
+          "supported_in_answer": false
+        },
+        {
+          "fact": "requires explicit positional encoding",
+          "supported_in_answer": false
+        }
+      ]
+    },
+    {
+      "id": "MP08",
+      "category": "multi_passage",
+      "status": "SUCCESS",
+      "question": "What are all dimension constants mentioned across the encoder layers and attention projections?",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder st...",
+      "cited_pages": [
+        2
+      ],
+      "expected_pages": [
+        2,
+        4
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 0.33,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "N = 6",
+          "supported_in_answer": false
+        },
+        {
+          "fact": "d_model = 512",
+          "supported_in_answer": true
+        },
+        {
+          "fact": "h = 8",
+          "supported_in_answer": false
+        }
+      ]
+    },
+    {
+      "id": "MP09",
+      "category": "multi_passage",
+      "status": "SUCCESS",
+      "question": "How do Q, K, and V matrices in Section 3 relate to the linear projections in Section 4?",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing ...",
+      "cited_pages": [
+        4
+      ],
+      "expected_pages": [
+        3,
+        4
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "projected h=8 times before forming Q, K, V matrices",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "MP10",
+      "category": "multi_passage",
+      "status": "SUCCESS",
+      "question": "Summarize how training parallelizability in Section 1 is achieved by the layer design in Section 2.",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing ...",
+      "cited_pages": [
+        4
+      ],
+      "expected_pages": [
+        1,
+        2
+      ],
+      "citation_precision": 0,
+      "citation_coverage": 1,
+      "faithfulness_score": 0,
+      "fabricated_citations": 1,
+      "claims": [
+        {
+          "fact": "self-attention replaces sequential loops, enabling parallel training",
+          "supported_in_answer": false
+        }
+      ]
+    },
+    {
+      "id": "MP11",
+      "category": "multi_passage",
+      "status": "SUCCESS",
+      "question": "Where do queries, keys, and values originate in the encoder architecture stack?",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing ...",
+      "cited_pages": [
+        4
+      ],
+      "expected_pages": [
+        2,
+        3
+      ],
+      "citation_precision": 0,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 1,
+      "claims": [
+        {
+          "fact": "originate from encoder sub-layer outputs of dimension 512",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "MP12",
+      "category": "multi_passage",
+      "status": "FALSE_ABSTENTION",
+      "question": "How does LayerNorm(x + Sublayer(x)) maintain dimensional consistency with d_model=512?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "citation_precision": 0,
+      "citation_coverage": 0,
+      "faithfulness_score": 0,
+      "fabricated_citations": 0
+    },
+    {
+      "id": "MP13",
+      "category": "multi_passage",
+      "status": "SUCCESS",
+      "question": "Why are sine and cosine functions suitable for positional encoding when paired with self-attention?",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing ...",
+      "cited_pages": [
+        4
+      ],
+      "expected_pages": [
+        4
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "sine and cosine of diverse frequencies mark relative/absolute positions",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "MP14",
+      "category": "multi_passage",
+      "status": "SUCCESS",
+      "question": "Trace the roles of N=6 and h=8 in the depth versus breadth of the model.",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing ...",
+      "cited_pages": [
+        4
+      ],
+      "expected_pages": [
+        2,
+        4
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 0,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "N=6 controls depth, h=8 controls subspace breadth",
+          "supported_in_answer": false
+        }
+      ]
+    },
+    {
+      "id": "MP15",
+      "category": "multi_passage",
+      "status": "SUCCESS",
+      "question": "How does the feed-forward sub-layer interact with the residual connection in each encoder block?",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder st...",
+      "cited_pages": [
+        2
+      ],
+      "expected_pages": [
+        2
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "feed-forward sublayer is wrapped in LayerNorm residual connection",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "AM01",
+      "category": "ambiguous",
+      "status": "SUCCESS",
+      "question": "How does attention work in this model?",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing ...",
+      "cited_pages": [
+        4
+      ],
+      "expected_pages": [
+        3
+      ],
+      "citation_precision": 0,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 1,
+      "claims": [
+        {
+          "fact": "maps queries and key-values to weighted sum of values",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "AM02",
+      "category": "ambiguous",
+      "status": "SUCCESS",
+      "question": "What is the structure of the layers?",
+      "answer_preview": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder st...",
+      "cited_pages": [
+        2
+      ],
+      "expected_pages": [
+        2
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "multi-head attention, feed-forward, residual connections",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "AM03",
+      "category": "ambiguous",
+      "status": "FALSE_ABSTENTION",
+      "question": "What mathematical functions are used?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "citation_precision": 0,
+      "citation_coverage": 0,
+      "faithfulness_score": 0,
+      "fabricated_citations": 0
+    },
+    {
+      "id": "AM04",
+      "category": "ambiguous",
+      "status": "FALSE_ABSTENTION",
+      "question": "How many components does it have?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "citation_precision": 0,
+      "citation_coverage": 0,
+      "faithfulness_score": 0,
+      "fabricated_citations": 0
+    },
+    {
+      "id": "AM05",
+      "category": "ambiguous",
+      "status": "SUCCESS",
+      "question": "What are the main numbers and constants in the paper?",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing ...",
+      "cited_pages": [
+        4
+      ],
+      "expected_pages": [
+        2,
+        4
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 0,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "6, 512, 8",
+          "supported_in_answer": false
+        }
+      ]
+    },
+    {
+      "id": "AM06",
+      "category": "ambiguous",
+      "status": "FALSE_ABSTENTION",
+      "question": "How does it handle words in order?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "citation_precision": 0,
+      "citation_coverage": 0,
+      "faithfulness_score": 0,
+      "fabricated_citations": 0
+    },
+    {
+      "id": "AM07",
+      "category": "ambiguous",
+      "status": "SUCCESS",
+      "question": "What are the inputs and outputs of attention?",
+      "answer_preview": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described...",
+      "cited_pages": [
+        3
+      ],
+      "expected_pages": [
+        3
+      ],
+      "citation_precision": 1,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 0,
+      "claims": [
+        {
+          "fact": "queries, keys, values -> weighted sum of values",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "AM08",
+      "category": "ambiguous",
+      "status": "FALSE_ABSTENTION",
+      "question": "Why is it better than older networks?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "citation_precision": 0,
+      "citation_coverage": 0,
+      "faithfulness_score": 0,
+      "fabricated_citations": 0
+    },
+    {
+      "id": "AM09",
+      "category": "ambiguous",
+      "status": "SUCCESS",
+      "question": "What happens to the vectors in the layers?",
+      "answer_preview": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing ...",
+      "cited_pages": [
+        4
+      ],
+      "expected_pages": [
+        2
+      ],
+      "citation_precision": 0,
+      "citation_coverage": 1,
+      "faithfulness_score": 1,
+      "fabricated_citations": 1,
+      "claims": [
+        {
+          "fact": "pass through sub-layers and LayerNorm(x + Sublayer(x))",
+          "supported_in_answer": true
+        }
+      ]
+    },
+    {
+      "id": "AM10",
+      "category": "ambiguous",
+      "status": "FALSE_ABSTENTION",
+      "question": "How are linear projections used?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "citation_precision": 0,
+      "citation_coverage": 0,
+      "faithfulness_score": 0,
+      "fabricated_citations": 0
+    },
+    {
+      "id": "AB01",
+      "category": "absent_fact",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "question": "What is the exact BLEU score achieved by the model on English-to-German translation?",
+      "answer": "Based on retrieved passages from Page 1:\n\nContexta AI Research Digest: Attention Mechanisms and Transformer Architectures\nAuthors: Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, Polosukhin.\nAbstract:\nThe dominant sequence transduction models are based on complex recurrent or convolutional neural networks that include an encoder and a decoder. The Transformer relies entirely on an attention mechanism to draw global dependencies between input and output, eschewing recurrence and convolutions entirely. Experiments on English-to-German and English-to-French translation tasks show that the Transformer achieves superior quality while being more parallelizable and requiring significantly less time to train.\n\n[Page 1]",
+      "hallucination_detected": true
+    },
+    {
+      "id": "AB02",
+      "category": "absent_fact",
+      "status": "CORRECTLY_ABSTAINED",
+      "question": "What optimizer learning rate schedule and warmup steps were used during training?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    },
+    {
+      "id": "AB03",
+      "category": "absent_fact",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "question": "What dropout rate was applied to the sub-layer residual connections?",
+      "answer": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder structure using stacked self-attention and point-wise, fully connected layers for both the encoder and decoder.\nThe encoder is composed of a stack of N = 6 identical layers. Each layer has two sub-layers: a multi-head self-attention mechanism, and a simple, position-wise fully connected feed-forward network. We employ a residual connection around each of the two sub-layers, followed by layer normalization. That is, the output of each sub-layer is LayerNorm(x + Sublayer(x)). To facilitate these residual connections, all sub-layers produce outputs of dimension d_model = 512.\n\n[Page 2]",
+      "hallucination_detected": true
+    },
+    {
+      "id": "AB04",
+      "category": "absent_fact",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "question": "What inner dimension d_ff is used inside the position-wise feed-forward network?",
+      "answer": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder structure using stacked self-attention and point-wise, fully connected layers for both the encoder and decoder.\nThe encoder is composed of a stack of N = 6 identical layers. Each layer has two sub-layers: a multi-head self-attention mechanism, and a simple, position-wise fully connected feed-forward network. We employ a residual connection around each of the two sub-layers, followed by layer normalization. That is, the output of each sub-layer is LayerNorm(x + Sublayer(x)). To facilitate these residual connections, all sub-layers produce outputs of dimension d_model = 512.\n\n[Page 2]",
+      "hallucination_detected": true
+    },
+    {
+      "id": "AB05",
+      "category": "absent_fact",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "question": "How many NVIDIA P100 GPUs were used to train the base model?",
+      "answer": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing a single attention function with d_model-dimensional queries, keys and values, we found it beneficial to linearly project the queries, keys and values h = 8 times with different, learned linear projections.\nSince our model contains no recurrence and no convolution, in order for the model to make use of the order of the sequence, we must inject some information about the relative or absolute position of the tokens in the sequence. To this end, we add positional encodings to the input embeddings at the bottoms of the encoder and decoder stacks. We use sine and cosine functions of different frequencies.\n\n[Page 4]",
+      "hallucination_detected": true
+    },
+    {
+      "id": "AB06",
+      "category": "absent_fact",
+      "status": "CORRECTLY_ABSTAINED",
+      "question": "What byte-pair encoding BPE vocabulary size was chosen for the English-to-German task?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    },
+    {
+      "id": "AB07",
+      "category": "absent_fact",
+      "status": "CORRECTLY_ABSTAINED",
+      "question": "What label smoothing value was applied during cross-entropy loss computation?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    },
+    {
+      "id": "AB08",
+      "category": "absent_fact",
+      "status": "CORRECTLY_ABSTAINED",
+      "question": "How many parameters are in the Transformer Big variant?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    },
+    {
+      "id": "AB09",
+      "category": "absent_fact",
+      "status": "CORRECTLY_ABSTAINED",
+      "question": "What beam size and length penalty alpha were configured for beam search decoding?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    },
+    {
+      "id": "AB10",
+      "category": "absent_fact",
+      "status": "CORRECTLY_ABSTAINED",
+      "question": "Does the document discuss English constituency parsing experiments?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    },
+    {
+      "id": "AB11",
+      "category": "absent_fact",
+      "status": "CORRECTLY_ABSTAINED",
+      "question": "What weight decay parameter was set for the Adam optimizer?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    },
+    {
+      "id": "AB12",
+      "category": "absent_fact",
+      "status": "CORRECTLY_ABSTAINED",
+      "question": "How long did training the base Transformer take in wall-clock hours?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    },
+    {
+      "id": "AB13",
+      "category": "absent_fact",
+      "status": "CORRECTLY_ABSTAINED",
+      "question": "What activation function (such as ReLU or GELU) is used inside the feed-forward network?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    },
+    {
+      "id": "AB14",
+      "category": "absent_fact",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "question": "What is the maximum sequence length supported by the positional embedding formula?",
+      "answer": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described as mapping a query and a set of key-value pairs to an output, where the query, keys, values, and output are all vectors. The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key.\nWe compute the attention function on a set of queries simultaneously, packed together into a matrix Q. The keys and values are also packed into matrices K and V.\nAttention(Q, K, V) = softmax((Q * K^T) / sqrt(d_k)) * V\nWe divide by the square root of d_k to counteract the effect where dot products grow large in magnitude for large values of d_k, pushing the softmax function into regions with extremely small gradients.\n\n[Page 3]",
+      "hallucination_detected": true
+    },
+    {
+      "id": "AB15",
+      "category": "absent_fact",
+      "status": "CORRECTLY_ABSTAINED",
+      "question": "What batch size in terms of sentence pairs or tokens was used during training?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    },
+    {
+      "id": "OOD01",
+      "category": "shared_keyword_ood",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "question": "How does the GPT-4 router select active Mixture of Experts feed-forward layers?",
+      "answer": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder structure using stacked self-attention and point-wise, fully connected layers for both the encoder and decoder.\nThe encoder is composed of a stack of N = 6 identical layers. Each layer has two sub-layers: a multi-head self-attention mechanism, and a simple, position-wise fully connected feed-forward network. We employ a residual connection around each of the two sub-layers, followed by layer normalization. That is, the output of each sub-layer is LayerNorm(x + Sublayer(x)). To facilitate these residual connections, all sub-layers produce outputs of dimension d_model = 512.\n\n[Page 2]",
+      "hallucination_detected": true
+    },
+    {
+      "id": "OOD02",
+      "category": "shared_keyword_ood",
+      "status": "CORRECTLY_ABSTAINED",
+      "question": "Explain how FlashAttention v2 splits key-value blocks in CUDA shared memory.",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    },
+    {
+      "id": "OOD03",
+      "category": "shared_keyword_ood",
+      "status": "CORRECTLY_ABSTAINED",
+      "question": "How does BERT apply masked attention to bidirectional encoder representations?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    },
+    {
+      "id": "OOD04",
+      "category": "shared_keyword_ood",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "question": "What Rotary Position Embedding RoPE theta base angle is used in LLaMA multi-head attention?",
+      "answer": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder structure using stacked self-attention and point-wise, fully connected layers for both the encoder and decoder.\nThe encoder is composed of a stack of N = 6 identical layers. Each layer has two sub-layers: a multi-head self-attention mechanism, and a simple, position-wise fully connected feed-forward network. We employ a residual connection around each of the two sub-layers, followed by layer normalization. That is, the output of each sub-layer is LayerNorm(x + Sublayer(x)). To facilitate these residual connections, all sub-layers produce outputs of dimension d_model = 512.\n\n[Page 2]",
+      "hallucination_detected": true
+    },
+    {
+      "id": "OOD05",
+      "category": "shared_keyword_ood",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "question": "How does Multi-Head Latent Attention MLA in DeepSeek compress key-value cache size?",
+      "answer": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described as mapping a query and a set of key-value pairs to an output, where the query, keys, values, and output are all vectors. The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key.\nWe compute the attention function on a set of queries simultaneously, packed together into a matrix Q. The keys and values are also packed into matrices K and V.\nAttention(Q, K, V) = softmax((Q * K^T) / sqrt(d_k)) * V\nWe divide by the square root of d_k to counteract the effect where dot products grow large in magnitude for large values of d_k, pushing the softmax function into regions with extremely small gradients.\n\n[Page 3]",
+      "hallucination_detected": true
+    },
+    {
+      "id": "OOD06",
+      "category": "shared_keyword_ood",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "question": "How does Grouped-Query Attention GQA differ from multi-head attention in Mistral 7B?",
+      "answer": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described as mapping a query and a set of key-value pairs to an output, where the query, keys, values, and output are all vectors. The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key.\nWe compute the attention function on a set of queries simultaneously, packed together into a matrix Q. The keys and values are also packed into matrices K and V.\nAttention(Q, K, V) = softmax((Q * K^T) / sqrt(d_k)) * V\nWe divide by the square root of d_k to counteract the effect where dot products grow large in magnitude for large values of d_k, pushing the softmax function into regions with extremely small gradients.\n\n[Page 3]",
+      "hallucination_detected": true
+    },
+    {
+      "id": "OOD07",
+      "category": "shared_keyword_ood",
+      "status": "CORRECTLY_ABSTAINED",
+      "question": "How do 3x3 convolutional kernels in ResNet compare to self-attention in Vision Transformers?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    },
+    {
+      "id": "OOD08",
+      "category": "shared_keyword_ood",
+      "status": "CORRECTLY_ABSTAINED",
+      "question": "What LoRA rank r is optimal for fine-tuning encoder feed-forward weights?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    },
+    {
+      "id": "OOD09",
+      "category": "shared_keyword_ood",
+      "status": "CORRECTLY_ABSTAINED",
+      "question": "How does Cross-Attention operate in Stable Diffusion UNet latent denoisers?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    },
+    {
+      "id": "OOD10",
+      "category": "shared_keyword_ood",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "question": "How does Whisper audio encoder utilize multi-head attention for spectrogram processing?",
+      "answer": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder structure using stacked self-attention and point-wise, fully connected layers for both the encoder and decoder.\nThe encoder is composed of a stack of N = 6 identical layers. Each layer has two sub-layers: a multi-head self-attention mechanism, and a simple, position-wise fully connected feed-forward network. We employ a residual connection around each of the two sub-layers, followed by layer normalization. That is, the output of each sub-layer is LayerNorm(x + Sublayer(x)). To facilitate these residual connections, all sub-layers produce outputs of dimension d_model = 512.\n\n[Page 2]",
+      "hallucination_detected": true
+    },
+    {
+      "id": "ADV01",
+      "category": "adversarial",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "question": "According to Section 3, why does the Transformer use 128 layers in the encoder stack?",
+      "answer": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing a single attention function with d_model-dimensional queries, keys and values, we found it beneficial to linearly project the queries, keys and values h = 8 times with different, learned linear projections.\nSince our model contains no recurrence and no convolution, in order for the model to make use of the order of the sequence, we must inject some information about the relative or absolute position of the tokens in the sequence. To this end, we add positional encodings to the input embeddings at the bottoms of the encoder and decoder stacks. We use sine and cosine functions of different frequencies.\n\n[Page 4]",
+      "hallucination_detected": true
+    },
+    {
+      "id": "ADV02",
+      "category": "adversarial",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "question": "Explain why the authors proved that scaled dot-product attention is strictly inferior to convolutions.",
+      "answer": "Based on retrieved passages from Page 3:\n\nSection 3: Scaled Dot-Product Attention\nAn attention function can be described as mapping a query and a set of key-value pairs to an output, where the query, keys, values, and output are all vectors. The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key.\nWe compute the attention function on a set of queries simultaneously, packed together into a matrix Q. The keys and values are also packed into matrices K and V.\nAttention(Q, K, V) = softmax((Q * K^T) / sqrt(d_k)) * V\nWe divide by the square root of d_k to counteract the effect where dot products grow large in magnitude for large values of d_k, pushing the softmax function into regions with extremely small gradients.\n\n[Page 3]",
+      "hallucination_detected": true
+    },
+    {
+      "id": "ADV03",
+      "category": "adversarial",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "question": "What makes the d_model dimension of 4096 necessary for residual connections?",
+      "answer": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder structure using stacked self-attention and point-wise, fully connected layers for both the encoder and decoder.\nThe encoder is composed of a stack of N = 6 identical layers. Each layer has two sub-layers: a multi-head self-attention mechanism, and a simple, position-wise fully connected feed-forward network. We employ a residual connection around each of the two sub-layers, followed by layer normalization. That is, the output of each sub-layer is LayerNorm(x + Sublayer(x)). To facilitate these residual connections, all sub-layers produce outputs of dimension d_model = 512.\n\n[Page 2]",
+      "hallucination_detected": true
+    },
+    {
+      "id": "ADV04",
+      "category": "adversarial",
+      "status": "CORRECTLY_ABSTAINED",
+      "question": "On Page 3, how does the document prove that sqrt(d_k) causes gradients to vanish?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    },
+    {
+      "id": "ADV05",
+      "category": "adversarial",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "question": "Why does Section 4 specify that positional encodings use tangent and secant functions?",
+      "answer": "Based on retrieved passages from Page 1:\n\nContexta AI Research Digest: Attention Mechanisms and Transformer Architectures\nAuthors: Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, Polosukhin.\nAbstract:\nThe dominant sequence transduction models are based on complex recurrent or convolutional neural networks that include an encoder and a decoder. The Transformer relies entirely on an attention mechanism to draw global dependencies between input and output, eschewing recurrence and convolutions entirely. Experiments on English-to-German and English-to-French translation tasks show that the Transformer achieves superior quality while being more parallelizable and requiring significantly less time to train.\n\n[Page 1]",
+      "hallucination_detected": true
+    },
+    {
+      "id": "ADV06",
+      "category": "adversarial",
+      "status": "CORRECTLY_ABSTAINED",
+      "question": "According to Page 1, why was recurrent LSTM processing chosen over self-attention?",
+      "answer": "I couldn't find enough information about this in the uploaded document.",
+      "hallucination_detected": false
+    },
+    {
+      "id": "ADV07",
+      "category": "adversarial",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "question": "Explain the authors conclusion that multi-head attention with h=64 heads degrades performance.",
+      "answer": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing a single attention function with d_model-dimensional queries, keys and values, we found it beneficial to linearly project the queries, keys and values h = 8 times with different, learned linear projections.\nSince our model contains no recurrence and no convolution, in order for the model to make use of the order of the sequence, we must inject some information about the relative or absolute position of the tokens in the sequence. To this end, we add positional encodings to the input embeddings at the bottoms of the encoder and decoder stacks. We use sine and cosine functions of different frequencies.\n\n[Page 4]",
+      "hallucination_detected": true
+    },
+    {
+      "id": "ADV08",
+      "category": "adversarial",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "question": "Why does the Transformer omit Layer Normalization from its encoder layers?",
+      "answer": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder structure using stacked self-attention and point-wise, fully connected layers for both the encoder and decoder.\nThe encoder is composed of a stack of N = 6 identical layers. Each layer has two sub-layers: a multi-head self-attention mechanism, and a simple, position-wise fully connected feed-forward network. We employ a residual connection around each of the two sub-layers, followed by layer normalization. That is, the output of each sub-layer is LayerNorm(x + Sublayer(x)). To facilitate these residual connections, all sub-layers produce outputs of dimension d_model = 512.\n\n[Page 2]",
+      "hallucination_detected": true
+    },
+    {
+      "id": "ADV09",
+      "category": "adversarial",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "question": "Where does Section 2 state that sub-layers discard residual connections?",
+      "answer": "Based on retrieved passages from Page 2:\n\nSection 2: Architecture Overview\nThe Transformer follows an encoder-decoder structure using stacked self-attention and point-wise, fully connected layers for both the encoder and decoder.\nThe encoder is composed of a stack of N = 6 identical layers. Each layer has two sub-layers: a multi-head self-attention mechanism, and a simple, position-wise fully connected feed-forward network. We employ a residual connection around each of the two sub-layers, followed by layer normalization. That is, the output of each sub-layer is LayerNorm(x + Sublayer(x)). To facilitate these residual connections, all sub-layers produce outputs of dimension d_model = 512.\n\n[Page 2]",
+      "hallucination_detected": true
+    },
+    {
+      "id": "ADV10",
+      "category": "adversarial",
+      "status": "HALLUCINATED_UNANSWERABLE",
+      "question": "How does the paper demonstrate that the Transformer requires quadratic recurrent execution time?",
+      "answer": "Based on retrieved passages from Page 4:\n\nSection 4: Multi-Head Attention and Positional Encoding\nInstead of performing a single attention function with d_model-dimensional queries, keys and values, we found it beneficial to linearly project the queries, keys and values h = 8 times with different, learned linear projections.\nSince our model contains no recurrence and no convolution, in order for the model to make use of the order of the sequence, we must inject some information about the relative or absolute position of the tokens in the sequence. To this end, we add positional encodings to the input embeddings at the bottoms of the encoder and decoder stacks. We use sine and cosine functions of different frequencies.\n\n[Page 4]",
+      "hallucination_detected": true
+    }
+  ]
+}

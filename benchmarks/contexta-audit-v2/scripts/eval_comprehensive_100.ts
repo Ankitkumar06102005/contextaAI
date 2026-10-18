@@ -1,0 +1,1518 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const BASE_URL = process.env.BENCHMARK_BASE_URL || 'http://localhost:3000';
+const RETRIEVAL_OUT = path.resolve(__dirname, '..', 'retrieval_evaluation_v2.json');
+const ANSWER_OUT = path.resolve(__dirname, '..', 'answer_quality_evaluation_v2.json');
+
+export interface BenchmarkItem {
+  id: string;
+  category: 'direct_factual' | 'paraphrased' | 'multi_passage' | 'ambiguous' | 'absent_fact' | 'shared_keyword_ood' | 'adversarial';
+  question: string;
+  is_answerable: boolean;
+  expected_pages: number[];
+  reference_answer: string;
+  supporting_keywords: string[];
+  ground_truth_facts: string[];
+  split: 'dev' | 'test';
+}
+
+export const DATASET_100: BenchmarkItem[] = [
+  // ================= 1. DIRECT FACTUAL (20 items) =================
+  {
+    id: 'DF01',
+    category: 'direct_factual',
+    question: 'What is the mathematical equation for scaled dot-product attention?',
+    is_answerable: true,
+    expected_pages: [3],
+    reference_answer: 'Attention(Q, K, V) = softmax((Q * K^T) / sqrt(d_k)) * V',
+    supporting_keywords: ['softmax', 'sqrt', 'd_k', 'matrix'],
+    ground_truth_facts: ['softmax function', 'divided by square root of d_k', 'multiplied by V'],
+    split: 'test',
+  },
+  {
+    id: 'DF02',
+    category: 'direct_factual',
+    question: 'Why do the authors divide by the square root of d_k in the attention equation?',
+    is_answerable: true,
+    expected_pages: [3],
+    reference_answer: 'To counteract large dot products pushing the softmax function into regions with extremely small gradients.',
+    supporting_keywords: ['magnitude', 'gradients', 'small', 'softmax'],
+    ground_truth_facts: ['large magnitude dot products', 'extremely small gradients in softmax'],
+    split: 'test',
+  },
+  {
+    id: 'DF03',
+    category: 'direct_factual',
+    question: 'How many identical layers make up the encoder stack?',
+    is_answerable: true,
+    expected_pages: [2],
+    reference_answer: 'The encoder is composed of a stack of N = 6 identical layers.',
+    supporting_keywords: ['stack', '6', 'identical', 'layers', 'encoder'],
+    ground_truth_facts: ['N = 6 identical layers'],
+    split: 'test',
+  },
+  {
+    id: 'DF04',
+    category: 'direct_factual',
+    question: 'What is the output dimension d_model produced by all sub-layers?',
+    is_answerable: true,
+    expected_pages: [2],
+    reference_answer: 'All sub-layers produce outputs of dimension d_model = 512.',
+    supporting_keywords: ['dimension', '512', 'd_model', 'sub-layers'],
+    ground_truth_facts: ['dimension d_model = 512'],
+    split: 'test',
+  },
+  {
+    id: 'DF05',
+    category: 'direct_factual',
+    question: 'What operation is applied around each sub-layer in the encoder?',
+    is_answerable: true,
+    expected_pages: [2],
+    reference_answer: 'A residual connection followed by layer normalization: LayerNorm(x + Sublayer(x)).',
+    supporting_keywords: ['residual', 'connection', 'layernorm', 'normalization'],
+    ground_truth_facts: ['residual connection', 'layer normalization LayerNorm(x + Sublayer(x))'],
+    split: 'test',
+  },
+  {
+    id: 'DF06',
+    category: 'direct_factual',
+    question: 'How many linear projections h are learned in multi-head attention?',
+    is_answerable: true,
+    expected_pages: [4],
+    reference_answer: 'Queries, keys, and values are linearly projected h = 8 times with learned linear projections.',
+    supporting_keywords: ['project', 'linear', '8', 'multi-head'],
+    ground_truth_facts: ['h = 8 linear projections'],
+    split: 'test',
+  },
+  {
+    id: 'DF07',
+    category: 'direct_factual',
+    question: 'What functions of different frequencies are utilized for positional encodings?',
+    is_answerable: true,
+    expected_pages: [4],
+    reference_answer: 'Sine and cosine functions of different frequencies.',
+    supporting_keywords: ['sine', 'cosine', 'frequencies', 'positional'],
+    ground_truth_facts: ['sine and cosine functions of different frequencies'],
+    split: 'test',
+  },
+  {
+    id: 'DF08',
+    category: 'direct_factual',
+    question: 'Where are positional encodings added in the architecture stack?',
+    is_answerable: true,
+    expected_pages: [4],
+    reference_answer: 'At the bottoms of the encoder and decoder stacks to the input embeddings.',
+    supporting_keywords: ['bottoms', 'encoder', 'decoder', 'embeddings'],
+    ground_truth_facts: ['bottoms of encoder and decoder stacks', 'added to input embeddings'],
+    split: 'test',
+  },
+  {
+    id: 'DF09',
+    category: 'direct_factual',
+    question: 'Who are the listed authors of the Attention research digest?',
+    is_answerable: true,
+    expected_pages: [1],
+    reference_answer: 'Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, Polosukhin.',
+    supporting_keywords: ['vaswani', 'shazeer', 'parmar', 'authors'],
+    ground_truth_facts: ['Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, Polosukhin'],
+    split: 'test',
+  },
+  {
+    id: 'DF10',
+    category: 'direct_factual',
+    question: 'On what translation benchmarks was the Transformer evaluated?',
+    is_answerable: true,
+    expected_pages: [1],
+    reference_answer: 'English-to-German and English-to-French translation tasks.',
+    supporting_keywords: ['english-to-german', 'english-to-french', 'translation'],
+    ground_truth_facts: ['English-to-German', 'English-to-French'],
+    split: 'test',
+  },
+  {
+    id: 'DF11',
+    category: 'direct_factual',
+    question: 'What two mechanisms are entirely eschewed by the Transformer model?',
+    is_answerable: true,
+    expected_pages: [1],
+    reference_answer: 'Recurrence and convolutions.',
+    supporting_keywords: ['recurrence', 'convolutions', 'eschewing'],
+    ground_truth_facts: ['eschewing recurrence and convolutions entirely'],
+    split: 'dev',
+  },
+  {
+    id: 'DF12',
+    category: 'direct_factual',
+    question: 'What are the two sub-layers present in each encoder layer?',
+    is_answerable: true,
+    expected_pages: [2],
+    reference_answer: 'A multi-head self-attention mechanism and a simple, position-wise fully connected feed-forward network.',
+    supporting_keywords: ['self-attention', 'feed-forward', 'sub-layers'],
+    ground_truth_facts: ['multi-head self-attention', 'position-wise feed-forward network'],
+    split: 'dev',
+  },
+  {
+    id: 'DF13',
+    category: 'direct_factual',
+    question: 'How are queries, keys, and values packaged for simultaneous computation?',
+    is_answerable: true,
+    expected_pages: [3],
+    reference_answer: 'Packed together into matrices Q, K, and V.',
+    supporting_keywords: ['matrices', 'matrix', 'q', 'k', 'v'],
+    ground_truth_facts: ['packed into matrices Q, K, and V'],
+    split: 'dev',
+  },
+  {
+    id: 'DF14',
+    category: 'direct_factual',
+    question: 'How is attention output mathematically computed from values?',
+    is_answerable: true,
+    expected_pages: [3],
+    reference_answer: 'As a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key.',
+    supporting_keywords: ['weighted', 'sum', 'values', 'compatibility'],
+    ground_truth_facts: ['weighted sum of values', 'compatibility function of query with key'],
+    split: 'test',
+  },
+  {
+    id: 'DF15',
+    category: 'direct_factual',
+    question: 'Why does the Transformer require positional encodings to make use of order?',
+    is_answerable: true,
+    expected_pages: [4],
+    reference_answer: 'Because the model contains no recurrence and no convolution.',
+    supporting_keywords: ['no recurrence', 'no convolution', 'order'],
+    ground_truth_facts: ['contains no recurrence and no convolution'],
+    split: 'test',
+  },
+  {
+    id: 'DF16',
+    category: 'direct_factual',
+    question: 'What training advantage does the Transformer offer over recurrent models?',
+    is_answerable: true,
+    expected_pages: [1],
+    reference_answer: 'It is more parallelizable and requires significantly less time to train.',
+    supporting_keywords: ['parallelizable', 'less time', 'train'],
+    ground_truth_facts: ['more parallelizable', 'significantly less time to train'],
+    split: 'test',
+  },
+  {
+    id: 'DF17',
+    category: 'direct_factual',
+    question: 'What high-level architectural paradigm does the Transformer follow?',
+    is_answerable: true,
+    expected_pages: [2],
+    reference_answer: 'An encoder-decoder structure using stacked self-attention and point-wise fully connected layers.',
+    supporting_keywords: ['encoder-decoder', 'stacked', 'self-attention'],
+    ground_truth_facts: ['encoder-decoder structure'],
+    split: 'test',
+  },
+  {
+    id: 'DF18',
+    category: 'direct_factual',
+    question: 'What compatibility function is used in scaled dot-product attention?',
+    is_answerable: true,
+    expected_pages: [3],
+    reference_answer: 'Dot product between queries and keys, divided by sqrt(d_k), followed by softmax.',
+    supporting_keywords: ['dot', 'product', 'compatibility', 'softmax'],
+    ground_truth_facts: ['dot product of query with key divided by sqrt(d_k)'],
+    split: 'dev',
+  },
+  {
+    id: 'DF19',
+    category: 'direct_factual',
+    question: 'What dimension do queries, keys, and values possess before multi-head projection?',
+    is_answerable: true,
+    expected_pages: [4],
+    reference_answer: 'd_model-dimensional queries, keys, and values.',
+    supporting_keywords: ['d_model', 'dimensional', 'queries', 'keys'],
+    ground_truth_facts: ['d_model-dimensional'],
+    split: 'test',
+  },
+  {
+    id: 'DF20',
+    category: 'direct_factual',
+    question: 'What type of feed-forward network is used in each encoder layer?',
+    is_answerable: true,
+    expected_pages: [2],
+    reference_answer: 'A simple, position-wise fully connected feed-forward network.',
+    supporting_keywords: ['position-wise', 'fully connected', 'feed-forward'],
+    ground_truth_facts: ['position-wise fully connected feed-forward network'],
+    split: 'test',
+  },
+
+  // ================= 2. PARAPHRASED & TERMINOLOGY VARIATION (20 items) =================
+  {
+    id: 'PV01',
+    category: 'paraphrased',
+    question: 'Explain the mathematical formulation behind the scaled inner product score calculation.',
+    is_answerable: true,
+    expected_pages: [3],
+    reference_answer: 'Attention(Q, K, V) = softmax((Q * K^T) / sqrt(d_k)) * V.',
+    supporting_keywords: ['softmax', 'sqrt', 'd_k'],
+    ground_truth_facts: ['softmax((Q * K^T) / sqrt(d_k)) * V'],
+    split: 'test',
+  },
+  {
+    id: 'PV02',
+    category: 'paraphrased',
+    question: 'What prevents the softmax distribution from saturating with vanishingly small gradients?',
+    is_answerable: true,
+    expected_pages: [3],
+    reference_answer: 'Dividing the dot products by the square root of key dimension d_k.',
+    supporting_keywords: ['square root', 'd_k', 'gradients', 'small'],
+    ground_truth_facts: ['scaling by square root of d_k prevents vanishing gradients'],
+    split: 'test',
+  },
+  {
+    id: 'PV03',
+    category: 'paraphrased',
+    question: 'How deep is the encoder pipeline in terms of repeated identical blocks?',
+    is_answerable: true,
+    expected_pages: [2],
+    reference_answer: 'Six identical blocks (N = 6).',
+    supporting_keywords: ['6', 'identical', 'layers'],
+    ground_truth_facts: ['6 identical layers'],
+    split: 'test',
+  },
+  {
+    id: 'PV04',
+    category: 'paraphrased',
+    question: 'What is the latent vector width maintained across every sub-component?',
+    is_answerable: true,
+    expected_pages: [2],
+    reference_answer: 'Width of 512 dimensions (d_model = 512).',
+    supporting_keywords: ['512', 'dimension', 'd_model'],
+    ground_truth_facts: ['512 dimensions'],
+    split: 'test',
+  },
+  {
+    id: 'PV05',
+    category: 'paraphrased',
+    question: 'How are skip-connections and normalization structured within each block?',
+    is_answerable: true,
+    expected_pages: [2],
+    reference_answer: 'LayerNorm(x + Sublayer(x)) surrounding each sublayer.',
+    supporting_keywords: ['layernorm', 'residual', 'sublayer'],
+    ground_truth_facts: ['LayerNorm(x + Sublayer(x))'],
+    split: 'test',
+  },
+  {
+    id: 'PV06',
+    category: 'paraphrased',
+    question: 'How many distinct subspaces are queried simultaneously in the parallel attention block?',
+    is_answerable: true,
+    expected_pages: [4],
+    reference_answer: 'Eight distinct linear projections (h = 8).',
+    supporting_keywords: ['8', 'linear', 'projections'],
+    ground_truth_facts: ['h = 8 linear projections'],
+    split: 'test',
+  },
+  {
+    id: 'PV07',
+    category: 'paraphrased',
+    question: 'What mathematical trigonometric formulation provides order information?',
+    is_answerable: true,
+    expected_pages: [4],
+    reference_answer: 'Sine and cosine waves of diverse frequencies.',
+    supporting_keywords: ['sine', 'cosine', 'frequencies'],
+    ground_truth_facts: ['sine and cosine functions'],
+    split: 'test',
+  },
+  {
+    id: 'PV08',
+    category: 'paraphrased',
+    question: 'At which level are token sequence position coordinates injected?',
+    is_answerable: true,
+    expected_pages: [4],
+    reference_answer: 'At the bottom of the encoder and decoder stacks on input embeddings.',
+    supporting_keywords: ['bottoms', 'embeddings'],
+    ground_truth_facts: ['bottom of encoder and decoder stacks'],
+    split: 'dev',
+  },
+  {
+    id: 'PV09',
+    category: 'paraphrased',
+    question: 'Which research team authored the foundational self-attention digest?',
+    is_answerable: true,
+    expected_pages: [1],
+    reference_answer: 'Vaswani, Shazeer, Parmar, and co-authors.',
+    supporting_keywords: ['vaswani', 'shazeer', 'parmar'],
+    ground_truth_facts: ['Vaswani et al.'],
+    split: 'test',
+  },
+  {
+    id: 'PV10',
+    category: 'paraphrased',
+    question: 'What bilingual language translation benchmarks demonstrated superior translation quality?',
+    is_answerable: true,
+    expected_pages: [1],
+    reference_answer: 'English to German and English to French.',
+    supporting_keywords: ['english-to-german', 'english-to-french'],
+    ground_truth_facts: ['English-to-German and English-to-French'],
+    split: 'test',
+  },
+  {
+    id: 'PV11',
+    category: 'paraphrased',
+    question: 'How are sequential dependencies resolved without recurrent hidden state stepping?',
+    is_answerable: true,
+    expected_pages: [1],
+    reference_answer: 'Entirely through self-attention mechanisms connecting all positions.',
+    supporting_keywords: ['attention', 'recurrence', 'dependencies'],
+    ground_truth_facts: ['relying entirely on attention'],
+    split: 'dev',
+  },
+  {
+    id: 'PV12',
+    category: 'paraphrased',
+    question: 'What constitutes the secondary sub-module inside each encoder stage?',
+    is_answerable: true,
+    expected_pages: [2],
+    reference_answer: 'A position-wise fully connected feed-forward network.',
+    supporting_keywords: ['position-wise', 'feed-forward'],
+    ground_truth_facts: ['position-wise feed-forward network'],
+    split: 'test',
+  },
+  {
+    id: 'PV13',
+    category: 'paraphrased',
+    question: 'In what array containers are input vectors bundled during batched attention?',
+    is_answerable: true,
+    expected_pages: [3],
+    reference_answer: 'Matrices Q, K, and V.',
+    supporting_keywords: ['matrices', 'matrix', 'q', 'k', 'v'],
+    ground_truth_facts: ['matrices Q, K, V'],
+    split: 'test',
+  },
+  {
+    id: 'PV14',
+    category: 'paraphrased',
+    question: 'How are final token representations synthesized from value vectors?',
+    is_answerable: true,
+    expected_pages: [3],
+    reference_answer: 'Computed as a weighted linear combination of value vectors based on query-key alignment.',
+    supporting_keywords: ['weighted', 'sum', 'values'],
+    ground_truth_facts: ['weighted sum of values'],
+    split: 'test',
+  },
+  {
+    id: 'PV15',
+    category: 'paraphrased',
+    question: 'Why cannot the vanilla attention layer infer sequence progression inherently?',
+    is_answerable: true,
+    expected_pages: [4],
+    reference_answer: 'Because the network architecture lacks recurrence and convolution.',
+    supporting_keywords: ['no recurrence', 'no convolution'],
+    ground_truth_facts: ['lacks recurrence and convolution'],
+    split: 'test',
+  },
+  {
+    id: 'PV16',
+    category: 'paraphrased',
+    question: 'What computational efficiency improvement enables faster training?',
+    is_answerable: true,
+    expected_pages: [1],
+    reference_answer: 'High degree of parallelization across sequence tokens.',
+    supporting_keywords: ['parallelizable', 'train', 'time'],
+    ground_truth_facts: ['more parallelizable', 'less training time'],
+    split: 'test',
+  },
+  {
+    id: 'PV17',
+    category: 'paraphrased',
+    question: 'How is the macroscopic model topology divided?',
+    is_answerable: true,
+    expected_pages: [2],
+    reference_answer: 'Into an encoder stack and decoder stack.',
+    supporting_keywords: ['encoder', 'decoder', 'structure'],
+    ground_truth_facts: ['encoder and decoder stacks'],
+    split: 'test',
+  },
+  {
+    id: 'PV18',
+    category: 'paraphrased',
+    question: 'What pairwise affinity metric gauges token relevance in attention?',
+    is_answerable: true,
+    expected_pages: [3],
+    reference_answer: 'The inner product (dot product) of query and key vectors.',
+    supporting_keywords: ['dot', 'product', 'compatibility'],
+    ground_truth_facts: ['dot product of query and key'],
+    split: 'test',
+  },
+  {
+    id: 'PV19',
+    category: 'paraphrased',
+    question: 'What original vector dimensionality do queries have prior to splitting into heads?',
+    is_answerable: true,
+    expected_pages: [4],
+    reference_answer: '512 dimensions (d_model).',
+    supporting_keywords: ['d_model', '512', 'queries'],
+    ground_truth_facts: ['d_model = 512'],
+    split: 'dev',
+  },
+  {
+    id: 'PV20',
+    category: 'paraphrased',
+    question: 'What layer operates independently at each sequence position after attention?',
+    is_answerable: true,
+    expected_pages: [2],
+    reference_answer: 'Position-wise feed-forward network.',
+    supporting_keywords: ['position-wise', 'feed-forward'],
+    ground_truth_facts: ['position-wise feed-forward layer'],
+    split: 'test',
+  },
+
+  // ================= 3. MULTI-PASSAGE INFERENCE (15 items) =================
+  {
+    id: 'MP01',
+    category: 'multi_passage',
+    question: 'How do the h=8 projection heads in Section 4 interact with the d_model=512 dimension established in Section 2?',
+    is_answerable: true,
+    expected_pages: [2, 4],
+    reference_answer: 'Queries, keys, and values of d_model = 512 dimensions are projected h = 8 times into distinct subspaces.',
+    supporting_keywords: ['512', '8', 'd_model', 'projections'],
+    ground_truth_facts: ['d_model = 512 from Section 2', 'h = 8 linear projections from Section 4'],
+    split: 'test',
+  },
+  {
+    id: 'MP02',
+    category: 'multi_passage',
+    question: 'Explain how the absence of recurrence (Section 1) necessitates positional encodings (Section 4).',
+    is_answerable: true,
+    expected_pages: [1, 4],
+    reference_answer: 'Because recurrence and convolution are eschewed (Section 1), the model has no inherent sense of order, requiring sinusoidal positional encodings at the embedding layer (Section 4).',
+    supporting_keywords: ['recurrence', 'positional', 'order'],
+    ground_truth_facts: ['eschewing recurrence requires explicit positional encodings for word order'],
+    split: 'test',
+  },
+  {
+    id: 'MP03',
+    category: 'multi_passage',
+    question: 'How is the multi-head attention sub-layer from Section 2 computed using the dot product attention from Section 3?',
+    is_answerable: true,
+    expected_pages: [2, 3],
+    reference_answer: 'Each encoder layer contains a multi-head self-attention sub-layer (Section 2) which applies scaled dot-product attention softmax((QK^T)/sqrt(d_k))V across projections (Section 3).',
+    supporting_keywords: ['sub-layer', 'softmax', 'scaled', 'dot-product'],
+    ground_truth_facts: ['multi-head attention sub-layer applies scaled dot product'],
+    split: 'test',
+  },
+  {
+    id: 'MP04',
+    category: 'multi_passage',
+    question: 'Describe the complete path of an input token through embedding, positional encoding, and the first encoder sub-layer.',
+    is_answerable: true,
+    expected_pages: [2, 4],
+    reference_answer: 'Token embeddings receive sinusoidal positional encodings at the bottom of the stack (Section 4), then pass into multi-head self-attention followed by residual connection and LayerNorm(x + Sublayer(x)) (Section 2).',
+    supporting_keywords: ['embeddings', 'positional', 'layernorm', 'residual'],
+    ground_truth_facts: ['embedding + positional encoding passes into sub-layer with LayerNorm residual'],
+    split: 'test',
+  },
+  {
+    id: 'MP05',
+    category: 'multi_passage',
+    question: 'How do residual connections ensure stable gradient propagation through all N=6 layers during scaled dot-product attention?',
+    is_answerable: true,
+    expected_pages: [2, 3],
+    reference_answer: 'Residual connections LayerNorm(x + Sublayer(x)) allow gradients to bypass sublayers across N=6 layers (Section 2), while 1/sqrt(d_k) scaling prevents softmax gradient vanishing (Section 3).',
+    supporting_keywords: ['residual', '6', 'sqrt', 'gradients'],
+    ground_truth_facts: ['LayerNorm residual connection across 6 layers', '1/sqrt(d_k) prevents softmax gradient vanishing'],
+    split: 'test',
+  },
+  {
+    id: 'MP06',
+    category: 'multi_passage',
+    question: 'Connect the machine translation tasks in Section 1 to the encoder-decoder structure in Section 2.',
+    is_answerable: true,
+    expected_pages: [1, 2],
+    reference_answer: 'The Transformer solves English-to-German and English-to-French translation (Section 1) using an encoder-decoder architecture of stacked self-attention layers (Section 2).',
+    supporting_keywords: ['translation', 'encoder-decoder'],
+    ground_truth_facts: ['translation tasks run on encoder-decoder structure'],
+    split: 'dev',
+  },
+  {
+    id: 'MP07',
+    category: 'multi_passage',
+    question: 'Why does eliminating convolutions (Section 1) change how token positions are tracked (Section 4)?',
+    is_answerable: true,
+    expected_pages: [1, 4],
+    reference_answer: 'Convolutions naturally process local neighbor offsets; removing them (Section 1) requires explicitly adding sinusoidal frequencies to denote token order (Section 4).',
+    supporting_keywords: ['convolution', 'positional', 'frequencies'],
+    ground_truth_facts: ['removing convolutions removes local position bias', 'requires explicit positional encoding'],
+    split: 'test',
+  },
+  {
+    id: 'MP08',
+    category: 'multi_passage',
+    question: 'What are all dimension constants mentioned across the encoder layers and attention projections?',
+    is_answerable: true,
+    expected_pages: [2, 4],
+    reference_answer: 'N = 6 identical layers, d_model = 512 sub-layer dimension, and h = 8 linear projections.',
+    supporting_keywords: ['6', '512', '8', 'd_model'],
+    ground_truth_facts: ['N = 6', 'd_model = 512', 'h = 8'],
+    split: 'test',
+  },
+  {
+    id: 'MP09',
+    category: 'multi_passage',
+    question: 'How do Q, K, and V matrices in Section 3 relate to the linear projections in Section 4?',
+    is_answerable: true,
+    expected_pages: [3, 4],
+    reference_answer: 'Queries, keys, and values are linearly projected h = 8 times (Section 4) before forming matrices Q, K, and V for scaled dot-product attention (Section 3).',
+    supporting_keywords: ['matrices', 'projections', '8', 'q', 'k', 'v'],
+    ground_truth_facts: ['projected h=8 times before forming Q, K, V matrices'],
+    split: 'test',
+  },
+  {
+    id: 'MP10',
+    category: 'multi_passage',
+    question: 'Summarize how training parallelizability in Section 1 is achieved by the layer design in Section 2.',
+    is_answerable: true,
+    expected_pages: [1, 2],
+    reference_answer: 'Replacing recurrent step-by-step loops with self-attention and position-wise feed-forward networks (Section 2) allows full sequence parallelization during training (Section 1).',
+    supporting_keywords: ['parallelizable', 'feed-forward', 'recurrence'],
+    ground_truth_facts: ['self-attention replaces sequential loops, enabling parallel training'],
+    split: 'test',
+  },
+  {
+    id: 'MP11',
+    category: 'multi_passage',
+    question: 'Where do queries, keys, and values originate in the encoder architecture stack?',
+    is_answerable: true,
+    expected_pages: [2, 3],
+    reference_answer: 'From the previous sub-layer outputs of dimension d_model = 512 in the encoder stack.',
+    supporting_keywords: ['encoder', 'd_model', 'sub-layer'],
+    ground_truth_facts: ['originate from encoder sub-layer outputs of dimension 512'],
+    split: 'test',
+  },
+  {
+    id: 'MP12',
+    category: 'multi_passage',
+    question: 'How does LayerNorm(x + Sublayer(x)) maintain dimensional consistency with d_model=512?',
+    is_answerable: true,
+    expected_pages: [2],
+    reference_answer: 'All sub-layers produce outputs of dimension d_model = 512 to facilitate the residual additions.',
+    supporting_keywords: ['layernorm', '512', 'residual'],
+    ground_truth_facts: ['sub-layers produce d_model = 512 to enable residual sum x + Sublayer(x)'],
+    split: 'test',
+  },
+  {
+    id: 'MP13',
+    category: 'multi_passage',
+    question: 'Why are sine and cosine functions suitable for positional encoding when paired with self-attention?',
+    is_answerable: true,
+    expected_pages: [4],
+    reference_answer: 'Different frequencies provide unique periodic coordinates across sequence positions without requiring recurrent processing.',
+    supporting_keywords: ['sine', 'cosine', 'frequencies'],
+    ground_truth_facts: ['sine and cosine of diverse frequencies mark relative/absolute positions'],
+    split: 'test',
+  },
+  {
+    id: 'MP14',
+    category: 'multi_passage',
+    question: 'Trace the roles of N=6 and h=8 in the depth versus breadth of the model.',
+    is_answerable: true,
+    expected_pages: [2, 4],
+    reference_answer: 'Depth is governed by N = 6 stacked layers (Section 2); breadth of representation subspaces is governed by h = 8 attention heads (Section 4).',
+    supporting_keywords: ['6', '8', 'depth', 'subspaces'],
+    ground_truth_facts: ['N=6 controls depth, h=8 controls subspace breadth'],
+    split: 'test',
+  },
+  {
+    id: 'MP15',
+    category: 'multi_passage',
+    question: 'How does the feed-forward sub-layer interact with the residual connection in each encoder block?',
+    is_answerable: true,
+    expected_pages: [2],
+    reference_answer: 'The position-wise feed-forward layer is wrapped in LayerNorm(x + Sublayer(x)) where Sublayer(x) is the feed-forward function.',
+    supporting_keywords: ['feed-forward', 'layernorm', 'residual'],
+    ground_truth_facts: ['feed-forward sublayer is wrapped in LayerNorm residual connection'],
+    split: 'dev',
+  },
+
+  // ================= 4. AMBIGUOUS QUESTIONS (10 items) =================
+  {
+    id: 'AM01',
+    category: 'ambiguous',
+    question: 'How does attention work in this model?',
+    is_answerable: true,
+    expected_pages: [3],
+    reference_answer: 'Attention maps queries and key-value pairs to weighted sums of values using softmax((QK^T)/sqrt(d_k))V.',
+    supporting_keywords: ['softmax', 'query', 'key', 'value'],
+    ground_truth_facts: ['maps queries and key-values to weighted sum of values'],
+    split: 'test',
+  },
+  {
+    id: 'AM02',
+    category: 'ambiguous',
+    question: 'What is the structure of the layers?',
+    is_answerable: true,
+    expected_pages: [2],
+    reference_answer: 'Each layer consists of multi-head self-attention and a position-wise feed-forward network with residual LayerNorm connections.',
+    supporting_keywords: ['self-attention', 'feed-forward', 'layernorm'],
+    ground_truth_facts: ['multi-head attention, feed-forward, residual connections'],
+    split: 'test',
+  },
+  {
+    id: 'AM03',
+    category: 'ambiguous',
+    question: 'What mathematical functions are used?',
+    is_answerable: true,
+    expected_pages: [3, 4],
+    reference_answer: 'Softmax, square root scaling, dot products, and sine/cosine trigonometric functions.',
+    supporting_keywords: ['softmax', 'sqrt', 'sine', 'cosine'],
+    ground_truth_facts: ['softmax, dot products, sine, cosine'],
+    split: 'test',
+  },
+  {
+    id: 'AM04',
+    category: 'ambiguous',
+    question: 'How many components does it have?',
+    is_answerable: true,
+    expected_pages: [2],
+    reference_answer: 'An encoder and decoder; each encoder layer has two sub-layers (attention and feed-forward) stacked N=6 times.',
+    supporting_keywords: ['encoder', 'decoder', 'sub-layers', '6'],
+    ground_truth_facts: ['encoder and decoder stacks of 6 layers'],
+    split: 'test',
+  },
+  {
+    id: 'AM05',
+    category: 'ambiguous',
+    question: 'What are the main numbers and constants in the paper?',
+    is_answerable: true,
+    expected_pages: [2, 4],
+    reference_answer: 'N = 6 layers, d_model = 512 dimensions, and h = 8 projection heads.',
+    supporting_keywords: ['6', '512', '8'],
+    ground_truth_facts: ['6, 512, 8'],
+    split: 'test',
+  },
+  {
+    id: 'AM06',
+    category: 'ambiguous',
+    question: 'How does it handle words in order?',
+    is_answerable: true,
+    expected_pages: [4],
+    reference_answer: 'Through positional encodings using sine and cosine functions of different frequencies.',
+    supporting_keywords: ['positional', 'sine', 'cosine'],
+    ground_truth_facts: ['positional encodings with sine and cosine'],
+    split: 'test',
+  },
+  {
+    id: 'AM07',
+    category: 'ambiguous',
+    question: 'What are the inputs and outputs of attention?',
+    is_answerable: true,
+    expected_pages: [3],
+    reference_answer: 'Inputs are queries, keys, and values; output is a weighted sum of the values.',
+    supporting_keywords: ['queries', 'keys', 'values', 'weighted sum'],
+    ground_truth_facts: ['queries, keys, values -> weighted sum of values'],
+    split: 'test',
+  },
+  {
+    id: 'AM08',
+    category: 'ambiguous',
+    question: 'Why is it better than older networks?',
+    is_answerable: true,
+    expected_pages: [1],
+    reference_answer: 'It achieves superior translation quality while being more parallelizable and taking significantly less training time.',
+    supporting_keywords: ['quality', 'parallelizable', 'less time'],
+    ground_truth_facts: ['superior quality, more parallelizable, less training time'],
+    split: 'test',
+  },
+  {
+    id: 'AM09',
+    category: 'ambiguous',
+    question: 'What happens to the vectors in the layers?',
+    is_answerable: true,
+    expected_pages: [2],
+    reference_answer: 'They maintain dimension d_model = 512 and undergo residual addition followed by layer normalization.',
+    supporting_keywords: ['512', 'layernorm', 'residual'],
+    ground_truth_facts: ['pass through sub-layers and LayerNorm(x + Sublayer(x))'],
+    split: 'dev',
+  },
+  {
+    id: 'AM10',
+    category: 'ambiguous',
+    question: 'How are linear projections used?',
+    is_answerable: true,
+    expected_pages: [4],
+    reference_answer: 'Linearly project queries, keys, and values h = 8 times with learned projections.',
+    supporting_keywords: ['8', 'project', 'linear'],
+    ground_truth_facts: ['project queries, keys, values h=8 times'],
+    split: 'test',
+  },
+
+  // ================= 5. QUESTIONS WITH ANSWERS ABSENT FROM CORPUS (15 items) =================
+  {
+    id: 'AB01',
+    category: 'absent_fact',
+    question: 'What is the exact BLEU score achieved by the model on English-to-German translation?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'AB02',
+    category: 'absent_fact',
+    question: 'What optimizer learning rate schedule and warmup steps were used during training?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'AB03',
+    category: 'absent_fact',
+    question: 'What dropout rate was applied to the sub-layer residual connections?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'AB04',
+    category: 'absent_fact',
+    question: 'What inner dimension d_ff is used inside the position-wise feed-forward network?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'AB05',
+    category: 'absent_fact',
+    question: 'How many NVIDIA P100 GPUs were used to train the base model?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'AB06',
+    category: 'absent_fact',
+    question: 'What byte-pair encoding BPE vocabulary size was chosen for the English-to-German task?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'AB07',
+    category: 'absent_fact',
+    question: 'What label smoothing value was applied during cross-entropy loss computation?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'AB08',
+    category: 'absent_fact',
+    question: 'How many parameters are in the Transformer Big variant?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'AB09',
+    category: 'absent_fact',
+    question: 'What beam size and length penalty alpha were configured for beam search decoding?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'AB10',
+    category: 'absent_fact',
+    question: 'Does the document discuss English constituency parsing experiments?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'AB11',
+    category: 'absent_fact',
+    question: 'What weight decay parameter was set for the Adam optimizer?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'dev',
+  },
+  {
+    id: 'AB12',
+    category: 'absent_fact',
+    question: 'How long did training the base Transformer take in wall-clock hours?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'AB13',
+    category: 'absent_fact',
+    question: 'What activation function (such as ReLU or GELU) is used inside the feed-forward network?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'AB14',
+    category: 'absent_fact',
+    question: 'What is the maximum sequence length supported by the positional embedding formula?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'AB15',
+    category: 'absent_fact',
+    question: 'What batch size in terms of sentence pairs or tokens was used during training?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+
+  // ================= 6. OUT-OF-DOMAIN WITH SHARED KEYWORDS (10 items) =================
+  {
+    id: 'OOD01',
+    category: 'shared_keyword_ood',
+    question: 'How does the GPT-4 router select active Mixture of Experts feed-forward layers?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'OOD02',
+    category: 'shared_keyword_ood',
+    question: 'Explain how FlashAttention v2 splits key-value blocks in CUDA shared memory.',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'OOD03',
+    category: 'shared_keyword_ood',
+    question: 'How does BERT apply masked attention to bidirectional encoder representations?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'OOD04',
+    category: 'shared_keyword_ood',
+    question: 'What Rotary Position Embedding RoPE theta base angle is used in LLaMA multi-head attention?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'OOD05',
+    category: 'shared_keyword_ood',
+    question: 'How does Multi-Head Latent Attention MLA in DeepSeek compress key-value cache size?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'OOD06',
+    category: 'shared_keyword_ood',
+    question: 'How does Grouped-Query Attention GQA differ from multi-head attention in Mistral 7B?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'dev',
+  },
+  {
+    id: 'OOD07',
+    category: 'shared_keyword_ood',
+    question: 'How do 3x3 convolutional kernels in ResNet compare to self-attention in Vision Transformers?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'OOD08',
+    category: 'shared_keyword_ood',
+    question: 'What LoRA rank r is optimal for fine-tuning encoder feed-forward weights?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'OOD09',
+    category: 'shared_keyword_ood',
+    question: 'How does Cross-Attention operate in Stable Diffusion UNet latent denoisers?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'OOD10',
+    category: 'shared_keyword_ood',
+    question: 'How does Whisper audio encoder utilize multi-head attention for spectrogram processing?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+
+  // ================= 7. ADVERSARIAL HALLUCINATION PROBES (10 items) =================
+  {
+    id: 'ADV01',
+    category: 'adversarial',
+    question: 'According to Section 3, why does the Transformer use 128 layers in the encoder stack?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'ADV02',
+    category: 'adversarial',
+    question: 'Explain why the authors proved that scaled dot-product attention is strictly inferior to convolutions.',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'ADV03',
+    category: 'adversarial',
+    question: 'What makes the d_model dimension of 4096 necessary for residual connections?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'ADV04',
+    category: 'adversarial',
+    question: 'On Page 3, how does the document prove that sqrt(d_k) causes gradients to vanish?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'ADV05',
+    category: 'adversarial',
+    question: 'Why does Section 4 specify that positional encodings use tangent and secant functions?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'ADV06',
+    category: 'adversarial',
+    question: 'According to Page 1, why was recurrent LSTM processing chosen over self-attention?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'dev',
+  },
+  {
+    id: 'ADV07',
+    category: 'adversarial',
+    question: 'Explain the authors conclusion that multi-head attention with h=64 heads degrades performance.',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'ADV08',
+    category: 'adversarial',
+    question: 'Why does the Transformer omit Layer Normalization from its encoder layers?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'ADV09',
+    category: 'adversarial',
+    question: 'Where does Section 2 state that sub-layers discard residual connections?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+  {
+    id: 'ADV10',
+    category: 'adversarial',
+    question: 'How does the paper demonstrate that the Transformer requires quadratic recurrent execution time?',
+    is_answerable: false,
+    expected_pages: [],
+    reference_answer: "I couldn't find enough information about this in the uploaded document.",
+    supporting_keywords: [],
+    ground_truth_facts: [],
+    split: 'test',
+  },
+];
+
+// Mathematical metric helper functions
+function calculateDcg(relevances: number[]): number {
+  return relevances.reduce((acc, rel, idx) => {
+    return acc + (Math.pow(2, rel) - 1) / Math.log2(idx + 2);
+  }, 0);
+}
+
+function calculateNdcgAtK(retrievedPages: number[], expectedPages: number[], k: number): number {
+  if (expectedPages.length === 0) return 0;
+  const topK = retrievedPages.slice(0, k);
+  const actualRels = topK.map((p) => (expectedPages.includes(p) ? 1 : 0));
+  const actualDcg = calculateDcg(actualRels);
+
+  const idealRels = expectedPages.map(() => 1).slice(0, k);
+  while (idealRels.length < k) idealRels.push(0);
+  const idealDcg = calculateDcg(idealRels);
+
+  if (idealDcg === 0) return 0;
+  return Number((actualDcg / idealDcg).toFixed(3));
+}
+
+async function runComprehensive100Evaluation() {
+  console.log('================================================================');
+  console.log('   CONTEXTA AI — 100-ITEM COMPREHENSIVE RAG & ANSWER AUDIT (V2)');
+  console.log(`   Corpus: transformer-foundations-sample.pdf (4 pages, 5 chunks)`);
+  console.log(`   Total Evaluation Items: ${DATASET_100.length}`);
+  console.log('   Categories: Direct Factual (20), Paraphrased (20), Multi-Passage (15),');
+  console.log('               Ambiguous (10), Absent Fact (15), Shared-Keyword OOD (10), Adversarial (10)');
+  console.log('================================================================\n');
+
+  // Load sample doc
+  const sampleRes = await fetch(`${BASE_URL}/sample-doc`);
+  const sampleDoc = await sampleRes.json();
+  const docId = sampleDoc.doc_id;
+  const totalDocPages = sampleDoc.page_count || 4;
+
+  const retrievalRecords: any[] = [];
+  const answerRecords: any[] = [];
+
+  let totalR5 = 0;
+  let totalR10 = 0;
+  let totalMrr = 0;
+  let totalNdcg10 = 0;
+  let totalDuplicateChunks = 0;
+  let totalRetrievedChunks = 0;
+  const latencies: number[] = [];
+
+  let answerableCount = 0;
+  let unanswerableCount = 0;
+  let answerableSuccess = 0;
+  let unanswerableAbstained = 0;
+  let falseAbstentionCount = 0;
+  let falseAnsweringCount = 0;
+
+  // Claim-level citation metrics
+  let totalSupportedClaims = 0;
+  let totalClaimsEvaluated = 0;
+  let totalCitationsEvaluated = 0;
+  let totalValidCitations = 0;
+  let totalFabricatedCitations = 0;
+  let totalFaithfulness = 0;
+
+  for (let i = 0; i < DATASET_100.length; i++) {
+    const item = DATASET_100[i];
+    const t0 = performance.now();
+
+    const res = await fetch(`${BASE_URL}/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ doc_id: docId, message: item.question }),
+    });
+
+    const latencyMs = performance.now() - t0;
+    latencies.push(latencyMs);
+
+    const data = await res.json();
+    const answer = typeof data.answer === 'string' ? data.answer : '';
+    const sources: any[] = Array.isArray(data.sources) ? data.sources : [];
+
+    const didAbstain =
+      answer.toLowerCase().includes("couldn't find enough information") ||
+      sources.length === 0;
+
+    const retrievedPages: number[] = sources.map((s: any) => s.page);
+    const uniquePages = Array.from(new Set(retrievedPages));
+
+    // Duplicate chunk rate check
+    const seenTexts = new Set<string>();
+    let dupCount = 0;
+    for (const s of sources) {
+      if (seenTexts.has(s.text)) dupCount++;
+      seenTexts.add(s.text);
+    }
+    totalDuplicateChunks += dupCount;
+    totalRetrievedChunks += sources.length;
+
+    // --- RETRIEVAL EVALUATION ---
+    let r5 = 0;
+    let r10 = 0;
+    let mrr = 0;
+    let ndcg = 0;
+
+    if (item.is_answerable) {
+      answerableCount++;
+      if (didAbstain) {
+        falseAbstentionCount++;
+      } else {
+        answerableSuccess++;
+        const matchedPages = item.expected_pages.filter((ep) => retrievedPages.includes(ep));
+        r5 = matchedPages.length / item.expected_pages.length;
+        r10 = r5;
+        totalR5 += r5;
+        totalR10 += r10;
+
+        for (let idx = 0; idx < retrievedPages.length; idx++) {
+          if (item.expected_pages.includes(retrievedPages[idx])) {
+            mrr = 1 / (idx + 1);
+            break;
+          }
+        }
+        totalMrr += mrr;
+
+        ndcg = calculateNdcgAtK(retrievedPages, item.expected_pages, 10);
+        totalNdcg10 += ndcg;
+      }
+    } else {
+      unanswerableCount++;
+      if (didAbstain) {
+        unanswerableAbstained++;
+      } else {
+        falseAnsweringCount++;
+      }
+    }
+
+    retrievalRecords.push({
+      id: item.id,
+      category: item.category,
+      split: item.split,
+      question: item.question,
+      is_answerable: item.is_answerable,
+      did_abstain: didAbstain,
+      retrieved_pages: uniquePages,
+      expected_pages: item.expected_pages,
+      recall_at_5: r5,
+      mrr,
+      ndcg_at_10: ndcg,
+      latency_ms: Number(latencyMs.toFixed(2)),
+    });
+
+    // --- ANSWER QUALITY & CLAIM-LEVEL CITATION AUDIT ---
+    // Extract [Page X] citations
+    const citationMatches = answer.match(/\[Page\s*(\d+)\]/gi) || [];
+    const citedPages = citationMatches.map((m) => {
+      const match = m.match(/\d+/);
+      return match ? parseInt(match[0], 10) : 0;
+    });
+
+    let itemCitationPrecision = 0;
+    let itemCitationCoverage = 0;
+    let itemFaithfulness = 0;
+    let itemFabricatedCount = 0;
+    let claimVerificationList: any[] = [];
+
+    if (item.is_answerable) {
+      if (!didAbstain) {
+        // Evaluate claim-level grounding against ground_truth_facts
+        let factsSupported = 0;
+        const answerLower = answer.toLowerCase();
+
+        for (const fact of item.ground_truth_facts) {
+          totalClaimsEvaluated++;
+          const factTerms = fact.toLowerCase().split(/\s+/).filter((w) => w.length > 3);
+          const hasFact = factTerms.length > 0 && factTerms.some((t) => answerLower.includes(t));
+          if (hasFact) {
+            factsSupported++;
+            totalSupportedClaims++;
+          }
+          claimVerificationList.push({
+            fact,
+            supported_in_answer: hasFact,
+          });
+        }
+
+        itemFaithfulness = item.ground_truth_facts.length > 0
+          ? factsSupported / item.ground_truth_facts.length
+          : 1.0;
+        totalFaithfulness += itemFaithfulness;
+
+        // Verify citations
+        if (citedPages.length > 0) {
+          itemCitationCoverage = 1.0;
+          let validForThisItem = 0;
+          for (const p of citedPages) {
+            totalCitationsEvaluated++;
+            if (p < 1 || p > totalDocPages) {
+              totalFabricatedCitations++;
+              itemFabricatedCount++;
+            } else if (item.expected_pages.includes(p)) {
+              totalValidCitations++;
+              validForThisItem++;
+            } else {
+              // Page exists in doc but does not support this specific fact
+              itemFabricatedCount++;
+              totalFabricatedCitations++;
+            }
+          }
+          itemCitationPrecision = validForThisItem / citedPages.length;
+        } else {
+          itemCitationCoverage = 0.0;
+          itemCitationPrecision = 0.0;
+        }
+
+        answerRecords.push({
+          id: item.id,
+          category: item.category,
+          status: 'SUCCESS',
+          question: item.question,
+          answer_preview: answer.slice(0, 120) + '...',
+          cited_pages: citedPages,
+          expected_pages: item.expected_pages,
+          citation_precision: Number(itemCitationPrecision.toFixed(2)),
+          citation_coverage: itemCitationCoverage,
+          faithfulness_score: Number(itemFaithfulness.toFixed(2)),
+          fabricated_citations: itemFabricatedCount,
+          claims: claimVerificationList,
+        });
+      } else {
+        answerRecords.push({
+          id: item.id,
+          category: item.category,
+          status: 'FALSE_ABSTENTION',
+          question: item.question,
+          answer,
+          citation_precision: 0,
+          citation_coverage: 0,
+          faithfulness_score: 0,
+          fabricated_citations: 0,
+        });
+      }
+    } else {
+      // Unanswerable probe
+      if (didAbstain) {
+        answerRecords.push({
+          id: item.id,
+          category: item.category,
+          status: 'CORRECTLY_ABSTAINED',
+          question: item.question,
+          answer,
+          hallucination_detected: false,
+        });
+      } else {
+        answerRecords.push({
+          id: item.id,
+          category: item.category,
+          status: 'HALLUCINATED_UNANSWERABLE',
+          question: item.question,
+          answer,
+          hallucination_detected: true,
+        });
+      }
+    }
+  }
+
+  latencies.sort((a, b) => a - b);
+  const p50 = latencies[Math.floor(latencies.length * 0.5)];
+  const p95 = latencies[Math.floor(latencies.length * 0.95)];
+
+  const meanRecall5 = Number((totalR5 / (answerableCount - falseAbstentionCount || 1)).toFixed(3));
+  const meanRecall10 = Number((totalR10 / (answerableCount - falseAbstentionCount || 1)).toFixed(3));
+  const meanMrr = Number((totalMrr / (answerableCount - falseAbstentionCount || 1)).toFixed(3));
+  const meanNdcg10 = Number((totalNdcg10 / (answerableCount - falseAbstentionCount || 1)).toFixed(3));
+  const unanswerableAbstentionRate = Number((unanswerableAbstained / unanswerableCount).toFixed(3));
+  const falseAbstentionRate = Number((falseAbstentionCount / answerableCount).toFixed(3));
+  const duplicateChunkRate = totalRetrievedChunks > 0 ? Number((totalDuplicateChunks / totalRetrievedChunks).toFixed(4)) : 0.0;
+
+  const meanCitationPrecision = totalCitationsEvaluated > 0 ? Number((totalValidCitations / totalCitationsEvaluated).toFixed(3)) : 0;
+  const meanClaimFaithfulness = answerableSuccess > 0 ? Number((totalFaithfulness / answerableSuccess).toFixed(3)) : 0;
+  const fabricatedCitationRate = totalCitationsEvaluated > 0 ? Number((totalFabricatedCitations / totalCitationsEvaluated).toFixed(4)) : 0;
+  const claimSupportRate = totalClaimsEvaluated > 0 ? Number((totalSupportedClaims / totalClaimsEvaluated).toFixed(3)) : 0;
+
+  // Breakdown by category
+  const categories = ['direct_factual', 'paraphrased', 'multi_passage', 'ambiguous', 'absent_fact', 'shared_keyword_ood', 'adversarial'];
+  const categoryStats: Record<string, any> = {};
+
+  for (const cat of categories) {
+    const catItems = retrievalRecords.filter((r) => r.category === cat);
+    const catAnswerable = catItems.filter((r) => r.is_answerable);
+    const catUnanswerable = catItems.filter((r) => !r.is_answerable);
+
+    const catR5 = catAnswerable.length > 0 ? catAnswerable.reduce((acc, r) => acc + r.recall_at_5, 0) / catAnswerable.length : null;
+    const catAbstain = catUnanswerable.length > 0 ? catUnanswerable.filter((r) => r.did_abstain).length / catUnanswerable.length : null;
+
+    categoryStats[cat] = {
+      total_items: catItems.length,
+      answerable_count: catAnswerable.length,
+      unanswerable_count: catUnanswerable.length,
+      recall_at_5: catR5 !== null ? Number(catR5.toFixed(3)) : 'N/A',
+      abstention_accuracy: catAbstain !== null ? Number(catAbstain.toFixed(3)) : 'N/A',
+    };
+  }
+
+  console.log('================ 100-ITEM AUDIT RESULTS SUMMARY ================');
+  console.log(`Total Evaluated Items:           ${DATASET_100.length}`);
+  console.log(`Answerable Questions:            ${answerableCount}`);
+  console.log(`Unanswerable Probes:             ${unanswerableCount}`);
+  console.log(`Answerable Success Rate:         ${(((answerableCount - falseAbstentionCount) / answerableCount) * 100).toFixed(1)}% (${answerableCount - falseAbstentionCount}/${answerableCount})`);
+  console.log(`False Abstention Rate:           ${(falseAbstentionRate * 100).toFixed(1)}% (${falseAbstentionCount}/${answerableCount})`);
+  console.log(`Unanswerable Abstention Rate:    ${(unanswerableAbstentionRate * 100).toFixed(1)}% (${unanswerableAbstained}/${unanswerableCount})`);
+  console.log(`Recall@5 (on answered):          ${(meanRecall5 * 100).toFixed(1)}%`);
+  console.log(`MRR:                             ${meanMrr}`);
+  console.log(`nDCG@10:                         ${meanNdcg10}`);
+  console.log(`Claim-Level Faithfulness:        ${(meanClaimFaithfulness * 100).toFixed(1)}%`);
+  console.log(`Claim Support Rate:              ${(claimSupportRate * 100).toFixed(1)}% (${totalSupportedClaims}/${totalClaimsEvaluated})`);
+  console.log(`Strict Citation Precision:       ${(meanCitationPrecision * 100).toFixed(1)}% (${totalValidCitations}/${totalCitationsEvaluated})`);
+  console.log(`Fabricated Citation Rate:        ${(fabricatedCitationRate * 100).toFixed(2)}% (${totalFabricatedCitations}/${totalCitationsEvaluated})`);
+  console.log(`Retrieval P50 Latency:           ${p50.toFixed(2)}ms | P95: ${p95.toFixed(2)}ms`);
+  console.log('=================================================================\n');
+
+  // Save outputs
+  const retrievalPayload = {
+    metadata: {
+      suite: 'RAG Retrieval Quality Evaluation V2',
+      evaluation_dataset_size: DATASET_100.length,
+      answerable_count: answerableCount,
+      unanswerable_count: unanswerableCount,
+      timestamp: new Date().toISOString(),
+    },
+    metrics: {
+      recall_at_5: meanRecall5,
+      recall_at_10: meanRecall10,
+      mean_reciprocal_rank: meanMrr,
+      ndcg_at_10: meanNdcg10,
+      abstention_accuracy: unanswerableAbstentionRate,
+      false_abstention_rate: falseAbstentionRate,
+      duplicate_chunk_rate: duplicateChunkRate,
+      latency_p50_ms: Number(p50.toFixed(2)),
+      latency_p95_ms: Number(p95.toFixed(2)),
+    },
+    category_breakdown: categoryStats,
+    items: retrievalRecords,
+  };
+
+  const answerPayload = {
+    metadata: {
+      suite: 'Generated Answer Quality & Hallucination Audit V2',
+      evaluation_dataset_size: DATASET_100.length,
+      total_claims_evaluated: totalClaimsEvaluated,
+      total_citations_evaluated: totalCitationsEvaluated,
+      timestamp: new Date().toISOString(),
+    },
+    metrics: {
+      answerable_success_rate: Number(((answerableCount - falseAbstentionCount) / answerableCount).toFixed(3)),
+      false_abstention_rate: falseAbstentionRate,
+      unanswerable_abstention_rate: unanswerableAbstentionRate,
+      hallucinated_unanswerable_rate: Number((falseAnsweringCount / unanswerableCount).toFixed(3)),
+      claim_level_faithfulness: meanClaimFaithfulness,
+      claim_support_rate: claimSupportRate,
+      strict_citation_precision: meanCitationPrecision,
+      fabricated_citation_rate: fabricatedCitationRate,
+      total_citations_checked: totalCitationsEvaluated,
+      valid_citations_count: totalValidCitations,
+      fabricated_citations_count: totalFabricatedCitations,
+    },
+    category_breakdown: categoryStats,
+    items: answerRecords,
+  };
+
+  fs.writeFileSync(RETRIEVAL_OUT, JSON.stringify(retrievalPayload, null, 2), 'utf-8');
+  fs.writeFileSync(ANSWER_OUT, JSON.stringify(answerPayload, null, 2), 'utf-8');
+  console.log(`Saved retrieval v2 results to: ${RETRIEVAL_OUT}`);
+  console.log(`Saved answer quality v2 results to: ${ANSWER_OUT}`);
+}
+
+if (process.argv[1] && process.argv[1].includes('eval_comprehensive_100')) {
+  runComprehensive100Evaluation().catch((err) => {
+    console.error('100-item evaluation failed:', err);
+    process.exit(1);
+  });
+}
