@@ -2,7 +2,7 @@ services:
   - type: web
     name: contexta-ai
     runtime: docker
-    plan: starter
+    plan: free
     region: oregon
     healthCheckPath: /health
     autoDeploy: true
