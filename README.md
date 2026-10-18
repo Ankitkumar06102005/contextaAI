@@ -220,17 +220,25 @@ Permanently deletes the document index and JSON metadata from disk.
 
 ---
 
-## 6. Persistence & Security
+## 6. Persistence, Deployment & Security
 
-- **Storage Location**: `./data/<doc_id>/`
-  - `index.faiss`: Binary FAISS FlatIP index.
-  - `metadata.json`: Document properties, chunk IDs, page maps, and text passages.
-- **Security Protections**:
-  - `path.basename` sanitation against directory traversal (`../`).
-  - No client-side exposure of `GEMINI_API_KEY`.
-  - Max upload size enforcement (25 MB limit).
-  - Validation against non-PDF mime types and corrupted files.
-  - Scanned PDF detection: returns clear error when no extractable text is present.
+### Render Cloud Deployment
+Contexta AI includes a full-stack production [Dockerfile](file:///e:/contexta%20ai/Dockerfile) and [render.yaml](file:///e:/contexta%20ai/render.yaml) blueprint:
+1. **Connect Repository**: In Render Dashboard, choose **New > Blueprint Instance** (or **New > Web Service > Docker**).
+2. **Environment Variables**:
+   - `GEMINI_API_KEY`: Your Google Gemini API key.
+   - `NODE_ENV`: `production` (default in blueprint).
+   - `PORT`: `3000` (automatically managed by Render).
+3. **Health Check Path**: `/health` (returns `{"status":"ok","product":"Contexta AI"}`).
+4. **Persistent Disk (Optional)**: Mount `1GB` disk at `/app/data` to preserve vector indexes across instance restarts.
+
+### Security Protections:
+- `path.basename` and regex sanitation against directory traversal (`../`).
+- No client-side exposure of `GEMINI_API_KEY`.
+- Max upload size enforcement (25 MB limit).
+- Validation against non-PDF mime types and corrupted files.
+- Scanned PDF detection: returns clear error when no extractable text is present.
+- Safe JSON error handling across all frontend fetches.
 
 ---
 

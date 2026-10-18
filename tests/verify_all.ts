@@ -21,6 +21,22 @@ async function runAllTests() {
 
   let passed = 0;
   let total = 13;
+  let serverInstance: any = null;
+
+  try {
+    const healthCheck = await fetch('http://localhost:3000/health').catch(() => null);
+    if (!healthCheck || !healthCheck.ok) {
+      const { app } = await import('../server.ts');
+      await new Promise<void>((resolve) => {
+        serverInstance = app.listen(3000, () => {
+          resolve();
+        });
+      });
+      await new Promise((r) => setTimeout(r, 300));
+    }
+  } catch (err) {
+    console.warn('Could not auto-start in-process server for tests:', err);
+  }
 
   // ----------------------------------------------------
   // TEST 1: Markdown headings, lists, and tables
@@ -374,6 +390,12 @@ async function runAllTests() {
   console.log('\n====================================================');
   console.log(`   TEST RESULTS: ${passed} / ${total} TESTS PASSED`);
   console.log('====================================================');
+
+  if (serverInstance) {
+    serverInstance.close();
+  }
+
+  process.exit(passed === total ? 0 : 1);
 }
 
 runAllTests().catch((e) => {
