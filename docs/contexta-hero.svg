@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" fill="none" role="img" aria-labelledby="title desc">
+<title id="title">Contexta AI — learn from your own documents</title>
+<desc id="desc">An animated editorial illustration of a document, a retrieval layer, and grounded answers connected by flowing paths.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="420" gradientUnits="userSpaceOnUse"><stop stop-color="#F8FAF7"/><stop offset="1" stop-color="#DCE9DD"/></linearGradient>
+  <linearGradient id="green" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#739678"/><stop offset="1" stop-color="#294331"/></linearGradient>
+  <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#294331" flood-opacity=".14"/></filter>
+  <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" stroke="#294331" stroke-opacity=".07" fill="none"/></pattern>
+  <style>
+    .label{font:600 13px 'Plus Jakarta Sans',Arial,sans-serif;letter-spacing:2px;fill:#55705A}
+    .headline{font:700 42px 'Plus Jakarta Sans',Arial,sans-serif;letter-spacing:-1.5px;fill:#203729}
+    .body{font:500 16px 'Plus Jakarta Sans',Arial,sans-serif;fill:#526656}
+    .line{stroke:#739678;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:7 10;animation:flow 8s linear infinite}
+    .float{animation:float 5s ease-in-out infinite}
+    .float2{animation:float 6s ease-in-out -2s infinite}
+    @keyframes flow{to{stroke-dashoffset:-136}}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    @media(prefers-reduced-motion:reduce){.line,.float,.float2{animation:none}}
+  </style>
+</defs>
+<rect width="1200" height="420" rx="28" fill="url(#bg)"/>
+<rect width="1200" height="420" rx="28" fill="url(#grid)"/>
+<circle cx="1000" cy="92" r="145" fill="#739678" fill-opacity=".09"/>
+<circle cx="1060" cy="320" r="180" fill="#294331" fill-opacity=".04"/>
+<text x="64" y="74" class="label">DOCUMENT-GROUNDED LEARNING</text>
+<text x="64" y="132" class="headline">Your documents.</text>
+<text x="64" y="180" class="headline">Your context.</text>
+<text x="64" y="228" class="headline">Your understanding.</text>
+<text x="66" y="276" class="body">Ask, explore, revise — with page-linked evidence.</text>
+<rect x="64" y="314" width="208" height="42" rx="21" fill="#294331"/>
+<text x="168" y="340" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#fff">RETRIEVE · EXPLAIN · VERIFY</text>
+<path class="line" d="M680 196 C740 196 732 118 790 118 S850 196 900 196 S960 274 1010 274"/>
+<path class="line" d="M680 216 C742 216 740 294 790 294 S850 216 900 216 S958 138 1010 138" opacity=".55"/>
+<g class="float" filter="url(#shadow)">
+<rect x="612" y="118" width="142" height="184" rx="13" fill="#fff" stroke="#DCE9DD"/>
+<path d="M636 150H716M636 166H704M636 182H710" stroke="#A7B9A7" stroke-width="5" stroke-linecap="round"/>
+<rect x="636" y="204" width="94" height="49" rx="7" fill="#EAF1E9"/>
+<path d="M648 220H715M648 234H700" stroke="#739678" stroke-width="4" stroke-linecap="round"/>
+<text x="683" y="278" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#294331">PDF SOURCE</text>
+</g>
+<g class="float2" filter="url(#shadow)">
+<rect x="808" y="74" width="142" height="112" rx="13" fill="#fff" stroke="#DCE9DD"/>
+<circle cx="830" cy="97" r="7" fill="#739678"/>
+<text x="844" y="101" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#294331">RETRIEVAL</text>
+<path d="M826 121H930M826 137H916M826 153H925" stroke="#DCE9DD" stroke-width="6" stroke-linecap="round"/>
+</g>
+<g class="float" filter="url(#shadow)">
+<rect x="946" y="226" width="190" height="100" rx="14" fill="#294331"/>
+<circle cx="970" cy="251" r="8" fill="#A8C7A9"/>
+<path d="M990 248H1110" stroke="#E7F0E5" stroke-width="5" stroke-linecap="round"/>
+<path d="M968 274H1110M968 290H1090" stroke="#9BB49C" stroke-width="5" stroke-linecap="round"/>
+<text x="1041" y="313" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#E7F0E5">ANSWER + CITATIONS</text>
+</g>
+<circle cx="790" cy="118" r="5" fill="#294331"/><circle cx="900" cy="196" r="5" fill="#294331"/><circle cx="1010" cy="274" r="5" fill="#294331"/>
+</svg>
