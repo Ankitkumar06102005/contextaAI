@@ -13,7 +13,8 @@ import {
   Activity,
   Timer,
   Menu,
-  UploadCloud
+  UploadCloud,
+  Paperclip
 } from 'lucide-react';
 import { ChatMessage, DocumentInfo, SourceSnippet } from '../types';
 import { AcademicRenderer } from './AcademicRenderer';
@@ -114,6 +115,15 @@ export const ConversationArea: React.FC<ConversationAreaProps> = ({
 
   return (
     <div className="flex-1 flex flex-col h-full bg-[#FAF8F9] dark:bg-[#090607] overflow-hidden relative">
+      {/* Hidden file input for uploading from any trigger button */}
+      <input
+        ref={emptyFileInputRef}
+        type="file"
+        accept=".pdf,application/pdf"
+        className="hidden"
+        onChange={handleEmptyFileChange}
+      />
+
       {/* Workspace Header */}
       <div className="h-14 px-3 sm:px-6 border-b border-[#E5DEE3] dark:border-[#40363E] bg-[#FFFFFF] dark:bg-[#221F20] flex items-center justify-between shrink-0 z-10 transition-colors">
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">
@@ -139,15 +149,39 @@ export const ConversationArea: React.FC<ConversationAreaProps> = ({
               {document ? document.filename : 'No Document Active'}
             </h2>
             <p className="text-[11px] text-[#72656F] dark:text-[#BEB4BB] font-mono-code truncate">
-              {document ? `${document.page_count} Pages · Grounded Retrieval` : 'Ask below or tap menu to select PDF'}
+              {document ? `${document.page_count} Pages · Grounded Retrieval` : 'Upload your PDF or select Sample Paper'}
             </p>
           </div>
         </div>
 
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          {onFileUpload && (
+            <button
+              onClick={() => emptyFileInputRef.current?.click()}
+              disabled={isLoading}
+              title={document ? 'Upload a different PDF or re-upload' : 'Upload your PDF'}
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-semibold text-white bg-gradient-to-r from-[#AC1ED6] to-[#9218B5] hover:opacity-95 disabled:opacity-50 rounded-xl transition-all shadow-xs cursor-pointer whitespace-nowrap"
+            >
+              <UploadCloud className="w-3.5 h-3.5 text-white" />
+              <span>{document ? 'Change PDF' : 'Upload PDF'}</span>
+            </button>
+          )}
+
+          {!document && onLoadSample && (
+            <button
+              onClick={onLoadSample}
+              disabled={isLoading}
+              title="Load pre-indexed research paper"
+              className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-[#AC1ED6] dark:text-[#E6B8F0] bg-[#AC1ED6]/10 hover:bg-[#AC1ED6]/20 border border-[#AC1ED6]/30 rounded-xl transition-colors cursor-pointer whitespace-nowrap"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Sample Paper</span>
+            </button>
+          )}
+
           <button
             onClick={onTriggerSummary}
-            disabled={isLoading}
+            disabled={isLoading || !document}
             className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#1E181D] dark:text-[#F7F3F6] bg-[#F3EEF2] dark:bg-[#2B2429] hover:bg-[#EBE4E9] dark:hover:bg-[#382F35] border border-[#E5DEE3] dark:border-[#40363E] disabled:opacity-50 rounded-xl transition-colors cursor-pointer"
           >
             <FileCheck className="w-3.5 h-3.5 text-[#AC1ED6] dark:text-[#E6B8F0]" />
@@ -155,7 +189,7 @@ export const ConversationArea: React.FC<ConversationAreaProps> = ({
           </button>
           <button
             onClick={onTriggerQuiz}
-            disabled={isLoading}
+            disabled={isLoading || !document}
             className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-medium text-white bg-[#AC1ED6] hover:bg-[#9218B5] disabled:opacity-50 rounded-xl transition-all cursor-pointer shadow-xs whitespace-nowrap"
           >
             <BrainCircuit className="w-3.5 h-3.5 text-white" />
@@ -206,28 +240,40 @@ export const ConversationArea: React.FC<ConversationAreaProps> = ({
                     </button>
                   )}
                   {onFileUpload && (
-                    <>
-                      <input
-                        ref={emptyFileInputRef}
-                        type="file"
-                        accept=".pdf,application/pdf"
-                        className="hidden"
-                        onChange={handleEmptyFileChange}
-                      />
-                      <button
-                        onClick={() => emptyFileInputRef.current?.click()}
-                        disabled={isLoading}
-                        className="w-full flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-semibold text-[#1E181D] dark:text-[#F7F3F6] bg-[#FFFFFF] dark:bg-[#221F20] border border-[#E5DEE3] dark:border-[#40363E] hover:bg-[#F3EEF2] dark:hover:bg-[#2B2429] rounded-xl transition-colors cursor-pointer shadow-xs"
-                      >
-                        <UploadCloud className="w-3.5 h-3.5 text-[#AC1ED6] dark:text-[#E6B8F0]" />
-                        <span>Upload your PDF</span>
-                      </button>
-                    </>
+                    <button
+                      onClick={() => emptyFileInputRef.current?.click()}
+                      disabled={isLoading}
+                      className="w-full flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-semibold text-[#1E181D] dark:text-[#F7F3F6] bg-[#FFFFFF] dark:bg-[#221F20] border border-[#E5DEE3] dark:border-[#40363E] hover:bg-[#F3EEF2] dark:hover:bg-[#2B2429] rounded-xl transition-colors cursor-pointer shadow-xs"
+                    >
+                      <UploadCloud className="w-3.5 h-3.5 text-[#AC1ED6] dark:text-[#E6B8F0]" />
+                      <span>Upload your PDF</span>
+                    </button>
                   )}
                 </div>
               ) : (
-                <div className="w-full space-y-2 pt-3">
-                  <p className="text-[11px] font-semibold text-[#AC1ED6] dark:text-[#E6B8F0] uppercase tracking-wider font-mono-code">
+                <div className="w-full space-y-3 pt-3">
+                  <div className="p-3.5 bg-[#FFFFFF]/90 dark:bg-[#221F20]/90 backdrop-blur-md border border-[#AC1ED6]/40 rounded-xl flex items-center justify-between gap-3 text-xs shadow-xs">
+                    <div className="flex items-center gap-2.5 min-w-0 text-left">
+                      <div className="w-8 h-8 rounded-lg bg-[#AC1ED6]/10 text-[#AC1ED6] dark:text-[#E6B8F0] flex items-center justify-center shrink-0 border border-[#AC1ED6]/20">
+                        <FileText className="w-4 h-4" />
+                      </div>
+                      <div className="truncate">
+                        <p className="font-semibold text-[#1E181D] dark:text-[#F7F3F6] truncate">{document.filename}</p>
+                        <p className="text-[11px] text-[#72656F] dark:text-[#BEB4BB] font-mono-code">{document.page_count} Pages · Vector Grounded</p>
+                      </div>
+                    </div>
+                    {onFileUpload && (
+                      <button
+                        onClick={() => emptyFileInputRef.current?.click()}
+                        disabled={isLoading}
+                        className="px-3 py-1.5 text-xs font-semibold text-[#AC1ED6] dark:text-[#E6B8F0] hover:bg-[#AC1ED6]/10 rounded-lg transition-colors shrink-0 cursor-pointer border border-[#AC1ED6]/40 whitespace-nowrap"
+                      >
+                        Re-upload / Switch
+                      </button>
+                    )}
+                  </div>
+
+                  <p className="text-[11px] font-semibold text-[#AC1ED6] dark:text-[#E6B8F0] uppercase tracking-wider font-mono-code text-left">
                     Suggested Starter Inquiries
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-left">
@@ -403,46 +449,101 @@ export const ConversationArea: React.FC<ConversationAreaProps> = ({
       {/* Message Composer */}
       <div className="p-3 sm:p-5 bg-[#FFFFFF] dark:bg-[#221F20] border-t border-[#E5DEE3] dark:border-[#40363E] shrink-0 z-10 transition-colors">
         <form onSubmit={handleSubmit} className="max-w-4xl mx-auto space-y-2">
-          {/* Quick Action Chips */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
-            <span className="text-[11px] text-[#9E919B] dark:text-[#8E828B] whitespace-nowrap font-mono-code">Mode:</span>
-            <button
-              type="button"
-              onClick={() => {
-                if (textareaRef.current) {
-                  textareaRef.current.value = 'Explain the following concept: ';
-                  textareaRef.current.focus();
-                }
-              }}
-              className="px-2.5 py-1 bg-[#F3EEF2] dark:bg-[#2B2429] hover:bg-[#EBE4E9] dark:hover:bg-[#382F35] text-[#1E181D] dark:text-[#F7F3F6] rounded-lg transition-colors whitespace-nowrap font-medium"
-            >
-              Explain
-            </button>
-            <button
-              type="button"
-              onClick={onTriggerSummary}
-              disabled={isLoading}
-              className="px-2.5 py-1 bg-[#F3EEF2] dark:bg-[#2B2429] hover:bg-[#EBE4E9] dark:hover:bg-[#382F35] text-[#1E181D] dark:text-[#F7F3F6] rounded-lg transition-colors whitespace-nowrap font-medium disabled:opacity-50"
-            >
-              Summarize
-            </button>
-            <button
-              type="button"
-              onClick={onTriggerQuiz}
-              disabled={isLoading}
-              className="px-2.5 py-1 bg-[#F3EEF2] dark:bg-[#2B2429] hover:bg-[#EBE4E9] dark:hover:bg-[#382F35] text-[#1E181D] dark:text-[#F7F3F6] rounded-lg transition-colors whitespace-nowrap font-medium disabled:opacity-50"
-            >
-              Quiz (10 Questions)
-            </button>
-            {!document && (
-              <span className="text-[11px] text-[#C26E73] whitespace-nowrap font-medium pl-1 hidden sm:inline">
-                (Sample paper auto-activates on question)
-              </span>
+          {/* Quick Action Chips & Active Document Bar */}
+          <div className="flex items-center justify-between gap-2 overflow-x-auto pb-1 text-xs">
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+              <span className="text-[11px] text-[#9E919B] dark:text-[#8E828B] whitespace-nowrap font-mono-code">Mode:</span>
+              <button
+                type="button"
+                onClick={() => {
+                  if (textareaRef.current) {
+                    textareaRef.current.value = 'Explain the following concept: ';
+                    textareaRef.current.focus();
+                  }
+                }}
+                className="px-2.5 py-1 bg-[#F3EEF2] dark:bg-[#2B2429] hover:bg-[#EBE4E9] dark:hover:bg-[#382F35] text-[#1E181D] dark:text-[#F7F3F6] rounded-lg transition-colors whitespace-nowrap font-medium cursor-pointer"
+              >
+                Explain
+              </button>
+              <button
+                type="button"
+                onClick={onTriggerSummary}
+                disabled={isLoading || !document}
+                className="px-2.5 py-1 bg-[#F3EEF2] dark:bg-[#2B2429] hover:bg-[#EBE4E9] dark:hover:bg-[#382F35] text-[#1E181D] dark:text-[#F7F3F6] rounded-lg transition-colors whitespace-nowrap font-medium disabled:opacity-50 cursor-pointer"
+              >
+                Summarize
+              </button>
+              <button
+                type="button"
+                onClick={onTriggerQuiz}
+                disabled={isLoading || !document}
+                className="px-2.5 py-1 bg-[#F3EEF2] dark:bg-[#2B2429] hover:bg-[#EBE4E9] dark:hover:bg-[#382F35] text-[#1E181D] dark:text-[#F7F3F6] rounded-lg transition-colors whitespace-nowrap font-medium disabled:opacity-50 cursor-pointer"
+              >
+                Quiz
+              </button>
+            </div>
+
+            {/* Document Indicator & Re-upload Trigger */}
+            {document ? (
+              <div className="flex items-center gap-1.5 px-2.5 py-1 bg-[#AC1ED6]/10 text-[#AC1ED6] dark:text-[#E6B8F0] border border-[#AC1ED6]/30 rounded-lg text-xs font-mono-code shrink-0">
+                <FileText className="w-3.5 h-3.5" />
+                <span className="truncate max-w-[130px] sm:max-w-[200px]" title={document.filename}>{document.filename}</span>
+                {onFileUpload && (
+                  <button
+                    type="button"
+                    onClick={() => emptyFileInputRef.current?.click()}
+                    disabled={isLoading}
+                    className="underline hover:text-[#9218B5] cursor-pointer ml-1 font-sans text-[11px]"
+                    title="Upload or switch PDF"
+                  >
+                    Change
+                  </button>
+                )}
+              </div>
+            ) : (
+              <div className="flex items-center gap-2 text-xs bg-[#C26E73]/10 border border-[#C26E73]/30 text-[#C26E73] px-2.5 py-1 rounded-lg shrink-0">
+                <span className="text-[11px]">No PDF attached</span>
+                {onFileUpload && (
+                  <button
+                    type="button"
+                    onClick={() => emptyFileInputRef.current?.click()}
+                    disabled={isLoading}
+                    className="font-semibold underline hover:opacity-80 cursor-pointer text-[11px]"
+                  >
+                    Upload PDF
+                  </button>
+                )}
+                {onLoadSample && (
+                  <>
+                    <span className="text-[10px] text-[#72656F] dark:text-[#BEB4BB]">or</span>
+                    <button
+                      type="button"
+                      onClick={onLoadSample}
+                      disabled={isLoading}
+                      className="font-semibold underline hover:opacity-80 cursor-pointer text-[11px]"
+                    >
+                      Sample
+                    </button>
+                  </>
+                )}
+              </div>
             )}
           </div>
 
           {/* Input Box */}
           <div className="relative flex items-end bg-[#FAF8F9] dark:bg-[#1A1618] border border-[#E5DEE3] dark:border-[#40363E] focus-within:border-[#AC1ED6] dark:focus-within:border-[#E6B8F0] focus-within:ring-1 focus-within:ring-[#AC1ED6] rounded-2xl p-2 transition-all">
+            {onFileUpload && (
+              <button
+                type="button"
+                onClick={() => emptyFileInputRef.current?.click()}
+                disabled={isLoading}
+                title={document ? `Attached: ${document.filename} (Click to re-upload / change PDF)` : 'Upload & attach PDF'}
+                className="p-2 text-[#72656F] dark:text-[#BEB4BB] hover:text-[#AC1ED6] dark:hover:text-[#E6B8F0] hover:bg-[#F3EEF2] dark:hover:bg-[#2B2429] rounded-xl transition-colors shrink-0 cursor-pointer mb-0.5"
+              >
+                <Paperclip className="w-4 h-4" />
+              </button>
+            )}
+
             <textarea
               ref={textareaRef}
               rows={2}
@@ -453,7 +554,7 @@ export const ConversationArea: React.FC<ConversationAreaProps> = ({
               placeholder={
                 document
                   ? 'Ask a question grounded in the document (Press Enter to send, Shift+Enter for new line)...'
-                  : 'Ask any question (e.g. "What is attention mechanism?") — sample paper auto-loads...'
+                  : 'No document attached. Click the paperclip or Upload button above to attach a PDF...'
               }
               className="w-full bg-transparent resize-none text-xs sm:text-sm text-[#1E181D] dark:text-[#F7F3F6] placeholder-[#9E919B] dark:placeholder-[#8E828B] focus:outline-none p-2 leading-relaxed"
             />

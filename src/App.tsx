@@ -13,7 +13,17 @@ import { AlertCircle, X } from 'lucide-react';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<'landing' | 'workspace'>('landing');
-  const [document, setDocument] = useState<DocumentInfo | null>(null);
+  const [document, setDocument] = useState<DocumentInfo | null>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('contexta_active_doc');
+        return saved ? JSON.parse(saved) : null;
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  });
   const [currentMode, setCurrentMode] = useState<'teacher' | 'summary' | 'quiz'>('teacher');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [quizQuestions, setQuizQuestions] = useState<QuizQuestion[]>([]);
@@ -21,6 +31,21 @@ export default function App() {
   const [activeQuizTopic, setActiveQuizTopic] = useState<string | null>(null);
   const [activeSource, setActiveSource] = useState<SourceSnippet | null>(null);
   const [isInspectorOpen, setIsInspectorOpen] = useState(false);
+
+  // Sync active document to localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        if (document) {
+          localStorage.setItem('contexta_active_doc', JSON.stringify(document));
+        } else {
+          localStorage.removeItem('contexta_active_doc');
+        }
+      } catch (e) {
+        console.warn('Failed to sync document to localStorage:', e);
+      }
+    }
+  }, [document]);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
     const saved = typeof window !== 'undefined' ? localStorage.getItem('contexta_dark_mode') : null;
     if (saved !== null) {
@@ -174,27 +199,8 @@ export default function App() {
   const handleSendMessage = async (text: string) => {
     let activeDoc = document;
     if (!activeDoc) {
-      // Auto-load sample document if user begins asking questions immediately
-      try {
-        setIsUploading(true);
-        const res = await fetch('/sample-doc');
-        const data = await safeFetchJson(res, 'Auto-activating sample document');
-        const loaded: DocumentInfo = {
-          doc_id: data.doc_id,
-          filename: data.filename,
-          status: data.status,
-          page_count: data.page_count,
-          chunk_count: data.chunk_count,
-          uploaded_at: new Date().toLocaleTimeString(),
-        };
-        setDocument(loaded);
-        activeDoc = loaded;
-      } catch (err: any) {
-        showError('No active document. Please upload or load a PDF first.');
-        return;
-      } finally {
-        setIsUploading(false);
-      }
+      showError('No document attached. Please upload your PDF or load the sample paper first so Contexta AI knows which document to answer from.');
+      return;
     }
 
     const userMsg: ChatMessage = {
