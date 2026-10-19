@@ -376,8 +376,16 @@ export default function App() {
     setIsInspectorOpen(true);
   };
 
+  useEffect(() => {
+    if (currentView === 'workspace' && typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
+    }
+  }, [currentView]);
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF8F9] dark:bg-[#090607] text-[#1E181D] dark:text-[#F7F3F6] transition-colors font-epilogue">
+    <div className={`flex flex-col bg-[#FAF8F9] dark:bg-[#090607] text-[#1E181D] dark:text-[#F7F3F6] transition-colors font-epilogue ${
+      currentView === 'workspace' ? 'h-screen max-h-screen overflow-hidden' : 'min-h-screen'
+    }`}>
       {/* Toast Notification */}
       {errorMessage && (
         <div className="fixed bottom-6 right-6 z-50 max-w-md bg-[#FFFFFF] dark:bg-[#221F20] border border-[#C26E73]/40 shadow-xl rounded-xl p-4 flex items-start gap-3">
@@ -424,7 +432,7 @@ export default function App() {
           <Footer onOpenWorkspace={() => setCurrentView('workspace')} />
         </main>
       ) : (
-        <main className="flex-1 flex overflow-hidden h-[calc(100dvh-4rem)] relative">
+        <main className="flex-1 flex overflow-hidden min-h-0 relative">
           {/* Left Sidebar */}
           <WorkspaceSidebar
             document={document}

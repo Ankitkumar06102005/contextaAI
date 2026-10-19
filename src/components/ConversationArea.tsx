@@ -53,6 +53,7 @@ export const ConversationArea: React.FC<ConversationAreaProps> = ({
   const [inputText, setInputText] = useState('');
   const [expandedSources, setExpandedSources] = useState<Record<string, boolean>>({});
   const [expandedLatencies, setExpandedLatencies] = useState<Record<string, boolean>>({});
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const emptyFileInputRef = useRef<HTMLInputElement>(null);
@@ -67,7 +68,19 @@ export const ConversationArea: React.FC<ConversationAreaProps> = ({
   };
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messages.length > 0 && messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTo({
+        top: messagesContainerRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
+    } else if (messagesContainerRef.current) {
+      // In new session or when empty, stay strictly at top
+      messagesContainerRef.current.scrollTop = 0;
+    }
+    // Guarantee window does not scroll down
+    if (typeof window !== 'undefined' && window.scrollY !== 0) {
+      window.scrollTo(0, 0);
+    }
   }, [messages, isLoading]);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -200,9 +213,9 @@ export const ConversationArea: React.FC<ConversationAreaProps> = ({
       </div>
 
       {/* Messages Stream */}
-      <div className="flex-1 overflow-y-auto px-4 sm:px-8 py-6 space-y-6 relative z-10">
+      <div ref={messagesContainerRef} className="flex-1 overflow-y-auto px-4 sm:px-8 py-3 sm:py-5 space-y-4 relative z-10">
         {messages.length === 0 ? (
-          <div className="h-full flex flex-col items-center justify-center max-w-lg mx-auto text-center space-y-6 my-auto py-8 sm:py-12 relative">
+          <div className="flex flex-col items-center justify-center max-w-lg mx-auto text-center space-y-3.5 py-2 sm:py-4 relative">
             {/* Subtle Moon Horizon background in empty state */}
             <MoonHorizon isDarkMode={isDarkMode} intensity="subtle" />
 
@@ -443,7 +456,7 @@ export const ConversationArea: React.FC<ConversationAreaProps> = ({
           </div>
         )}
 
-        <div ref={messagesEndRef} />
+        {messages.length > 0 && <div ref={messagesEndRef} />}
       </div>
 
       {/* Message Composer */}

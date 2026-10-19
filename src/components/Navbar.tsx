@@ -17,7 +17,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onToggleDarkMode,
 }) => {
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#FAF8F9]/90 dark:bg-[#090607]/90 backdrop-blur-md border-b border-[#E5DEE3] dark:border-[#40363E] transition-colors">
+    <header className="sticky top-0 z-40 w-full shrink-0 bg-[#FAF8F9]/90 dark:bg-[#090607]/90 backdrop-blur-md border-b border-[#E5DEE3] dark:border-[#40363E] transition-colors">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
         {/* Zone 1: Brand Wordmark */}
         <button
