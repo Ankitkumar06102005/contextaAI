@@ -1,250 +1,327 @@
-# Contexta AI — RAG-Based PDF Learning Assistant
+<!-- Animated hero: SVG uses subtle motion and respects reduced-motion preferences. -->
+<p align="center">
+  <img src="docs/contexta-hero.svg" alt="Contexta AI — your documents, your context, your understanding" width="100%" />
+</p>
 
-> **"Your documents. Your context. Your understanding."**  
-> Turn complex PDFs into clear explanations, structured summaries, and interactive quizzes grounded in retrieved passages with verified page citations.
+<h1 align="center">Contexta AI</h1>
+<p align="center"><strong>A document-grounded AI learning workspace for PDFs.</strong><br/>Turn dense study material into explanations, structured summaries, and interactive quizzes — with source passages you can inspect.</p>
+
+<p align="center">
+  <a href="https://contexta-ai-ipbi.onrender.com/"><img alt="Live app" src="https://img.shields.io/badge/Live%20App-Open%20Contexta-294331?style=for-the-badge&logo=render&logoColor=white"></a>
+  <a href="https://github.com/Ankitkumar06102005/contextaAI"><img alt="GitHub repository" src="https://img.shields.io/badge/Source-GitHub-24292f?style=for-the-badge&logo=github"></a>
+  <img alt="TypeScript" src="https://img.shields.io/badge/Frontend-React%20%2B%20TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
+  <img alt="Python API" src="https://img.shields.io/badge/API-FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white">
+</p>
+
+<p align="center">
+  <a href="#quick-start">Quick start</a> · <a href="#architecture">Architecture</a> · <a href="#api-reference">API reference</a> · <a href="#testing-and-benchmarks">Testing & benchmarks</a> · <a href="#deployment-and-operations">Deployment</a>
+</p>
 
 ---
 
-## 1. Project Overview
+## What is Contexta AI?
 
-**Contexta AI** is a document-grounded learning companion designed for researchers, university students, and technical professionals studying dense PDFs. Unlike general-purpose chatbots, Contexta AI grounds every response strictly in retrieved passages from the user's uploaded document, citing exact page numbers and verbatim excerpts so learners can verify sources.
+Contexta AI is an AI-assisted study companion that lets a learner ask questions about their own PDF material. Its intended differentiator is **traceability**: answers can include page-linked evidence, and the source inspector lets users review the retrieved passage instead of treating model output as unquestionable truth.
 
-### Key Capabilities
+### Product capabilities
 
-- **Teacher Agent (`agents/teacher.py`)**: Pedagogical concept explanations, step-by-step mathematical/technical derivations, and clear definitions with inline `[Page X]` citations. Acknowledges missing evidence if the document does not support a claim.
-- **Summary Agent (`agents/summary.py`)**: Executive synthesis, core thematic definitions, and exam-focused revision checklists sampled deliberately across all document sections.
-- **Quiz Genie (`agents/quiz.py`)**: Validated 4-option multiple-choice quizzes with configurable difficulty (`easy`, `medium`, `hard`), locked answers, and evidence-based rationales.
-- **Source Passage Inspector**: Inspect verbatim chunk excerpts, chunk IDs, and page numbers side-by-side with assistant explanations.
-- **Safe Lifecycle Management**: Permanent deletion endpoint (`DELETE /document/{doc_id}`) removing indexes and metadata from disk.
+| Capability | What it does | Evidence / boundary |
+|---|---|---|
+| PDF ingestion | Accepts PDFs, extracts page text, creates chunks and indexes them | Text-based PDFs are the primary target; image-only/scanned PDFs may have no extractable text |
+| Teacher agent | Explains concepts and answers document questions | Grounding depends on retrieval quality and model behavior; always inspect citations |
+| Summary agent | Produces structured summaries and revision takeaways | Output quality depends on source coverage and model output |
+| Quiz Genie | Generates multiple-choice questions with difficulty selection | Treat generated questions and answer keys as AI-generated study aids |
+| Source inspector | Shows retrieved passages, chunk identifiers and page metadata | Lets a learner verify whether evidence supports the answer |
+| Document lifecycle | Supports deleting a document and its stored index/metadata | Deletion applies to artifacts managed by the app; verify storage and deployment configuration |
 
----
+## Product tour
 
-## 2. Architecture & RAG Pipeline
+1. **Upload** a PDF (maximum configured size: 25 MB).
+2. **Index** the extracted text into overlapping chunks and vector embeddings.
+3. **Ask** a question or request a summary/quiz.
+4. **Retrieve** candidate passages and filter weak or repetitive evidence.
+5. **Review** the response alongside page-linked source passages.
+6. **Revise** using explanations and quizzes, then verify important claims against the original document.
 
+## Architecture
+
+The repository contains a TypeScript/Express full-stack application and a Python/FastAPI RAG implementation. The Render service configuration in this repository runs the Node/Express application; the Python API is separately runnable. Keep these paths distinct when testing or deploying changes.
+
+```mermaid
+flowchart LR
+    U[Browser / Learner] --> UI[React + TypeScript + Vite]
+    UI --> API[Express API · server.ts]
+    API --> UP[PDF validation and extraction]
+    UP --> CH[Page-aware chunking]
+    CH --> EM[Gemini embeddings]
+    EM --> VS[Vector search / retrieval]
+    VS --> FIL[Relevance filtering and deduplication]
+    FIL --> AG[Teacher · Summary · Quiz]
+    AG --> GM[Gemini generation]
+    GM --> OUT[Answer + source passages + page citations]
+    OUT --> UI
+    VS <--> STORE[(Local document index and metadata)]
 ```
-[ User PDF Upload ]
-        │
-        ▼
-[ Page-by-Page Extraction ] ── (1-indexed page preservation)
-        │
-        ▼
-[ Sentence-Aligned Chunking ] ── (~800 characters with ~100 char overlap)
-        │
-        ▼
-[ Gemini Embeddings ] ── (Normalized float32 vectors)
-        │
-        ▼
-[ FAISS Vector Store ] ── (IndexFlatIP cosine similarity + JSON metadata under /data/<doc_id>/)
-        │
-        ▼
-[ Top-K Query Retrieval ] ── (Ranked by cosine inner product)
-        │
-        ▼
-[ Agents: Teacher / Summary / Quiz ] ── (Gemini 3.8 Flash with strict grounding instructions)
+
+### Retrieval flow
+
+```mermaid
+flowchart TD
+    A[Question] --> B[Embed query]
+    B --> C[Retrieve top candidates]
+    C --> D[Filter low-relevance passages]
+    D --> E[Remove near-duplicate chunks]
+    E --> F{Enough evidence?}
+    F -- Yes --> G[Agent generates grounded response]
+    F -- No --> H[Insufficient-evidence response]
+    G --> I[Return answer and source references]
+    H --> I
 ```
 
----
+### Main technologies
 
-## 3. Project Structure
+| Layer | Technology | Role |
+|---|---|---|
+| UI | React, TypeScript, Vite | Landing page, workspace, chat, quiz and source inspection |
+| UI motion / rendering | Motion, Markdown-It, KaTeX, Mermaid, DOMPurify | Interface animation, formatted responses, math/diagrams and HTML sanitization |
+| Web server | Node.js, Express, Multer | Routes, PDF uploads, request handling and serving the frontend |
+| Model integration | Google GenAI SDK / Gemini | Embeddings and generated explanations, summaries and quizzes |
+| Retrieval | Vector similarity, chunk metadata and relevance filtering | Select candidate passages for document-grounded responses |
+| Python service | FastAPI, pypdf, NumPy, FAISS, google-genai | Alternate/separate Python RAG API implementation |
+| Deployment | Docker, Render blueprint | Containerized Node service and health-check configuration |
+
+> **Model configuration note:** defaults and SDK availability can change. Check `config.py`, `server.ts`, and your provider's current model catalogue before changing model identifiers. Do not commit API keys.
+
+## Repository map
 
 ```text
-contexta-ai/
-├── main.py                     # FastAPI REST API application
-├── config.py                   # Centralized configuration & environment constants
-├── requirements.txt            # Python dependencies (FastAPI, pypdf, faiss-cpu, google-genai)
-├── server.ts                   # Full-stack Node.js / Express runner for AI Studio live preview
-├── package.json                # Frontend & full-stack dependencies
-├── vite.config.ts              # Vite configuration
-├── metadata.json               # AI Studio metadata
-├── index.html                  # HTML entry point with DM Serif Display & Plus Jakarta Sans
-├── .env.example                # Environment variables template
-├── .gitignore                  # Excludes private uploads, indexes, and secrets
-├── agents/
-│   ├── __init__.py
-│   ├── teacher.py              # Pedagogical explanation agent
-│   ├── summary.py              # Multi-section summary & revision agent
-│   ├── quiz.py                 # Interactive MCQ generation agent with schema validation
-│   └── router.py               # Keyword-based intent classification
-├── rag/
-│   ├── __init__.py
-│   ├── loader.py               # Page-by-page PDF extraction
-│   ├── chunker.py              # Sentence-aligned 800-char chunking
-│   ├── embedder.py             # Vector embedding with normalization
-│   ├── faiss_store.py          # FAISS IndexFlatIP persistence & search
-│   └── retriever.py            # Top-K retrieval orchestrator
-├── src/
-│   ├── App.tsx                 # Main application controller (Landing + Workspace)
-│   ├── types.ts                # TypeScript domain models
-│   ├── index.css               # Design tokens (warm off-white, pale sage, forest green)
-│   ├── components/
-│   │   ├── Navbar.tsx          # 3-zone top bar
-│   │   ├── LandingHero.tsx     # Editorial hero with real upload & floating previews
-│   │   ├── WorkflowSection.tsx # 4-step methodical pipeline
-│   │   ├── FeatureShowcase.tsx # 4-agent showcase with real mockups
-│   │   ├── WorkspaceSidebar.tsx# Active document card, modes, and deletion
-│   │   ├── ConversationArea.tsx# Grounded chat & source drawer
-│   │   ├── QuizView.tsx        # Interactive MCQ examination UI
-│   │   ├── SourceInspector.tsx # Verbatim passage viewer
-│   │   └── Footer.tsx          # Editorial footer
-└── data/                       # Per-document FAISS index & metadata storage
-    └── .gitkeep
+.
+├── src/                    # React + TypeScript user interface
+│   ├── App.tsx             # App-level controller
+│   ├── types.ts            # Frontend domain types
+│   ├── index.css           # Design tokens and global styling
+│   └── components/         # Landing, workspace, chat, quiz, sources, navigation
+├── server.ts               # Express full-stack server and Node-side AI/RAG flow
+├── package.json            # Scripts and JavaScript dependencies
+├── vite.config.ts          # Vite configuration
+├── Dockerfile              # Multi-stage container build
+├── render.yaml             # Render service blueprint
+├── main.py                 # Separate FastAPI application
+├── config.py               # Python RAG configuration
+├── agents/                 # Python teacher, summary, quiz and router modules
+├── rag/                    # Python PDF extraction, chunking, embeddings, FAISS retrieval
+├── tests/verify_all.ts     # Node-side verification suite
+├── requirements.txt        # Python service dependencies
+├── .env.example            # Environment-variable template (review before use)
+└── data/                   # Runtime document indexes/metadata; do not commit user files
 ```
 
----
+## Quick start
 
-## 4. Environment Prerequisites & Setup
+### Requirements
 
-### Option A: Running with Python & FastAPI
+- Node.js 22 recommended (matches the Dockerfile runtime) and npm.
+- Python 3.10+ for the separate FastAPI implementation.
+- A Gemini API key for live model-backed features.
+- Git and a code editor such as VS Code.
 
-1. **Python Version**: Python 3.10+ recommended.
-2. **Create and Activate a Virtual Environment**:
-   ```bash
-   # Linux / macOS
-   python3 -m venv .venv
-   source .venv/bin/activate
-
-   # Windows PowerShell
-   python -m venv .venv
-   .\.venv\Scripts\Activate.ps1
-   ```
-3. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. **Configure Gemini API Key**:
-   Create a `.env` file in the root directory:
-   ```bash
-   GEMINI_API_KEY="your-gemini-api-key"
-   ```
-5. **Start the FastAPI Server**:
-   ```bash
-   python main.py
-   # Or using uvicorn directly:
-   uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-   ```
-   Interactive API documentation will be available at `http://localhost:8000/docs`.
-
-### Option B: Running Full-Stack Dev Server (AI Studio / Node.js)
-
-The project includes a unified `server.ts` Express entry point that runs the full RAG pipeline and mounts the Vite frontend on port 3000:
+### 1. Clone and install the web app
 
 ```bash
+git clone https://github.com/Ankitkumar06102005/contextaAI.git
+cd contextaAI
 npm install
+```
+
+Create a local `.env` file from the template if one is present, then set the server-side key:
+
+```dotenv
+GEMINI_API_KEY=your_key_here
+NODE_ENV=development
+PORT=3000
+```
+
+Keep `.env` private. Never place provider secrets in frontend variables such as `VITE_*`, screenshots, issues, logs or commits.
+
+### 2. Start the full-stack application
+
+```bash
 npm run dev
 ```
 
-Visit `http://localhost:3000`.
+Open <http://localhost:3000>. The Express server mounts the Vite development server; use the scripts in `package.json` as the source of truth.
+
+### 3. Build and verify the frontend
+
+```bash
+npm run build
+npm run lint
+npm test
+```
+
+The verification suite in `tests/verify_all.ts` expects the app at port 3000 or attempts to start the server itself. Review its console output and exit code; do not infer a pass merely because the command started.
+
+### 4. Run the separate Python API
+
+```bash
+python -m venv .venv
+# Windows PowerShell
+.\.venv\Scripts\Activate.ps1
+# macOS / Linux
+# source .venv/bin/activate
+
+pip install -r requirements.txt
+```
+
+Set `GEMINI_API_KEY` in your local environment, then run:
+
+```bash
+uvicorn main:app --reload --port 8000
+```
+
+- Health check: <http://127.0.0.1:8000/health>
+- Interactive API documentation: <http://127.0.0.1:8000/docs>
+
+The Node service and Python API are separate implementations. Do not assume that changing one automatically changes the other or that the live Render deployment uses the Python API.
+
+## API reference
+
+The Python FastAPI implementation exposes the following routes in `main.py`. The deployed Node service has its own route handlers in `server.ts`; confirm that file before assuming the exact response schema is identical.
+
+| Method | Route | Purpose |
+|---|---|---|
+| `GET` | `/health` | Health and configured model information |
+| `POST` | `/upload` | Validate, extract and index a PDF |
+| `POST` | `/chat` | Route a question to an agent and retrieve source passages |
+| `POST` | `/summary` | Generate a document summary |
+| `POST` | `/quiz` | Generate MCQs with configurable difficulty |
+| `DELETE` | `/document/{doc_id}` | Delete a document's stored artifacts |
+
+### Example: upload a PDF (Python API)
+
+```bash
+curl -X POST http://127.0.0.1:8000/upload \
+  -F "file=@./sample.pdf"
+```
+
+Use the returned `doc_id` for subsequent requests. Example chat payload:
+
+```json
+{
+  "doc_id": "YOUR_RETURNED_DOC_ID",
+  "message": "Explain the main idea and cite the relevant pages."
+}
+```
+
+Example quiz payload:
+
+```json
+{
+  "doc_id": "YOUR_RETURNED_DOC_ID",
+  "num_questions": 5,
+  "difficulty": "medium"
+}
+```
+
+Use the live OpenAPI page or inspect `main.py` and `server.ts` for the authoritative request/response schemas before integrating another client.
+
+## Testing and benchmarks
+
+### What is present in the repository
+
+- `npm test` runs `tsx tests/verify_all.ts`, a custom verification suite whose source currently declares **13 checks**.
+- `npm run build` builds the Vite frontend.
+- `npm run lint` runs TypeScript's `tsc --noEmit` check.
+- The Python RAG modules include measurable stages for query embedding, vector search and filtering (`rag/retriever.py`).
+
+**A test count is not the same as a passing test run.** This README does not claim that all 13 checks currently pass; run the commands on the target commit and retain the output/CI result.
+
+### Performance metrics: report measured results, not guesses
+
+No reproducible, verified end-to-end benchmark results are recorded here yet. The repository instruments parts of Python retrieval, but that is not sufficient to claim a global latency, accuracy, throughput, or cost figure for the deployed application. Do not add invented “99% accurate”, “sub-second”, “production-grade”, or “X users” claims.
+
+For a meaningful benchmark, record at least:
+
+| Metric | How to measure | Report with |
+|---|---|---|
+| Upload/index latency | Time upload request until indexing response completes | PDF page count, bytes, chunk count, warm/cold run |
+| Query latency | Time each request end-to-end | Model, deployment region, concurrency, p50/p95/p99 |
+| Retrieval latency | Use existing embedding/search/filter timings where available | Number of indexed chunks and top-k setting |
+| Retrieval quality | Label relevant passages for a fixed question set; compute Recall@k / MRR | Dataset size and relevance rubric |
+| Citation support | Manually or programmatically check each citation against its source page | Sample size, unsupported-citation rate |
+| Answer quality | Use a reviewed question/answer set and a stated rubric | Groundedness, completeness, abstention behavior |
+| Reliability | Run repeated requests and record success/error/timeout rates | Total requests, duration, model/API failures |
+| Resource and cost | Track memory, CPU, token usage and provider charges | Hardware, model, input/output token counts |
+
+Suggested benchmark procedure:
+
+1. Prepare a small, non-sensitive, versioned PDF set and a fixed set of answerable and unanswerable questions.
+2. Run at least one warm-up and then multiple repetitions per question.
+3. Store raw timings and failures in CSV/JSON; report sample size and p50/p95/p99 rather than only an average.
+4. Check citations against the original page text, and explicitly test questions whose answers are absent.
+5. Repeat after changes to chunking, embedding models, top-k, relevance threshold or prompts.
+6. Publish the dataset description, command, environment, commit SHA and raw results alongside any headline metric.
+
+A benchmark table should only be filled after the run:
+
+| Commit | Dataset / queries | p50 / p95 latency | Recall@5 | Citation support | Error rate |
+|---|---|---|---|---|---|
+| _Not measured in this README_ | — | — | — | — | — |
+
+## Deployment and operations
+
+The repository includes a multi-stage `Dockerfile` and a `render.yaml` blueprint for the Node service.
+
+1. Connect the GitHub repository in Render and deploy the blueprint or Docker web service.
+2. Set `GEMINI_API_KEY` as a **secret environment variable** in Render; do not put it in the repository.
+3. Check the configured health route and inspect deployment logs after each release.
+4. Verify the actual public URL, upload a small test PDF, ask a question, check source pages, generate a quiz, and delete the test document.
+5. Confirm the persistent-disk configuration before relying on saved indexes across restarts.
+
+**Storage warning:** local filesystem data may be ephemeral on hosted platforms unless a persistent disk is explicitly configured and mounted at the correct path. Treat uploaded PDFs and derived indexes as temporary until persistence and deletion behavior have been tested on the deployed service.
+
+Live app: <https://contexta-ai-ipbi.onrender.com/>
+
+## Security, privacy and limitations
+
+- Keep `GEMINI_API_KEY` on the server and out of the frontend bundle and Git history.
+- The app's configured PDF upload limit is 25 MB; verify limits at both proxy and application layers.
+- Only upload documents you have permission to process. Avoid sensitive personal, financial, medical or confidential material unless the deployment's data handling is appropriate.
+- Deleting an index is not the same as a verified global data-erasure guarantee; check logs, backups and hosting storage.
+- CORS and security-header settings should be reviewed for the intended production domains before exposing a service publicly.
+- Extracted text can be incomplete for scans, tables, diagrams, equations or unusual PDF encodings.
+- Retrieval can return irrelevant passages and an LLM can still produce unsupported claims. Check citations against the source before relying on answers.
+- API/model availability, rate limits and billing are controlled by the provider.
+
+## Roadmap for a stronger engineering portfolio
+
+- [ ] Add CI that installs dependencies and runs build, lint and tests on every pull request.
+- [ ] Add focused unit tests for PDF validation, chunk boundaries, retrieval filtering, citation mapping, quiz schema validation and deletion.
+- [ ] Add a reproducible benchmark script and commit raw results plus a short methodology.
+- [ ] Add request IDs, structured logs, latency/error counters and a safe way to inspect failures without logging document contents or secrets.
+- [ ] Add authentication, rate limiting and per-user document isolation before handling multiple users' private documents.
+- [ ] Add persistent storage configuration and test restart/redeploy behavior.
+- [ ] Add screenshots or a short demo GIF of the real application; keep demo assets aligned with the current UI.
+- [ ] Document known limitations and update the architecture/API diagrams whenever the implementation changes.
+
+These are recommendations, not claims that the features are already implemented.
+
+## Contributing
+
+1. Create a focused branch from the current development branch.
+2. Make a small, reviewable change and add or update tests.
+3. Run `npm run build`, `npm run lint` and `npm test`; run the Python checks relevant to Python changes.
+4. Include the test output and any measured performance impact in the pull request.
+5. Never commit secrets, real user PDFs, local indexes or generated private data.
+
+## Author
+
+**Ankit Kumar** · Computer Science & Artificial Intelligence
+
+- GitHub: <https://github.com/Ankitkumar06102005>
+- Portfolio: <https://ankitkumar06102005.github.io/portfolio>
+- Live project: <https://contexta-ai-ipbi.onrender.com/>
 
 ---
 
-## 5. REST API Contract & Examples
-
-### 1. `POST /upload`
-Uploads and indexes a PDF document.
-- **Request**: `multipart/form-data` with `file: <binary.pdf>`
-- **Response**:
-  ```json
-  {
-    "doc_id": "doc_m8x21a9",
-    "filename": "quantum-computing.pdf",
-    "status": "ready",
-    "page_count": 18,
-    "chunk_count": 94
-  }
-  ```
-
-### 2. `POST /chat`
-Asks a question grounded in the uploaded document.
-- **Request**:
-  ```json
-  {
-    "doc_id": "doc_m8x21a9",
-    "message": "Explain how phase kickback works."
-  }
-  ```
-- **Response**:
-  ```json
-  {
-    "agent": "teacher",
-    "answer": "Phase kickback is a quantum phenomenon where a target qubit's eigenvalue is kicked back into the control qubit [Page 7]...",
-    "sources": [
-      {
-        "chunk_id": "chunk-doc_m8-0024",
-        "page": 7,
-        "text": "The phase kickback mechanism allows..."
-      }
-    ]
-  }
-  ```
-
-### 3. `POST /summary`
-Generates a multi-section executive summary with core definitions and exam takeaways.
-- **Request**: `{"doc_id": "doc_m8x21a9"}`
-- **Response**: `{ "agent": "summary", "answer": "...", "sources": [...] }`
-
-### 4. `POST /quiz`
-Generates validated multiple-choice questions.
-- **Request**:
-  ```json
-  {
-    "doc_id": "doc_m8x21a9",
-    "num_questions": 5,
-    "difficulty": "medium"
-  }
-  ```
-- **Response**:
-  ```json
-  {
-    "doc_id": "doc_m8x21a9",
-    "difficulty": "medium",
-    "questions": [
-      {
-        "question": "What is the primary function of the Hadamard gate?",
-        "options": [
-          "Creates equal superposition states",
-          "Applies a bit flip",
-          "Measures the target qubit",
-          "Decouples environmental noise"
-        ],
-        "correct_answer": "Creates equal superposition states",
-        "explanation": "Page 3 defines the Hadamard operation as transforming computational basis states into superposition.",
-        "source_pages": [3]
-      }
-    ]
-  }
-  ```
-
-### 5. `DELETE /document/{doc_id}`
-Permanently deletes the document index and JSON metadata from disk.
-- **Response**: `{"success": true, "message": "Document artifacts removed successfully."}`
-
----
-
-## 6. Persistence, Deployment & Security
-
-### Render Cloud Deployment
-Contexta AI includes a full-stack production [Dockerfile](file:///e:/contexta%20ai/Dockerfile) and [render.yaml](file:///e:/contexta%20ai/render.yaml) blueprint:
-1. **Connect Repository**: In Render Dashboard, choose **New > Blueprint Instance** (or **New > Web Service > Docker**).
-2. **Environment Variables**:
-   - `GEMINI_API_KEY`: Your Google Gemini API key.
-   - `NODE_ENV`: `production` (default in blueprint).
-   - `PORT`: `3000` (automatically managed by Render).
-3. **Health Check Path**: `/health` (returns `{"status":"ok","product":"Contexta AI"}`).
-4. **Persistent Disk (Optional)**: Mount `1GB` disk at `/app/data` to preserve vector indexes across instance restarts.
-
-### Security Protections:
-- `path.basename` and regex sanitation against directory traversal (`../`).
-- No client-side exposure of `GEMINI_API_KEY`.
-- Max upload size enforcement (25 MB limit).
-- Validation against non-PDF mime types and corrupted files.
-- Scanned PDF detection: returns clear error when no extractable text is present.
-- Safe JSON error handling across all frontend fetches.
-
----
-
-## 7. Visual Design Principles
-
-- **Primary Colors**: White (`#FFFFFF`), Warm off-white (`#F8FAF7`), Pale Sage Accent (`#DCE9DD`), Forest Green (`#294331`), Accent Strong (`#739678`).
-- **Zero Blue Lighting**: All electric-blue glows, dark navy cards, and saturated neon accents have been replaced with subtle sage illumination.
-- **Typography Pairing**: `Plus Jakarta Sans` for clean interface clarity paired with `DM Serif Display` for editorial italic accents.
-- **Zero-Pill Discipline**: Metadata is displayed as unboxed text separated by subtle typographic dots (`·` / `/`), avoiding generic AI pill badges.
+<p align="center"><sub>Built to make learning from documents more traceable. Verify evidence, measure performance, and keep the claims honest.</sub></p>
