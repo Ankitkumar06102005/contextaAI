@@ -73,6 +73,7 @@ export const WorkspaceSidebar: React.FC<WorkspaceSidebarProps> = ({
         onCloseMobile?.();
       }
     }
+    e.target.value = '';
   };
 
   const handleModeSelect = (mode: 'teacher' | 'summary' | 'quiz') => {

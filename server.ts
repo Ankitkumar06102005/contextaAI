@@ -421,12 +421,52 @@ app.post('/upload', (req, res, next) => {
       });
     }
 
-    const { pages, totalPages } = extraction;
-    const allText = pages.map((p) => p.text).join(' ').trim();
+    const { pages } = extraction;
+    let totalPages = extraction.totalPages;
+    let allText = pages.map((p) => p.text).join(' ').trim();
+
+    // Multimodal OCR fallback for scanned documents or image-only PDFs
+    if (!allText || allText.length < 30) {
+      if (apiKey) {
+        console.log('PDF has minimal embedded text stream. Attempting Gemini multimodal OCR...');
+        try {
+          const ocrResponse = await ai.models.generateContent({
+            model: 'gemini-2.5-flash',
+            contents: [
+              {
+                inlineData: {
+                  mimeType: 'application/pdf',
+                  data: req.file.buffer.toString('base64'),
+                },
+              },
+              {
+                text: 'Extract all text, sections, headers, and formulas from this PDF document thoroughly. Separate distinct pages clearly using "--- Page X ---" delimiters where X is the 1-based page number.',
+              },
+            ],
+          });
+
+          const ocrText = (ocrResponse.text || '').trim();
+          if (ocrText && ocrText.length >= 30) {
+            console.log(`Gemini OCR successfully extracted ${ocrText.length} characters from scanned PDF.`);
+            const pageBlocks = ocrText.split(/---\s*Page\s+\d+\s*---/i).map((b) => b.trim()).filter(Boolean);
+            const ocrPages = pageBlocks.length > 0
+              ? pageBlocks.map((t, idx) => ({ pageNumber: idx + 1, text: t }))
+              : [{ pageNumber: 1, text: ocrText }];
+
+            pages.length = 0;
+            pages.push(...ocrPages);
+            totalPages = Math.max(totalPages, ocrPages.length);
+            allText = pages.map((p) => p.text).join(' ').trim();
+          }
+        } catch (ocrErr: any) {
+          console.warn('Gemini OCR fallback error:', ocrErr?.message || ocrErr);
+        }
+      }
+    }
 
     if (!allText || allText.length < 30) {
       return res.status(400).json({
-        error: 'The PDF contains no extractable text. Scanned PDFs without OCR are not supported in this MVP.',
+        error: 'The PDF contains no extractable text. Scanned PDFs without OCR or password-protected files cannot be processed.',
       });
     }
 

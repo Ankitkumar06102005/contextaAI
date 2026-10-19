@@ -474,6 +474,7 @@ export default function App() {
               document={document}
               messages={messages}
               isLoading={isLoading}
+              isUploading={isUploading}
               isDarkMode={isDarkMode}
               showPets={showPets}
               onSendMessage={handleSendMessage}

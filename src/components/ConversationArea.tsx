@@ -25,6 +25,7 @@ interface ConversationAreaProps {
   document: DocumentInfo | null;
   messages: ChatMessage[];
   isLoading: boolean;
+  isUploading?: boolean;
   isDarkMode?: boolean;
   showPets?: boolean;
   onSendMessage: (text: string) => void;
@@ -40,6 +41,7 @@ export const ConversationArea: React.FC<ConversationAreaProps> = ({
   document,
   messages,
   isLoading,
+  isUploading = false,
   isDarkMode = true,
   showPets = true,
   onSendMessage,
@@ -65,6 +67,7 @@ export const ConversationArea: React.FC<ConversationAreaProps> = ({
         onFileUpload(file);
       }
     }
+    e.target.value = '';
   };
 
   useEffect(() => {
@@ -159,10 +162,12 @@ export const ConversationArea: React.FC<ConversationAreaProps> = ({
           )}
           <div className="min-w-0">
             <h2 className="text-xs sm:text-sm font-semibold text-[#1E181D] dark:text-[#F7F3F6] truncate max-w-[160px] sm:max-w-xs md:max-w-md font-epilogue">
-              {document ? document.filename : 'No Document Active'}
+              {isUploading ? 'Indexing PDF...' : (document ? document.filename : 'No Document Active')}
             </h2>
             <p className="text-[11px] text-[#72656F] dark:text-[#BEB4BB] font-mono-code truncate">
-              {document ? `${document.page_count} Pages · Grounded Retrieval` : 'Upload your PDF or select Sample Paper'}
+              {isUploading
+                ? 'Extracting text & vector embeddings...'
+                : (document ? `${document.page_count} Pages · Grounded Retrieval` : 'Upload your PDF or select Sample Paper')}
             </p>
           </div>
         </div>
@@ -171,12 +176,16 @@ export const ConversationArea: React.FC<ConversationAreaProps> = ({
           {onFileUpload && (
             <button
               onClick={() => emptyFileInputRef.current?.click()}
-              disabled={isLoading}
+              disabled={isLoading || isUploading}
               title={document ? 'Upload a different PDF or re-upload' : 'Upload your PDF'}
               className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-semibold text-white bg-gradient-to-r from-[#AC1ED6] to-[#9218B5] hover:opacity-95 disabled:opacity-50 rounded-xl transition-all shadow-xs cursor-pointer whitespace-nowrap"
             >
-              <UploadCloud className="w-3.5 h-3.5 text-white" />
-              <span>{document ? 'Change PDF' : 'Upload PDF'}</span>
+              {isUploading ? (
+                <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              ) : (
+                <UploadCloud className="w-3.5 h-3.5 text-white" />
+              )}
+              <span>{isUploading ? 'Indexing...' : (document ? 'Change PDF' : 'Upload PDF')}</span>
             </button>
           )}
 
@@ -497,7 +506,12 @@ export const ConversationArea: React.FC<ConversationAreaProps> = ({
             </div>
 
             {/* Document Indicator & Re-upload Trigger */}
-            {document ? (
+            {isUploading ? (
+              <div className="flex items-center gap-2 px-2.5 py-1 bg-[#AC1ED6]/10 text-[#AC1ED6] dark:text-[#E6B8F0] border border-[#AC1ED6]/30 rounded-lg text-xs font-mono-code shrink-0">
+                <div className="w-3 h-3 border-2 border-[#AC1ED6] border-t-transparent rounded-full animate-spin" />
+                <span>Indexing new PDF...</span>
+              </div>
+            ) : document ? (
               <div className="flex items-center gap-1.5 px-2.5 py-1 bg-[#AC1ED6]/10 text-[#AC1ED6] dark:text-[#E6B8F0] border border-[#AC1ED6]/30 rounded-lg text-xs font-mono-code shrink-0">
                 <FileText className="w-3.5 h-3.5" />
                 <span className="truncate max-w-[130px] sm:max-w-[200px]" title={document.filename}>{document.filename}</span>
@@ -505,7 +519,7 @@ export const ConversationArea: React.FC<ConversationAreaProps> = ({
                   <button
                     type="button"
                     onClick={() => emptyFileInputRef.current?.click()}
-                    disabled={isLoading}
+                    disabled={isLoading || isUploading}
                     className="underline hover:text-[#9218B5] cursor-pointer ml-1 font-sans text-[11px]"
                     title="Upload or switch PDF"
                   >
@@ -520,7 +534,7 @@ export const ConversationArea: React.FC<ConversationAreaProps> = ({
                   <button
                     type="button"
                     onClick={() => emptyFileInputRef.current?.click()}
-                    disabled={isLoading}
+                    disabled={isLoading || isUploading}
                     className="font-semibold underline hover:opacity-80 cursor-pointer text-[11px]"
                   >
                     Upload PDF
@@ -532,7 +546,7 @@ export const ConversationArea: React.FC<ConversationAreaProps> = ({
                     <button
                       type="button"
                       onClick={onLoadSample}
-                      disabled={isLoading}
+                      disabled={isLoading || isUploading}
                       className="font-semibold underline hover:opacity-80 cursor-pointer text-[11px]"
                     >
                       Sample
@@ -549,11 +563,15 @@ export const ConversationArea: React.FC<ConversationAreaProps> = ({
               <button
                 type="button"
                 onClick={() => emptyFileInputRef.current?.click()}
-                disabled={isLoading}
-                title={document ? `Attached: ${document.filename} (Click to re-upload / change PDF)` : 'Upload & attach PDF'}
-                className="p-2 text-[#72656F] dark:text-[#BEB4BB] hover:text-[#AC1ED6] dark:hover:text-[#E6B8F0] hover:bg-[#F3EEF2] dark:hover:bg-[#2B2429] rounded-xl transition-colors shrink-0 cursor-pointer mb-0.5"
+                disabled={isLoading || isUploading}
+                title={isUploading ? 'Indexing PDF...' : (document ? `Attached: ${document.filename} (Click to re-upload / change PDF)` : 'Upload & attach PDF')}
+                className="p-2 text-[#72656F] dark:text-[#BEB4BB] hover:text-[#AC1ED6] dark:hover:text-[#E6B8F0] hover:bg-[#F3EEF2] dark:hover:bg-[#2B2429] rounded-xl transition-colors shrink-0 cursor-pointer mb-0.5 disabled:opacity-50"
               >
-                <Paperclip className="w-4 h-4" />
+                {isUploading ? (
+                  <div className="w-4 h-4 border-2 border-[#AC1ED6] border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <Paperclip className="w-4 h-4" />
+                )}
               </button>
             )}
 
