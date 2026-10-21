@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { LandingHero } from './components/LandingHero';
+import { ScrollStrokeSection } from './components/ScrollStrokeSection';
 import { WorkflowSection } from './components/WorkflowSection';
 import { FeatureShowcase } from './components/FeatureShowcase';
 import { WorkspaceSidebar } from './components/WorkspaceSidebar';
@@ -427,6 +428,7 @@ export default function App() {
             isUploading={isUploading}
             isDarkMode={isDarkMode}
           />
+          <ScrollStrokeSection />
           <WorkflowSection />
           <FeatureShowcase onOpenWorkspace={() => setCurrentView('workspace')} />
           <Footer onOpenWorkspace={() => setCurrentView('workspace')} />
