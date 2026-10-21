@@ -90,7 +90,7 @@ export const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({ onOpenWorkspac
         {/* Section Header */}
         <div className="max-w-2xl mb-16 space-y-3">
           <div className="text-xs font-semibold text-[#AC1ED6] dark:text-[#E6B8F0] uppercase tracking-wider font-mono-code">
-            03 / Purpose-Built Intelligence
+            04 / Purpose-Built Intelligence
           </div>
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-[#1E181D] dark:text-[#F7F3F6] font-epilogue">
             Four dedicated agents. <br />
