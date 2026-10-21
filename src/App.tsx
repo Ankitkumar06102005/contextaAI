@@ -415,8 +415,9 @@ export default function App() {
 
       {/* View Switcher */}
       {currentView === 'landing' ? (
-        <main className="relative flex-1">
+        <main className="relative isolate flex-1">
           <ScrollStrokeSection />
+          <div className="relative z-10">
           <LandingHero
             onFileUpload={handleFileUpload}
             onLoadSample={handleLoadSample}
@@ -432,6 +433,7 @@ export default function App() {
           <WorkflowSection />
           <FeatureShowcase onOpenWorkspace={() => setCurrentView('workspace')} />
           <Footer onOpenWorkspace={() => setCurrentView('workspace')} />
+          </div>
         </main>
       ) : (
         <main className="flex-1 flex overflow-hidden min-h-0 relative">
